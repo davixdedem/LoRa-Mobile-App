@@ -1,5 +1,5 @@
 # LoRaMobileApp
-A messaging app leveraging the LoRa protocol
+A messaging app, for Android, leveraging the LoRa protocol.
 
 
 
