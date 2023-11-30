@@ -35,6 +35,8 @@ import org.json.JSONObject
 import java.security.MessageDigest
 import java.util.concurrent.Executors
 import android.Manifest
+import android.app.Activity
+import android.app.Application
 import android.database.SQLException
 import android.hardware.usb.UsbDeviceConnection
 import android.location.Location
@@ -42,6 +44,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
 import android.webkit.WebViewClient
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -134,6 +137,7 @@ class MainActivity : AppCompatActivity() {
     private var locationManager: LocationManager? = null
     private var locationListener: LocationListener? = null
     private var timeoutTimer: Timer? = null
+    private var isAppInForeground = false
 
     /***************************** DATABASE *****************************************/
     private lateinit var db: SQLiteDatabase
@@ -144,6 +148,30 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /*
+        Classe per conoscere la situazione dell'app(aperta/chiusa ecc..)
+         */
+        registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+
+            override fun onActivityStarted(activity: Activity) {}
+
+            override fun onActivityResumed(activity: Activity) {
+                isAppInForeground = true
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+                isAppInForeground = false
+            }
+
+            override fun onActivityStopped(activity: Activity) {}
+
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+
+            override fun onActivityDestroyed(activity: Activity) {}
+        })
+
         setContentView(R.layout.activity_main)
 
         /*
@@ -271,6 +299,11 @@ class MainActivity : AppCompatActivity() {
             atCmdSetPrintModeOn to 2
         )
 
+        /*
+         Rimuovo le notifiche ad applicazione aperta
+         */
+        removeNotifications()
+
     }
 
     /*
@@ -282,6 +315,11 @@ class MainActivity : AppCompatActivity() {
             url.contains("chat-1.html") -> "Chat"
             else -> "Unknown"
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        removeNotifications()
     }
 
     /*
@@ -664,22 +702,39 @@ class MainActivity : AppCompatActivity() {
      Metodo per mostrare la notifica
      */
     private fun showNotification(title: String, content: String) {
-        if(checkNotificationPermission(this)) {
-            Log.d("APPMessage", "Sto inviando una notifica...")
-            val notificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            createNotificationChannel()
+        if (!isAppInForeground) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            val pendingIntent =
+                PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
             val notificationBuilder = NotificationCompat.Builder(this, channelID)
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent) // Imposta l'intenzione quando si preme la notifica
                 .setAutoCancel(true)
+
+            val notificationManager = NotificationManagerCompat.from(this)
+            createNotificationChannel()
+
             val notificationId = 1
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
             notificationManager.notify(notificationId, notificationBuilder.build())
-        }
-        else{
-            requestNotificationPermission(this)
         }
     }
 
@@ -1557,6 +1612,12 @@ class MainActivity : AppCompatActivity() {
     fun stopGPS() {
         resetTimeout()
         locationManager?.removeUpdates(locationListener as LocationListener)
+    }
+
+    private fun removeNotifications() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancelAll() // Questo cancella tutte le notifiche emesse dall'app
+        Log.d("Notifications","Sto cancellando le notifiche...")
     }
 }
 
