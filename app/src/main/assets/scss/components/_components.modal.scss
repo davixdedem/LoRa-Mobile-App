@@ -1,0 +1,68 @@
+/*------------------------------------------------------------------
+MODAL STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+
+// Fullscreen Modal at lg,ms,sm width
+.modal.show{
+
+    // Check if component is enabled
+    @if $modal-lg-fullscreen {
+        &.modal-lg-fullscreen{
+
+            @include media-breakpoint-down(lg){
+                @include modal-fullscreen();
+            }
+        }
+    }
+
+    // Check if component is enabled
+    @if $modal-md-fullscreen {
+        &.modal-md-fullscreen{
+
+            @include media-breakpoint-down(md){
+                @include modal-fullscreen();
+            }
+        }
+    }
+
+    // Check if component is enabled
+    @if $modal-sm-fullscreen {
+        &.modal-sm-fullscreen{
+
+            @include media-breakpoint-down(sm){
+                @include modal-fullscreen();
+            }
+        }
+    }
+}
+
+
+// It will hide number count in multi step modal header
+.js-title-step{
+    span.label{
+        display: none;
+    }
+}
+
+.modal{
+    &.fade{
+        .modal-dialog{
+            &.modal-dialog-zoom{
+                transform: translate(0,0) scale(.95);
+            }
+        }
+    }
+    &.show{
+        .modal-dialog{
+            &.modal-dialog-zoom{
+                transform: translate(0,0) scale(1);
+            }
+        }
+    }
+}
+

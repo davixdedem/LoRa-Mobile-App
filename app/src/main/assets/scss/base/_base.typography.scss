@@ -1,0 +1,42 @@
+/*------------------------------------------------------------------
+TYPOGRAPHY STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+
+.font-size-sm {
+    font-size: $font-size-sm;
+}
+
+.small {
+    font-size: 0.75rem;
+}
+
+.h5,
+h5 {
+    font-size: 1.09375rem;
+}
+
+.h6,
+h6 {
+    font-size: .875rem;
+}
+
+p {
+    font-size: $font-size-sm;
+}
+
+a {
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.page-main-heading{
+    border-bottom: 1px solid $border-color;
+    background-color: $white;
+    display: flex;
+}

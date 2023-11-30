@@ -1,0 +1,241 @@
+/*------------------------------------------------------------------
+RTL STYLESHEET
+
+Last change: Added in Version 1.3
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+body[dir="rtl"] {
+	unicode-bidi: bidi-override;
+	direction: rtl;
+	text-align: right;
+
+	.navbar,
+	.appbar {
+		.nav {
+			padding: 0;
+		}
+	}
+
+	//Chat Sidebar
+	.sidebar {
+		@include media-breakpoint-up(xl) {
+			border-right: initial;
+			border-left: 1px solid $border-color;
+		}
+	}
+
+	//Contacts Tab
+	.contacts-list {
+		li.contacts-item {
+			text-align: right;
+		}
+	}
+
+	//Contacts List
+	.contacts-content {
+		padding-right: 0.875rem;
+		padding-left: initial;
+
+		.contacts-info {
+			.chat-name {
+				margin-left: auto;
+				margin-right: initial;
+			}
+		}
+
+		.contacts-texts {
+			p {
+				margin-left: auto;
+				margin-right: initial;
+			}
+		}
+	}
+
+	//List Group
+	.list-group {
+		padding: 0;
+	}
+
+	//Chat Info
+	.chat-info {
+		@include media-breakpoint-up(xl) {
+			border-left: 0;
+			border-right: 1px solid $border-color;
+		}
+
+		&.chat-info-visible {
+			@media screen and (max-width: 1300px) and (min-width: 1200px) {
+				border-left: 0;
+				border-right: 1px solid $border-color;
+			}
+		}
+	}
+
+	//Form
+	.input-group {
+		> .form-control:not(:last-child) {
+			border-top-right-radius: 0.25rem;
+			border-top-left-radius: 0;
+			border-bottom-right-radius: 0.25rem;
+			border-bottom-left-radius: 0;
+			border-right: 1px solid $border-color !important;
+			border-left: 0;
+			padding-right: 0.75rem !important;
+			padding-left: 0;
+		}
+
+		.input-group-append {
+			.input-group-text {
+				border-top-left-radius: 0.25rem;
+				border-top-right-radius: 0;
+				border-bottom-left-radius: 0.25rem;
+				border-bottom-right-radius: 0;
+				border-left: 1px solid $border-color !important;
+				border-right: 0;
+			}
+		}
+	}
+
+	.custom-file {
+		.custom-file-label:after {
+			left: 0;
+			right: initial;
+			border-radius: 0.25rem 0 0 0.25rem;
+			border-left: 0;
+			border-right: initial;
+		}
+	}
+
+	.custom-radio {
+		.form-check-label {
+			padding-right: 1rem;
+		}
+	}
+
+	//Modal
+	.modal-dialog {
+		.modal-header {
+			.close {
+				margin: -1rem auto -1rem -1rem;
+			}
+		}
+	}
+
+	//Messages
+	.message {
+		&.self {
+			text-align: left;
+		}
+		.message-content {
+			text-align: right;
+		}
+	}
+
+	// Appbar
+	.appbar {
+		.appnavbar-content.appnavbar-content-visible {
+			@include media-breakpoint-up(xl) {
+				left: 3.75rem;
+				right: initial;
+			}
+		}
+
+		//To-do List
+		.todo-item {
+			.custom-checkbox {
+				.custom-control-label {
+					&::before {
+						left: -0.5rem;
+					}
+
+					&::after {
+						left: -0.5rem;
+					}
+				}
+			}
+		}
+	}
+
+	//Utilities Classes
+	.mr-1 {
+		margin-right: 0 !important;
+		margin-left: 0.375rem !important;
+	}
+
+	.mr-2 {
+		margin-right: 0 !important;
+		margin-left: 0.5rem !important;
+	}
+
+	.mr-3 {
+		margin-right: 0 !important;
+		margin-left: 1rem !important;
+	}
+
+	.mr-4 {
+		margin-right: 0 !important;
+		margin-left: 1.5rem !important;
+	}
+
+	.ml-1 {
+		margin-right: 0.375rem !important;
+		margin-left: 0 !important;
+	}
+
+	.ml-2 {
+		margin-right: 0.5rem !important;
+		margin-left: 0 !important;
+	}
+
+	.ml-auto {
+		margin-left: 0 !important;
+		margin-right: auto !important;
+	}
+
+	.mr-auto {
+		margin-right: 0 !important;
+		margin-left: auto !important;
+	}
+
+	.mr-0 {
+		padding-left: 0 !important;
+		padding-right: initial !important;
+	}
+
+	//Vendror Fix
+	.mfp-counter {
+		direction: ltr;
+	}
+
+	//Chat Header
+	.chat-header {
+		[data-close] {
+			transform: rotate(180deg);
+		}
+	}
+
+	//Chat Footer
+	.chat-body {
+		.chat-footer {
+			.send-icon {
+				left: 0.625rem;
+				right: initial;
+			}
+
+			.attachment {
+				right: 0.75rem;
+				left: initial;
+			}
+
+			.emojionearea-editor {
+				padding: 1.5rem 2.5rem 1.5rem 6.5rem;
+			}
+			.emojionearea-button {
+				left: 70px;
+				right: initial;
+			}
+		}
+	}
+}

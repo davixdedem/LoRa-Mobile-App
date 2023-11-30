@@ -1,0 +1,261 @@
+/*------------------------------------------------------------------
+CHAT STYLESHEET
+
+Added On : Version 1.1
+
+Last change: Version 1.3
+
+Chanelog: 
+
+-- Added [data-appcontent-close] style
+-------------------------------------------------------------------*/
+$appbar-wrapper-width:60px;
+$appnavbar-content-width:350px;
+
+
+.appbar {
+
+    @include hide-scrollbar();
+    height: 100%;
+    background: $white;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    z-index: 1025;
+    display: flex;
+    transition: transform .3s ease, visibility .3s ease;
+
+    @include media-breakpoint-up(xl) {
+        position: static;
+        height: 100vh;
+        display: flex;
+        order: 4;
+    }
+
+    &.appbar-hidden {
+        left: 100%;
+    }
+
+    .nav-link{
+        color: $text-muted;
+    }
+
+    .appbar-head{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid $border-color;
+        width: 100%;
+        padding: 0.88rem 0;
+        background-color: $light;
+    }
+
+    .appbar-wrapper {
+        min-width: $appbar-wrapper-width;
+        width: $appbar-wrapper-width;
+        border-right: 1px solid $border-color;
+
+        @include media-breakpoint-up(xl) {
+            border-left: 1px solid $border-color;
+        }
+
+        .appbar-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-link {
+            text-align: center;
+            padding: 1rem 0;
+
+            &.active {
+                color: $primary;
+            }
+        }
+    }
+
+    .appnavbar-content {
+
+        display: flex;
+        height: 100%;
+        flex-grow: 1;
+        background: $white;
+        visibility: visible;
+
+        @include media-breakpoint-up(xl) {
+            visibility: hidden;
+            width: 0;
+        }
+
+        .tab-pane {
+            width: 100%;
+        }
+
+        &.appnavbar-content-visible {
+            width: 100%;
+
+            @include media-breakpoint-up(xl) {
+                position: fixed;
+                top: 0;
+                right: 60px;
+                bottom: 0;
+                visibility: visible;
+                width: 360px;
+            }
+        }
+
+        .appnavbar-content-wrapper {
+            display: flex;
+            height: 100%;
+            flex-grow: 1;
+        }
+
+        .appnavbar-scrollable-wrapper {
+            display: flex;
+            flex-grow: 1;
+            flex-flow: column;
+
+            width: 100%;
+
+            @include media-breakpoint-up(sm) {
+                min-width: 360px;
+            }
+        }
+
+
+        .appnavbar-heading {
+            border-bottom: 1px solid $border-color;
+            padding: 1.48rem 1rem;
+            background-color: $white;
+
+            [data-appcontent-close] {
+                visibility: hidden;
+
+                @include media-breakpoint-up(xl) {
+                    visibility: visible;
+                }
+            }
+        }
+
+        .appnavbar-body-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1;
+            padding: .75rem;
+            background-color: $white;
+            border-bottom: 1px solid $border-color;
+        }
+
+        .appnavbar-body {
+            @include hide-scrollbar();
+            flex: 2;
+        }
+
+        .appnavbar-footer {
+            padding: 1.3rem 0.75rem;
+            border-top: 1px solid $border-color;
+            background-color: $white;
+        }
+    }
+}
+
+[data-appcontent-close]{
+    cursor: pointer;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+    z-index: 1022;
+    visibility: hidden;
+
+    &.backdrop-visible {
+        visibility: visible;
+    }
+}
+
+
+.note-container {
+    padding: 0.75rem;
+
+    .note {
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        background-color: $white;
+
+        &:not(:last-of-type) {
+            margin-bottom: 1rem;
+        }
+
+        .note-body {
+            padding: 1rem;
+        }
+
+        .note-footer {
+            border-top: 1px solid $border-color;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0 1rem;
+
+            .note-tools {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .note-added-on {
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: $gray-500;
+            font-weight: 500;
+        }
+
+        .note-description {
+            color: $text-muted;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.todo-container {
+    padding: 0.75rem;
+
+    .todo-list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        .todo-item {
+            font-size: $font-size-sm;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .todo-title {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .todo-task-done {
+            .todo-title {
+                text-decoration: line-through;
+                color: $text-muted;
+            }
+        }
+    }
+}
+
+.settings-container {
+    padding: 0.75rem;
+}

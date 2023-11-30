@@ -1,0 +1,687 @@
+// Dark Skin
+
+@import "./dark-skin-variables";
+@import "./../framework/functions";
+@import "./../abstracts/bootstrap-variables";
+@import "./../abstracts/theme-variables";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    color: $white;
+}
+
+.text-dark{
+    color: $light !important;
+}
+
+.authentication-page {
+    p {
+        color: $light !important;
+    }
+
+}
+
+.media-link {
+    &::after {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
+.form-group {
+    label {
+        color: $white;
+    }
+}
+
+.input-group,
+.form-group {
+
+    &.bg-light {
+        background-color: $skin-bg !important;
+    }
+
+    .input-group-text {
+        border-color: $skin-input-border-color;
+        background-color: $skin-input-bg;
+    }
+
+    input.form-control {
+        caret-color: $skin-input-caret-color;
+        background-color: $skin-input-bg;
+        border-color: $skin-input-border-color;
+
+        &:focus {
+            background-color: $skin-input-bg;
+            border-color: $skin-input-border-color;
+            color: $white;
+        }
+    }
+}
+
+.form-control {
+    &:focus {
+        background-color: $skin-input-bg;
+        border-color: $skin-input-border-color;
+    }
+}
+
+textarea.form-control {
+    &:focus {
+        background-color: transparent;
+    }
+}
+
+.custom-file-label {
+    background-color: $skin-input-bg;
+    border-color: $skin-input-border-color;
+    color: $text-muted;
+
+    &::after {
+        background-color: $skin-bg;
+        border-color: $skin-input-bg;
+        color: $white;
+    }
+}
+
+//
+// COPONENTS
+//
+
+
+// AVATAR
+.avatar {
+    box-shadow: $skin-avatar-box-shadow;
+}
+
+.avatar {
+
+    &.avatar-online:before,
+    &.avatar-offline:before,
+    &.avatar-busy:before,
+    &.avatar-away:before {
+        border-color: $skin-avatar-status-border;
+    }
+}
+
+// BUTTON
+
+
+.btn-outline-default {
+    border-color: $skin-btn-border-color;
+    background: $skin-btn-bg;
+    color: $gray-500;
+
+    &:hover {
+        background: $gray-700;
+        color: $gray-500;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.btn-minimal {
+    color: $skin-btn-minimal-color;
+    background-color: transparent !important;
+
+
+    &:hover {
+        color: inherit !important;
+    }
+
+    &:focus {
+        color: $btn-minimal-color;
+    }
+
+    &.active {
+        color: inherit;
+    }
+}
+.btn-secondary{
+    color: $text-muted;
+}
+.btn-secondary:not(:disabled):not(.disabled):active {
+    color: inherit;
+}
+
+.message-content {
+    .btn-primary {
+        background: darken($color: $primary, $amount: 5);
+    }
+}
+
+// CHAT STYLE
+
+.message {
+
+    .message-content {
+        background-color: $skin-left-message-bg;
+        color: $skin-left-message-color;
+    }
+
+    .avatar {
+
+        img {
+            box-shadow: 0px 0px 0px 0.5rem $skin-main-bg;
+        }
+    }
+
+    .message-options {
+        color: $text-muted;
+    }
+
+    &.self {
+        .message-content {
+            background-color: $skin-right-message-bg;
+            color: $skin-right-message-color;
+        }
+
+    }
+}
+
+.message-divider {
+
+    &:before {
+        background-color: $skin-message-divider-bg;
+        border-color: $skin-border;
+        color: $skin-message-divider-color;
+    }
+}
+
+
+// CHAT LIST
+
+.contacts-list {
+
+    .contacts-item {
+
+        &.active {
+            .avatar::before {
+                border-color: $primary;
+            }
+        }
+
+        &.unread {
+            .avatar::before {
+                border-color: $message-unread;
+            }
+        }
+
+        .contacts-link {
+            border-color: $skin-contacts-link-border-color;
+            color: inherit;
+            color: $white;
+        }
+
+        &:hover {
+
+            @media (min-width:1200px) {
+                .contacts-link {
+                    border-color: $primary;
+                }
+            }
+        }
+
+        &.active {
+
+            @media (min-width:1200px) {
+                .contacts-link {
+                    background: $primary;
+                    border: 1px solid $primary;
+
+                    .chat-name {
+                        color: $white;
+                    }
+
+                    .chat-time,
+                    .contacts-texts,
+                    svg,
+                    p {
+                        color: $gray-50 !important;
+                    }
+                }
+            }
+
+
+        }
+
+        &.unread {
+
+            .contacts-link {
+                background: $skin-message-unread-bg;
+                border-color: $skin-message-unread-border-color;
+
+                .contacts-texts {
+                    color: $skin-contacts-texts-color;
+                }
+            }
+
+            &.active {
+                @media (min-width:1200px) {
+                    .contacts-link {
+                        background: $primary;
+                        border: 1px solid $primary;
+
+                        .chat-name,
+                        .chat-time,
+                        .contacts-texts {
+                            color: $gray-50;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    .contacts-content {
+
+        .contacts-info {
+            .chat-time {
+                color: $gray-500;
+            }
+        }
+
+        .contacts-texts {
+            color: $gray-500;
+        }
+    }
+}
+
+// DROPDOWN
+
+.dropdown {
+    &.show {
+
+        .btn-secondary.btn-minimal,
+        .nav-link {
+            color: $gray-700 !important;
+        }
+
+        .btn-outline-default {
+            background-color: $gray-700;
+        }
+
+        .dropdown-menu {
+            background: $skin-dropdown-menu-bg;
+
+
+            .dropdown-item {
+                color: $skin-dropdown-item-color;
+
+                &:focus,
+                &:hover {
+                    background-color: $skin-dropdown-item-focus-bg;
+                }
+            }
+        }
+    }
+}
+
+// MODAL
+
+
+.modal-content {
+    background: $skin-modal-content-bg;
+    border-color: $skin-border;
+
+    h5,
+    h6 {
+        color: $white;
+    }
+
+    .modal-header {
+
+        border-color: $skin-border;
+
+        .modal-title {
+            color: $white;
+        }
+    }
+
+    .modal-footer {
+        border-color: $skin-border;
+    }
+}
+
+.close {
+    text-shadow: none;
+}
+
+// LIST GROUP
+
+.list-group-item {
+    background: $skin-list-group-bg;
+    border-color: $skin-border;
+
+    p {
+        color: $white;
+    }
+}
+
+.document-body,
+.media-body {
+    h6 {
+        color: $white;
+    }
+
+    p {
+        color: $white;
+    }
+}
+
+//
+// LAYOUTS
+//
+
+// CHAT
+
+.chat-body {
+
+    .chat-header {
+        border-color: $skin-border;
+    }
+
+    .chat-footer {
+        border-color: $skin-border;
+    }
+}
+
+.chat-info {
+    background: $skin-chat-info-bg;
+
+    @media (min-width:1200px) {
+        border-color: $skin-border;
+    }
+
+    &.chat-info-visible {
+        @media screen and (max-width: 1260px) and (min-width: 1200px) {
+            border-color: $skin-border;
+        }
+    }
+
+    .chat-info-header {
+        border-color: $skin-border;
+    }
+
+    h5,
+    h6 {
+        color: $white;
+    }
+}
+
+// LAYOUT
+
+.main-layout {
+    .navigation {
+        background: $skin-navigation-bg;
+
+        @media (min-width:1200px) {
+            border-color: $skin-border;
+        }
+    }
+
+    .sidebar {
+        background: $skin-sidebar-bg;
+
+        @media (min-width:1200px) {
+            border-color: $skin-border;
+        }
+    }
+
+    .main {
+        background: $skin-main-bg;
+
+        @media (max-width:992px) {
+            background: $skin-main-bg;
+        }
+
+    }
+
+
+}
+
+
+// NAVBAR
+
+.navbar-light {
+    .nav-minimal {
+        .nav-link {
+            color: lighten($color: $primary, $amount: 15);
+
+            &:hover {
+                color: lighten($color: $primary, $amount: 25);
+            }
+
+            &.active {
+                color: $white;
+            }
+        }
+    }
+}
+
+// SIDEBAR
+
+.sidebar-header {
+    background: $skin-sidebar-header-bg;
+    border-color: $skin-border;
+
+    h5 {
+        color: $white;
+    }
+}
+
+/**********************/
+
+.card-bg-1,
+.card-bg-2,
+.card-bg-3,
+.card-bg-4,
+.card-bg-5 {
+    background-color: $skin-card-bg;
+    border-color: $skin-border;
+}
+
+.card {
+
+    border-color: $skin-border;
+    background-color: $skin-card-bg;
+
+    .card-header,
+    .card-footer {
+        background-color: $skin-card-header-footer-bg;
+        border-color: $skin-border;
+    }
+
+    h5,
+    h6 {
+        color: $white;
+    }
+}
+
+
+.page-main-heading {
+    border-color: $skin-border;
+    background-color: $skin-page-main-heading-bg;
+
+    h5 {
+        color: $white;
+    }
+}
+
+.border-bottom {
+    border-color: $skin-border !important;
+}
+
+
+.appbar {
+    background: $skin-bg;
+
+    @media (min-width:1200px) {
+        border-color: $skin-border;
+    }
+
+    .appbar-head {
+        border-color: $skin-border;
+        color: $light;
+        background-color: $skin-appbar-head-bg;
+    }
+
+    .nav-link{
+        color: $text-muted;
+    }
+  
+    .appbar-wrapper {
+        border-color: $skin-border;
+
+        @media (min-width:1200px) {
+            border-color: $skin-border;
+        }
+
+        .nav-link {
+            color: $skin-appnavlink-color;
+        }
+    }
+
+    .appnavbar-content {
+        background: $skin-appnavbar-content-bg;
+
+
+        .appnavbar-heading {
+            border-color: $skin-border;
+            background-color: $skin-appnavbar-bg;
+        }
+
+        .appnavbar-body-title {
+            background-color: $skin-appnavbar-bg;
+            border-color: $skin-border;
+        }
+
+
+
+        .appnavbar-footer {
+            border-color: $skin-border;
+            background-color: $skin-appnavbar-footer-bg;
+        }
+    }
+}
+
+.backdrop {
+    background-color: rgba($color: #000000, $alpha: 0.3);
+}
+
+.translator-container {
+    textarea {
+        color: $skin-textarea-color;
+        caret-color: $skin-textarea-caretcolor;
+        background-color: $skin-textarea-bg;
+        border-color: $skin-textarea-border-color;
+
+        &:focus {
+            color: $skin-textarea-focus-color;
+        }
+    }
+
+    .card{
+        color: #b9b9b9;
+    }
+}
+
+.note-container {
+    padding: 0.75rem;
+
+    .note {
+        border-color: $skin-border;
+        background-color: $skin-note-bg;
+
+        .note-footer {
+            border-color: $skin-border;
+        }
+
+        .note-added-on {
+            color: $gray-500;
+        }
+
+        .note-description {
+            color: $text-muted;
+        }
+    }
+}
+
+.todo-container {
+    .todo-list {
+        .todo-task-done {
+            .todo-title {
+                color: $text-muted;
+            }
+        }
+    }
+}
+
+.settings-container {
+    .border {
+        border-color: $skin-border !important;
+    }
+}
+
+.modal-body{
+
+    .form-control{
+        color: $skin-modal-form-color;
+    }
+    textarea {
+        color: $skin-textarea-color;
+        caret-color: $skin-textarea-caretcolor;
+        background-color: $skin-textarea-bg;
+        border-color: $skin-textarea-border-color;
+
+        &:focus {
+            color: $skin-textarea-focus-color;
+        }
+    }
+}
+
+.dropdown-divider{
+    border-color: $skin-dd-border-color;
+}
+
+// Emojione Area
+
+
+
+.emojionearea{
+
+    .emojionearea-picker{
+
+        background: $skin-main-bg;
+
+        .emojionearea-filters{
+            background: $skin-bg;
+
+            .emojionearea-filter.active{
+                background: $skin-main-bg;
+            }
+        }
+    }
+}
+
+.emojionearea-form-control{
+    background-color: $skin-main-bg;
+    border-color: $skin-border !important; 
+    color: $gray-500;
+
+    &.focused{
+        color: $white;
+    }
+}

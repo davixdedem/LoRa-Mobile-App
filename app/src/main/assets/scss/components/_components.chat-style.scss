@@ -1,0 +1,113 @@
+/*------------------------------------------------------------------
+CHAT STYLE STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+// Message Bubble style
+.message{
+    margin-bottom: 1.25rem;
+    font-size: $font-size-sm;
+
+    .message-content{
+        padding: 1rem 2.25rem;
+        background-color: $bg-left-message;
+        color: $color-left-message;
+        margin-left: 1.25rem;
+        border-radius: 1.25rem;
+        text-align: left;
+        display: inline-block;
+    
+        @include media-breakpoint-up(xs) {
+            max-width: 25rem;
+        }
+
+        .message-attachment{
+            display: flex;
+            align-items: center;
+
+            .btn-icon{
+                margin-right: 0.625rem;
+            }
+        }
+    }
+
+    .avatar{
+        display: inline-block;
+        vertical-align: bottom;
+        margin-top: -1.25rem;
+
+        img{
+            box-shadow: 0px 0px 0px 0.5rem $white
+        }
+    }
+
+    .message-options{
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.75rem;
+        color: $text-muted;
+        margin-top: 0.3125rem;
+       
+
+        & > *{
+            margin-left: 0.3125rem;
+            margin-right: 0.3125rem;
+          
+
+            &:not(.avatar){
+                height: 1.125rem;
+                line-height: 1.125rem;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+
+
+
+    &.self{
+        text-align: right;
+       
+        .message-content {
+            background-color: $bg-right-message;
+            color: $color-right-message;
+            margin-right: 1.25rem;
+            margin-left: 0px
+        }
+
+        .message-options{
+            flex-direction: row-reverse;
+        }
+    }
+}
+
+// Message Divider
+.message-divider {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+
+    &:before {
+        content: attr(data-label);
+        display: block;
+        position: absolute;
+        top: -0.5rem;
+        letter-spacing: 0.0313rem;
+        font-size: 0.6875rem;
+        padding: 0.125rem 0.5rem;
+        border-radius: 0.1875rem;
+        background-color: $light;
+        border: 1px solid $border-color;
+        left: 50%;
+        font-weight: 500;
+        transform: translateX(-50%)
+    }
+}
+

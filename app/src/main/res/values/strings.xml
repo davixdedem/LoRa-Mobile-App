@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">ATCommand</string>
+    <string name="lora_freq">868000000</string>
+    <string name="lora_power">22</string>
+    <string name="lora_sf">12</string>
+    <string name="lora_bw">0</string>
+    <string name="lora_code_rate">1</string>
+    <string name="lora_preamble_length">8</string>
+    <string name="lora_crc">1</string>
+    <string name="lora_iq_invert">0</string>
+    <string name="lora_save_to_flash">0</string>
+    <string name="lora_receive_timeout">0</string>
+    <string name="lora_dev_eui">8888888888888888</string>
+    <string name="lora_app_eui">8888888888888888</string>
+    <string name="lora_app_key">88888888888888888888888888888888</string>
+    <string name="lora_nw_k_skey">88888888888888888888888888888888</string>
+    <string name="lora_app_skey">88888888888888888888888888888888</string>
+    <string name="lora_dev_addr">88888888</string>
+    <string name="lora_ch_mask">00000000000000000000FF00</string>
+    <string name="lora_duty_cycle">60000</string>
+    <string name="lora_class_A">A</string>
+    <string name="lora_class_B">B</string>
+    <string name="lora_class_C">C</string>
+    <string name="lora_app_port">5</string>
+    <string name="lora_retry_number">3</string>
+    <string name="lora_question">\u003F</string>
+    <string name="lora_prefix">AT+</string>
+</resources>

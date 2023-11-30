@@ -1,0 +1,74 @@
+/*------------------------------------------------------------------
+UTILITIES STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+//
+// Height & Width
+//
+
+.hw-14 {height: 0.875rem; width: 0.875rem;}
+.hw-16 {height: 1rem; width: 1rem;}
+.hw-18 {height: 1.125rem; width: 1.125rem;}
+.hw-20 {height: 1.25rem; width: 1.25rem;}
+.hw-22 {height: 1.375rem; width: 1.375rem;}
+.hw-24 {height: 1.5rem; width: 1.5rem;}
+.hw-50 {height: 3.125rem; width: 3.125rem;}
+.hw-100 {height: 6.25rem; width: 6.25rem;}
+
+
+
+//
+// Font Weight
+//
+.font-weight-medium {font-weight: 500;}
+.font-weight-semibold {font-weight: 600;}
+
+
+//
+// Colors
+//
+
+.fill-muted {fill: $text-muted;}
+.fill-primary {fill: $primary;}
+.fill-dark {fill: $dark;}
+.fill-danger {fill: $danger;}
+.fill-white {fill: $white;}
+
+.transparent-bg{background-color: transparent;}
+
+
+//
+// Hide Scrollbar
+//
+
+.hide-scrollbar {
+    @include hide-scrollbar();
+}
+
+//
+// Display
+//
+
+.hide {
+    display: none;
+}
+
+
+//
+// Other Utilities
+//
+
+.badge-rounded {border-radius: 6.25rem;}
+.rotate-y {transform: rotateY(180deg);}
+
+.no-box-shadow {
+    box-shadow: none;
+
+    &:focus {
+        box-shadow: none;
+    }
+}

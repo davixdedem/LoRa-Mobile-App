@@ -1,0 +1,94 @@
+/*------------------------------------------------------------------
+BUTTONS STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+
+.btn {
+    font-size: $font-size-sm;
+}
+
+// Icon  Button
+.btn-icon {
+    height: 3rem;
+    width: 3rem;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.btn-xs {
+        width: calc(1.15rem + 2px);
+        line-height: 1.15rem;
+    }
+
+    &.btn-sm {
+        width: calc(1.5rem + 2px);
+        line-height: 1.5rem;
+    }
+
+    &.btn-lg {
+        width: calc(3rem + 2px);
+        line-height: 3rem;
+    }
+}
+
+// Default Outline Button
+.btn-outline-default {
+    border: 1px solid $border-color;
+    background: transparent;
+
+    &:hover{
+        background: $light;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+// Button Minimal
+.btn-minimal {
+    color: $btn-minimal-color;
+    box-shadow: none;
+    background-color: transparent !important;
+    border: 0;
+    transition: all 0.2s ease;
+
+    &:hover{
+        color: inherit !important;
+    }
+
+    &:focus{
+        box-shadow: none !important;
+        color: $btn-minimal-color;
+    }
+
+    &.active {
+        box-shadow: none !important;
+        color: inherit;
+    }
+
+}
+
+
+.btn-secondary:not(:disabled):not(.disabled):active {
+    color: inherit;
+}
+
+
+button.close{
+    &:focus{
+        outline: none;
+    }
+}
+
+.message-content{
+    .btn-primary{
+        background: darken($color: $primary, $amount: 5);
+    }
+}

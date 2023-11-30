@@ -1,0 +1,202 @@
+/*------------------------------------------------------------------
+LAYOUT STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+.main-layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint-up(xl) {
+        flex-direction: row;
+    }
+
+    .navigation {
+        @include hide-scrollbar();
+        background: $white;
+        order: 2;
+        min-height: 3.75rem;
+
+        @include media-breakpoint-up(xl) {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            order: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: $navigation-width;
+            border-top: 0;
+            border-right: 1px solid $border-color;
+            padding-left: 0;
+            padding-right: 0;
+            text-align: center;
+        }
+    }
+
+    .sidebar {
+        @include hide-scrollbar();
+        background: $light;
+        flex-grow: 2;
+        order: 1;
+
+        @include media-breakpoint-up(xl) {
+            flex-grow: 0;
+            
+            width: $sidebar-width;
+            border-right: 1px solid $border-color;
+        }
+
+        
+    }
+
+    .main {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        order: 3;
+        flex: 1;
+        background: $white;
+
+        @include media-breakpoint-up(xl) {
+            height: 100vh;
+        }
+
+        @include media-breakpoint-down(lg) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            z-index: $zindex-sticky;
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: transform .3s ease, visibility .3s ease;
+            background: $body-bg;
+        }
+
+        &.main-visible {
+
+            @include media-breakpoint-down(lg) {
+                visibility: visible;
+                transform: translateX(0);
+            }
+           
+        }
+    }
+
+    .chats {
+        display: flex;
+        height: 100%;
+        flex-grow: 1;
+    }
+
+    .calls{
+        display: flex;
+        height: 100%;
+        flex-grow: 1;
+
+        @include hide-scrollbar();
+
+        .calls-log{
+            .card{
+                &:not(:last-child){
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+
+    .friends{
+        display: flex;
+        height: 100%;
+        flex-grow: 1;
+
+        @include hide-scrollbar();
+
+        .friends-info{
+            .card{
+                &:not(:last-child){
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+
+    .profile{
+        display: flex;
+        height: 100%;
+        flex-grow: 1;
+
+        @include hide-scrollbar();
+    }
+}
+
+
+body{
+
+    &.chats-tab-open{
+
+        .main{
+            .chats{
+                display: flex;
+            }
+
+            .calls,
+            .friends,
+            .profile{
+                display: none;
+            }
+        }
+    }
+
+    &.calls-tab-open{
+        .main{
+            .calls{
+                display: block;
+            }
+
+            .chats,
+            .friends,
+            .profile{
+                display: none;
+            }
+        }
+    }
+    
+    &.friends-tab-open{
+        .main{
+            .friends{
+                display: block;
+            }
+
+            .calls,
+            .chats,
+            .profile{
+                display: none;
+            }
+        }
+    }
+    
+    &.profile-tab-open{
+        .main{
+            .profile{
+                display: block;
+            }
+
+            .calls,
+            .friends,
+            .chats{
+                display: none;
+            }
+        }
+    }
+}
+
+

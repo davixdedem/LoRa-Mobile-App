@@ -1,0 +1,51 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:    Quicky Messanger
+Version:    1.0
+Last change:    [Initial Release]
+-------------------------------------------------------------------*/
+
+// CONFIGURATION
+@use "sass:math";
+@import "./config";
+
+// FRAMEWORK
+@import "./framework/bootstrap";
+
+// ABSTRACTS
+@import "./abstracts/mixins";
+
+// BASE
+@import "./base/base.root";
+@import "./base/base.typography";
+@import "./base/base.links";
+@import "./base/base.backgrounds";
+@import "./base/base.utilities";
+@import "./base/base.forms";
+
+// COMOPNENTS
+@import "./components/components.avatar";
+@import "./components/components.buttons";
+@import "./components/components.cards";
+@import "./components/components.chat-style";
+@import "./components/components.chatlist";
+@import "./components/components.dropdown";
+@import "./components/components.list-group";
+@import "./components/components.modal";
+@import "./components/components.events";
+
+// LAYOUTS
+@import "./layouts/layouts.navbar";
+@import "./layouts/layouts.layout";
+@import "./layouts/layouts.sidebar";
+@import "./layouts/layouts.chat";
+@import "./layouts/layouts.appbar";
+@import "./layouts/layouts.rtl";
+
+// VENDORS
+@import "./vendors/vendors.magnificpopup";
+@import "./vendors/vendors.emojionearea";
+
+// CUSTOM
+@import "./custom";

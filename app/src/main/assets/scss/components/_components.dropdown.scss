@@ -1,0 +1,67 @@
+/*------------------------------------------------------------------
+DROPDOWN STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+// Dropdown
+.dropdown {
+
+    .dropdown-menu {
+        z-index: 1025;
+        font-size: $font-size-sm;
+
+        .dropdown-item {
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+
+            span {
+                line-height: 1;
+            }
+        }
+    }
+
+    &.show {
+
+        .btn-secondary.btn-minimal,
+        .nav-link {
+            color: $gray-700 !important;
+        }
+    }
+}
+
+
+.select2-container--default {
+    .select2-selection--single {
+
+        .select2-selection__rendered{
+            color: $btn-minimal-color;
+            box-shadow: none;
+            background-color: transparent !important;
+            border: 0;
+            transition: all 0.2s ease;
+            border: 1px solid $border-color;
+            background: transparent;
+    
+            &:hover {
+                color: inherit !important;
+                background: $light;
+            }
+    
+            &:focus {
+                box-shadow: none;
+                color: $btn-minimal-color;
+            }
+    
+            &.active {
+                box-shadow: none !important;
+                color: inherit;
+            }
+        }
+        
+
+    }
+}

@@ -1,0 +1,68 @@
+/*------------------------------------------------------------------
+LIST GROUP STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+// List Group Column For SM Size
+.list-group-sm-column {
+
+    .list-group-item {
+
+        .media {
+
+            @include media-breakpoint-down(sm) {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+
+            .media-body {
+                @include media-breakpoint-down(sm) {
+                    align-self: start;
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+    }
+
+}
+
+// .list-group{
+//     .list-group-item{
+//         &:last-child{
+//             padding-bottom: 0;
+//         }
+//     }
+// }
+
+.document,
+.media{
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+
+    .document-body,
+    .media-body{
+        flex: 1;
+        align-self: center;
+        overflow: hidden;
+
+        h6{
+            margin-bottom: 4px;
+        }
+
+        a{
+            &:hover{
+                text-decoration: none;
+            }
+
+        }
+    }
+
+    .document-options,
+    .media-options{
+        align-self: center;
+    }
+}

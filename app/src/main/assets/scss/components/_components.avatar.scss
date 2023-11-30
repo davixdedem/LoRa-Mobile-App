@@ -1,0 +1,121 @@
+/*------------------------------------------------------------------
+AVATAR STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+.avatar {
+    height: 3rem;
+    width: 3rem;
+    min-width: 3rem;
+    display: inline-block;
+    position: relative;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+
+    img,
+    span {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.avatar-sm {
+        height: 2.25rem;
+        width: 2.25rem;
+        min-width: 2.25rem;
+    }
+
+    &.avatar-md {
+        height: 3.75rem;
+        width: 3.75rem;
+        min-width: 3.75rem;
+    }
+
+    &.avatar-lg {
+        height: 5rem;
+        width: 5rem;
+        min-width: 5rem;
+    }
+
+    &.avatar-xl {
+        height: 7.5rem;
+        width: 7.5rem;
+        min-width: 7.5rem;
+    }
+
+    &.avatar-xxl {
+        height: 9.375rem;
+        width: 9.375rem;
+        min-width: 9.375rem;
+    }
+
+    &.avatar-primary{
+        background: $primary;
+        color: $white;
+    }
+
+    &.avatar-success{
+        background: $success;
+        color: $white;
+    }
+
+    &.avatar-secondary{
+        background: $secondary;
+        color: $white;
+    }
+
+    &.avatar-danger{
+        background: $danger;
+        color: $white;
+    }
+
+    &.avatar-warning{
+        background: $warning;
+        color: $white;
+    }
+
+    &.avatar-info{
+        background: $info;
+        color: $white;
+    }
+}
+
+.avatar {
+    &.avatar-online:before,
+    &.avatar-offline:before,
+    &.avatar-busy:before,
+    &.avatar-away:before{
+        content: "";
+        position: absolute;
+        display: block;
+        width: .8rem;
+        height: .8rem;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        border: 3px solid $white;
+    }
+
+    &.avatar-online:before {
+        background: $success;
+    }
+
+    &.avatar-offline:before {
+        background: $secondary;
+    }
+
+    &.avatar-busy:before {
+        background: $danger;
+    }
+
+    &.avatar-away:before {
+        background: $warning;
+    }
+}

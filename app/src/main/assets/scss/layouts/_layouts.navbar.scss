@@ -1,0 +1,30 @@
+/*------------------------------------------------------------------
+NAVBAR STYLESHEET
+
+Last change: [Initial Release]
+
+Chanelog:
+-------------------------------------------------------------------*/
+
+
+.navbar-light{
+    .nav-minimal{
+        .nav-link{
+            color: lighten($color: $primary, $amount: 15);
+            transition: all 0.2s ease;
+
+            &:hover{
+                color: lighten($color: $primary, $amount: 25);
+            }
+
+            &.active{
+                color: $white;
+            }
+        }
+    }
+}
+
+.tab-content,
+.tab-pane{
+    height: 100% !important;
+}

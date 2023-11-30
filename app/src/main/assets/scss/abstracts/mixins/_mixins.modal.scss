@@ -1,0 +1,23 @@
+
+// Fullscreen bootstrap modal mixin
+@mixin modal-fullscreen {
+    right: 0;
+    bottom: 0;
+
+    .modal-dialog {
+        margin: 0;
+        max-width: none;
+        height: 100%;
+        min-height: 100%;
+        max-height: 100%;
+
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 0;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+}
