@@ -34,6 +34,8 @@ function receiveJsonUserChat(jsonString, newMessage="false") {
         riduciOpacitaUltimoMessaggio();
     }
     scrollToChatEnd();
+    bindMessagesCopyButtons();
+    bindMessagesDeleteButtons();
 }
 
 // Funzione chiamata da Kotlin
@@ -119,10 +121,10 @@ function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID
                             </svg>
 
                             <!-- Alternate :: External File link -->
-                            <!-- <img class="injectable hw-18 mr-2" src="./../assets/media/heroicons/outline/duplicate.svg" alt="message options"> -->
+                            <!-- <img class="injectable hw-18 mr-2 copy-icon" src="./../assets/media/heroicons/outline/duplicate.svg" alt="message options"> -->
                             <span>Copy</span>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center favourite-button" href="#">
                             <!-- Default :: Inline SVG -->
                             <svg class="hw-18 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
@@ -132,7 +134,7 @@ function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID
                             <!-- <img class="injectable hw-18 mr-2" src="./../assets/media/heroicons/outline/star.svg" alt="message favourite"> -->
                             <span>Favourite</span>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center text-danger" href="#">
+                        <a class="dropdown-item d-flex align-items-center text-danger" href="#" data-id="${messageID}">
                             <!-- Default :: Inline SVG -->
                             <svg class="hw-18 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -249,6 +251,7 @@ function bindingInputText() {
 // Popola l'InputText
 function populeInputText(text) {
     inputText.value = text
+    messageInput.style.background = "transparent";
 }
 
 // Mostra il caricamento GPS
@@ -258,6 +261,7 @@ function showLoading(text) {
     // Imposta il testo e la classe per l'effetto di lampeggio
     messageInput.value = "Looking for GPS...";
     messageInput.style.color = "black";
+    messageInput.style.background = "#3498db"; // Imposta lo sfondo blu
     messageInput.classList.add('blink-text');
     messageInput.disabled = true;
     submitButton.style.opacity = "0";
@@ -314,25 +318,33 @@ function removeOverlayDeviceDisconnected() {
 // Mette in attesa l'input text fino a nuova disponibilità
 function simulateSending() {
     var messageInput = document.getElementById('messageInput');
+    var duration = 1500; // Durata desiderata in millisecondi (qui impostata a 1000ms in più rispetto al valore precedente)
+    var refreshRate = 10; // Intervallo di aggiornamento della barra di caricamento in millisecondi
+    var totalIterations = duration / refreshRate; // Calcolo del numero totale di iterazioni
+    var increment = 100 / totalIterations; // Calcolo dell'incremento in base al numero di iterazioni
+
     var loadingProgress = 0;
     var loadingInterval = setInterval(function() {
-        // Modifica il colore di sfondo della barra di caricamento (puoi personalizzare lo stile)
         messageInput.style.backgroundImage = `linear-gradient(to right, #3498db ${loadingProgress}%, transparent ${loadingProgress}%)`;
-        loadingProgress += 10; // Incrementa il progresso della barra di caricamento
-        messageInput.placeholder = 'Sending message...'; // Ripristina il placeholder originale
+        loadingProgress += increment; // Incremento basato sul numero di iterazioni
+        messageInput.placeholder = 'Sending message...';
 
-        if (loadingProgress > 100) {
-            clearInterval(loadingInterval); // Arresta l'intervallo dopo il completamento della simulazione di invio
-            messageInput.style.backgroundImage = 'none'; // Ripristina lo stile originale della textarea
-            messageInput.placeholder = 'Type your message here...'; // Ripristina il placeholder originale
+        if (loadingProgress >= 100) {
+            clearInterval(loadingInterval);
+            messageInput.style.backgroundImage = 'none';
+            messageInput.placeholder = 'Type your message here...';
             ripristinaOpacitaUltimoMessaggio();
         }
-    }, 300); // Intervallo di aggiornamento della barra di caricamento (200 millisecondi)
+    }, refreshRate); // Intervallo di aggiornamento della barra di caricamento
 }
+
 
 // Riduce l'opacità dell'ultimo messaggio
 function riduciOpacitaUltimoMessaggio() {
   const messaggi = document.querySelectorAll('.message');
+  charCount.style.opacity = "0";
+  submitButton.style.opacity = "0";
+  dropDownButton.style.opacity = "0";
   if (messaggi.length > 0) {
     const ultimoMessaggio = messaggi[messaggi.length - 1];
     ultimoMessaggio.style.opacity = '0.5';
@@ -342,10 +354,64 @@ function riduciOpacitaUltimoMessaggio() {
 // Resetta l'opacità dell'ultimo messaggio
 function ripristinaOpacitaUltimoMessaggio() {
   const messaggi = document.querySelectorAll('.message');
+  charCount.style.opacity = "1.0";
+  submitButton.style.opacity = "1.0";
+  dropDownButton.style.opacity = "1.0";
   if (messaggi.length > 0) {
     const ultimoMessaggio = messaggi[messaggi.length - 1];
     ultimoMessaggio.style.opacity = '1';
+    submitButton.style.opacity = '0.5';
   }
+}
+
+// Copia nella clipboard
+function copyToClipboard(text) {
+    const tempInput = document.createElement('input');
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+}
+
+// Binding del pulsante per copiare il messaggio
+function bindMessagesCopyButtons(){
+    const copyIcons = document.querySelectorAll('.copy-button');
+
+    copyIcons.forEach(function(copyIcon) {
+        copyIcon.addEventListener('click', function(event) {
+            const parentMessage = event.target.closest('.message');
+            if (parentMessage) {
+                const messageContent = parentMessage.querySelector('.message-content');
+                if (messageContent) {
+                    let contentToCopy = messageContent.textContent;
+                    contentToCopy = contentToCopy.trim(); // Rimuovi gli spazi vuoti
+                    copyToClipboard(contentToCopy, parentMessage);
+                }
+            }
+        });
+    });
+}
+
+// Binding del pulsante per eliminare un messaggio
+function bindMessagesDeleteButtons(){
+    const dropdownItems = document.querySelectorAll('.text-danger');
+    dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function(event) {
+            event.preventDefault(); // Evita l'azione predefinita del link
+
+            const messageID = item.getAttribute('data-id');
+            if (messageID) {
+                console.log(messageID);
+                if (global_isGroup == "false"){
+                    Android.DeleteMessageJS(messageID,global_myUUID,false);
+                }
+                else{
+                    Android.DeleteMessageJS(messageID,global_myUUID,true);
+                }
+            }
+        });
+    });
 }
 
 // Avviene quando la pagina è stata caricata
@@ -368,17 +434,6 @@ window.onload = function() {
     inputText.setAttribute('maxlength', global_maxLength);
     charCount.textContent = `0/${global_maxLength}`;
 
-    const copyButtons = document.querySelectorAll('.dropdown-item.d-flex.align-items-center.copy-button');
-    console.log(copyButtons.length)
-    copyButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            console.log("Copying..")
-            //const messageText = this.getAttribute('data-message');
-            //copyToClipboard(messageText);
-
-        });
-    });
-
     const locationLink = document.getElementById('buttonLocation');
     locationLink.addEventListener('click', function(event) {
         event.preventDefault();
@@ -387,6 +442,7 @@ window.onload = function() {
         Android.getGPSCoordinateJS();
     });
 }
+
 
 
 

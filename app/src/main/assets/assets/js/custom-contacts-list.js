@@ -128,10 +128,10 @@ function createGroupChatItem(groupName, myUUID, senderUUID, name, lastMessage, t
 
     var listItem = document.createElement("li");
     if (seen == 0){
-        listItem.classList.add("contacts-item", "groups", "friends", "unread");
+        listItem.classList.add("contacts-item", "groups", "unread");
     }
     else{
-        listItem.classList.add("contacts-item", "groups", "friends");
+        listItem.classList.add("contacts-item", "groups");
     }
 
     // Imposta l'attributo data-id con il valore di senderUUID

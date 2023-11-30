@@ -527,18 +527,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        executor.execute {
-            /*
-             Thread di lettura porta seriale
-             */
-            readSerial(port)
-        }
+        /*
+        Avvio il thread di lettura
+         */
+       executor.execute {
+           readSerial()
+       }
+
     }
 
     /*
      Legge dalla porta seriale
      */
-    private fun readSerial(port: UsbSerialPort) {
+    private fun readSerial() {
         val readThread = Thread {
             isThreadReadingRunning = true
             val buffer = ByteArray(4096)
@@ -764,6 +765,20 @@ class MainActivity : AppCompatActivity() {
         """.trimIndent()
         db.execSQL(query)
     }
+
+    fun deleteMessageById(db: SQLiteDatabase, messageId: Int) {
+        val whereClause = "id = ?"
+        val whereArgs = arrayOf(messageId.toString())
+
+        val deletedRows = db.delete("messages", whereClause, whereArgs)
+
+        if (deletedRows > 0) {
+            println("Messaggio eliminato con successo!")
+        } else {
+            println("Nessun messaggio eliminato.")
+        }
+    }
+
 
     /*
     Creo la tabella 'groups'
@@ -1698,8 +1713,15 @@ class WebAppInterface(private val mainActivity: MainActivity) {
     }
 
     @JavascriptInterface
-    fun DeleteMessageJS(messageID: String){
+    fun DeleteMessageJS(messageID: String,myUUID: String,isGroup: Boolean = false){
         Log.d("KotlinScript","$messageID")
+        mainActivity.deleteMessageById(db,messageID.toInt())
+        if (!isGroup){
+            getMessagesForUserJS(myUUID)
+        }
+        else{
+            getMessagesGroupForUserJS()
+        }
     }
 
     @JavascriptInterface
