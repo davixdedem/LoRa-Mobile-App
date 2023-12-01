@@ -63,6 +63,16 @@ function receiveGroupJsonUserChat(jsonString,newMessage = "false"){
         riduciOpacitaUltimoMessaggio();
     }
     scrollToChatEnd();
+    bindMessagesCopyButtons();
+    bindMessagesDeleteButtons();
+}
+
+// Funzione chiamata da Kotlin
+function receiveContactsListJson(jsonString) {
+    var jsonData = JSON.parse(jsonString);
+
+    // Chiama la funzione per creare la lista dei contatti
+    createContactList(jsonData);
 }
 
 // Aggiunge il divider
@@ -87,11 +97,11 @@ function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID
     const messageClass = isSelf ? 'message self' : 'message';
     let messageContent = '';
 
-    if (needDivider) {
+/*    if (needDivider) {
         messageContent += `
             <div class="message-divider sticky-top pb-2" data-label="Yesterday">&nbsp;</div>
         `;
-    }
+    }*/
 
     messageContent += `
         <!-- Received Message Start -->
@@ -252,6 +262,7 @@ function bindingInputText() {
 function populeInputText(text) {
     inputText.value = text
     messageInput.style.background = "transparent";
+    charCount.textContent = `${text.length}/${global_maxLength}`;
 }
 
 // Mostra il caricamento GPS
@@ -414,9 +425,78 @@ function bindMessagesDeleteButtons(){
     });
 }
 
+// Crea la lista dei contatti
+function createContactList(jsonData) {
+    const contactsList = document.getElementById('friendsTab');
+    contactsList.innerHTML = ''; // Pulisce il contenuto precedente
+
+    // Raggruppa gli utenti per la prima lettera del nome
+    const groupedUsers = {};
+
+    jsonData.forEach(user => {
+        const firstLetter = user.friendlyName.charAt(0).toUpperCase();
+
+        if (!groupedUsers[firstLetter]) {
+            groupedUsers[firstLetter] = [];
+        }
+
+        groupedUsers[firstLetter].push(user);
+    });
+
+    // Ordina le chiavi in ordine alfabetico
+    const sortedKeys = Object.keys(groupedUsers).sort();
+
+    sortedKeys.forEach(letter => {
+        const usersInSection = groupedUsers[letter];
+
+        // Crea la sezione per la lettera
+        const section = document.createElement('li');
+        section.innerHTML = `<small class="font-weight-medium text-uppercase text-muted" data-letter="${letter}">${letter}</small>`;
+        contactsList.appendChild(section);
+
+        // Itera attraverso gli utenti nella sezione corrente
+        usersInSection.forEach(user => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('contacts-item', 'active');
+            listItem.innerHTML = `
+                <a class="contacts-link" href="#">
+                    <div class="avatar">
+                        <img src="./../assets/media/avatar/user.png" alt="">
+                    </div>
+                    <div class="contacts-content">
+                        <div class="contacts-info">
+                            <h6 class="chat-name text-truncate">${user.friendlyName}</h6>
+                        </div>
+                        <div class="contacts-texts">
+                            <svg class="hw-16 text-muted mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                            </svg>
+                            <p class="text-muted mb-0">${user.lastMessage}</p>
+                        </div>
+                    </div>
+                </a>
+            `;
+
+            // Aggiunge l'elemento alla sezione corrispondente
+            section.appendChild(listItem);
+        });
+    });
+}
+
+// Nasconde gli elementi della rubrica
+function hideContacts() {
+    const elementsToHide = document.querySelectorAll('.contacts-item, .contacts-item.active, small.font-weight-medium.text-uppercase.text-muted');
+
+    elementsToHide.forEach(element => {
+        element.style.display = 'none';
+    });
+}
+
+
 // Avviene quando la pagina è stata caricata
 window.onload = function() {
     hideMessages();
+    hideContacts();
     set_myUUID_and_senderUUID();
     set_isGroup();
     if (global_isGroup === "false"){
@@ -441,6 +521,7 @@ window.onload = function() {
         showLoading();
         Android.getGPSCoordinateJS();
     });
+
 }
 
 

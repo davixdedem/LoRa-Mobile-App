@@ -54,6 +54,7 @@ import com.hoho.android.usbserial.driver.UsbSerialDriver
 import java.util.Timer
 import java.util.TimerTask
 
+
 class MainActivity : AppCompatActivity() {
     /***************************** DEVICE CONFIG *****************************************/
     private lateinit var loraFreq: String
@@ -304,6 +305,7 @@ class MainActivity : AppCompatActivity() {
          */
         removeNotifications()
 
+        getUsersAsJson(db)
     }
 
     /*
@@ -955,6 +957,57 @@ class MainActivity : AppCompatActivity() {
         db.execSQL(query)
     }
 
+    data class User(
+        val id: Int,
+        val userUUID: String,
+        val friendlyName: String?,
+        val profileImage: String?,
+        val lastMessage: String?,
+        val isAccepted: Int,
+        val isBlocked: Int,
+        val timestamp: String
+    )
+    @SuppressLint("Range")
+    fun getUsersAsJson(db: SQLiteDatabase): String {
+        val userList = mutableListOf<User>()
+
+        val query = "SELECT * FROM users"
+        val cursor = db.rawQuery(query, null)
+
+        cursor.use {
+            while (it.moveToNext()) {
+                val user = User(
+                    it.getInt(it.getColumnIndex("id")),
+                    it.getString(it.getColumnIndex("userUUID")),
+                    it.getString(it.getColumnIndex("friendlyName")),
+                    it.getString(it.getColumnIndex("profileImage")),
+                    it.getString(it.getColumnIndex("lastMessage")),
+                    it.getInt(it.getColumnIndex("isAccepted")),
+                    it.getInt(it.getColumnIndex("isBlocked")),
+                    it.getString(it.getColumnIndex("timestamp"))
+                )
+                userList.add(user)
+            }
+        }
+
+        val jsonArray = JSONArray()
+        for (user in userList) {
+            val jsonObject = JSONObject()
+            jsonObject.put("id", user.id)
+            jsonObject.put("userUUID", user.userUUID)
+            jsonObject.put("friendlyName", user.friendlyName)
+            jsonObject.put("profileImage", user.profileImage)
+            jsonObject.put("lastMessage", user.lastMessage)
+            jsonObject.put("isAccepted", user.isAccepted)
+            jsonObject.put("isBlocked", user.isBlocked)
+            jsonObject.put("timestamp", user.timestamp)
+            jsonArray.put(jsonObject)
+        }
+        Log.d("DBHandler", "Lista user: $jsonArray")
+        return jsonArray.toString()
+    }
+
+
     /*
      Creo la tabella 'configurations'
      */
@@ -1465,6 +1518,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+        /*
+     Chiama la funzione JavaScript 'receiveContactsListJson'
+     */
+    fun sendJsonToJSUsersList(jsonString: String) {
+        runOnUiThread {
+            webView.evaluateJavascript("receiveContactsListJson('$jsonString');") {
+            }
+        }
+    }
+
     /*
     Flagga tutti i messaggi del gruppo come visti
      */
@@ -1729,6 +1792,15 @@ class WebAppInterface(private val mainActivity: MainActivity) {
         Log.d("KotlinScript","Cerco le coordinate GPS attuali...")
         mainActivity.checkLocationPermission()
         mainActivity.startGPS()
+    }
+
+    @JavascriptInterface
+    fun getContactsListJS() {
+        val messages = mainActivity.getUsersAsJson(db)
+        Log.d("KotlinScript", messages)
+        val jsonArray = JSONArray(messages)
+        val jsonString = jsonArray.toString()
+        mainActivity.sendJsonToJSUsersList(jsonString)
     }
 
 }
