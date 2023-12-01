@@ -384,7 +384,6 @@ function bindingContactListButton(){
     const friendsTab = document.getElementById('friends-tab');
     friendsTab.addEventListener('click', function(event) {
         event.preventDefault();
-        console.log('L\'elemento Friends Tab è stato cliccato!');
         Android.getContactsListJS();
     });
 }

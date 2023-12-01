@@ -46,13 +46,13 @@ import android.net.Uri
 import android.webkit.WebViewClient
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
 import com.hoho.android.usbserial.driver.UsbSerialDriver
 import java.util.Timer
 import java.util.TimerTask
+import kotlin.concurrent.timerTask
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -128,17 +128,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentPage: String
     private lateinit var driver: UsbSerialDriver
     private lateinit var connection: UsbDeviceConnection
+    private var isCheckSerialStatusStarted = false
+    private var isDeviceConnected = false
 
     /*
      GPS
      */
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var locationRequest: LocationRequest
-    private lateinit var locationCallback: LocationCallback
     private var locationManager: LocationManager? = null
     private var locationListener: LocationListener? = null
     private var timeoutTimer: Timer? = null
     private var isAppInForeground = false
+    private var isReadSerialActive = false
 
     /***************************** DATABASE *****************************************/
     private lateinit var db: SQLiteDatabase
@@ -305,7 +306,13 @@ class MainActivity : AppCompatActivity() {
          */
         removeNotifications()
 
-        getUsersAsJson(db)
+        /*
+        Controllo ogni n° secondi che la lettura sia avviata
+         */
+        if (!isCheckSerialStatusStarted) {
+            checkReadSerialStatus()
+        }
+
     }
 
     /*
@@ -456,6 +463,87 @@ class MainActivity : AppCompatActivity() {
         /*
          USBManager
          */
+/*
+        if (!isDeviceConfigured) {
+            val usbManager = getSystemService(Context.USB_SERVICE) as UsbManager
+            val deviceList: HashMap<String, UsbDevice> = usbManager.deviceList
+            for (entry in deviceList.entries) {
+                val device: UsbDevice = entry.value
+                val permissionIntent = PendingIntent.getBroadcast(
+                    this,
+                    0,
+                    Intent(actionUsbPermission),
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+                usbManager.requestPermission(device, permissionIntent)
+            }
+
+            */
+/*
+             Find all available drivers from attached devices.
+             *//*
+
+            val manager = getSystemService(USB_SERVICE) as UsbManager
+            val availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager)
+            Log.d("Driver", "$availableDrivers")
+            if (availableDrivers.isEmpty()) {
+                Log.d("Driver", "$availableDrivers")
+            }
+
+            try {
+                */
+/*
+                 Open a connection to the first available driver.
+                 *//*
+
+                driver = availableDrivers[0]
+                connection = manager.openDevice(driver.device)
+                    ?: // add UsbManager.requestPermission(driver.getDevice(), ..) handling here
+                    return
+                // Rest of your code to handle the USB connection
+                port = driver.ports[0]
+                port.open(connection)
+                port.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE)
+            } catch (e: Exception) {
+                // Handle exceptions here
+                e.printStackTrace() // Or perform other error handling tasks
+            }
+
+            */
+/*
+             Configurazione del dispositivo
+             *//*
+
+            isDeviceConfigured = setDeviceConfig(port)
+            if (isDeviceConfigured) {
+                Log.d("USBManager", "Device configurato correttamente,popolo i dati sul db.")
+                val mName = port.device.manufacturerName
+                val mVendorId = port.device.vendorId
+                val mDeviceId = port.device.deviceId
+                val mProductId = port.device.productId
+                val mProductName = port.device.productName
+                val mSerialNumber = port.device.serialNumber
+                val mVersion = port.device.version
+                if (mName != null) {
+                    inserisciConfigurazione(db, "mName", mName, "Device Manufacture Name")
+                }
+                inserisciConfigurazione(db, "mVendorId", mVendorId.toString(), "Device Vendor ID")
+                inserisciConfigurazione(db, "mDeviceId", mDeviceId.toString(), "Device ID")
+                inserisciConfigurazione(db, "mProductId", mProductId.toString(), "Device Product ID")
+                if (mProductName != null) {
+                    inserisciConfigurazione(db, "mProductName", mProductName, "Device Manufacture Name")
+                }
+                if (mSerialNumber != null) {
+                    inserisciConfigurazione(db, "mSerialNumber", mSerialNumber, "Device Serial Number")
+                }
+                inserisciConfigurazione(db, "mVersion", mVersion, "Device Version name")
+            }
+        }
+*/
+
+    }
+
+    private fun configureDevice(){
         if (!isDeviceConfigured) {
             val usbManager = getSystemService(Context.USB_SERVICE) as UsbManager
             val deviceList: HashMap<String, UsbDevice> = usbManager.deviceList
@@ -487,7 +575,7 @@ class MainActivity : AppCompatActivity() {
                 driver = availableDrivers[0]
                 connection = manager.openDevice(driver.device)
                     ?: // add UsbManager.requestPermission(driver.getDevice(), ..) handling here
-                    return
+                            return
                 // Rest of your code to handle the USB connection
                 port = driver.ports[0]
                 port.open(connection)
@@ -496,9 +584,6 @@ class MainActivity : AppCompatActivity() {
                 // Handle exceptions here
                 e.printStackTrace() // Or perform other error handling tasks
             }
-
-
-
 
             /*
              Configurazione del dispositivo
@@ -529,13 +614,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /*
-        Avvio il thread di lettura
-         */
-       executor.execute {
-           readSerial()
-       }
-
     }
 
     /*
@@ -544,6 +622,7 @@ class MainActivity : AppCompatActivity() {
     private fun readSerial() {
         val readThread = Thread {
             isThreadReadingRunning = true
+            isReadSerialActive = true
             val buffer = ByteArray(4096)
             while (!Thread.interrupted()) {
                 if (needThreadReading) {
@@ -568,12 +647,14 @@ class MainActivity : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         // Gestione dell'eccezione
+                        isReadSerialActive = false
                         isThreadReadingRunning = false
                         e.printStackTrace()
                         Thread.currentThread().interrupt() // Interrompe il thread in caso di eccezione
                         addOverlayDeviceDisconnected()
                     }
                 } else {
+                    isReadSerialActive = false
                     Log.d("Buffering", "Thread fermato in questo momento...")
                 }
             }
@@ -585,6 +666,38 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.d("Buffering", "Thread di lettura già avviato.")
         }
+    }
+
+    /*
+    Funzione che controlla ogni 3 secondi lo stato della funzione readSerial()
+     */
+    private fun checkReadSerialStatus() {
+        // Verifica se la funzione è già stata avviata
+        if (isCheckSerialStatusStarted) {
+            Log.d("USBSerial", "La funzione checkReadSerialStatus() è già stata avviata.")
+            return
+        }
+
+        val timer = Timer()
+        timer.scheduleAtFixedRate(timerTask {
+            if (isReadSerialActive) {
+                Log.d("USBSerial", "La funzione readSerial() è attiva.")
+                removeOverlayDeviceDisconnected()
+            } else {
+                Log.d("USBSerial", "La funzione readSerial() non è attiva.")
+                /*
+                Avvio il thread di lettura
+                */
+                configureDevice()
+                executor.execute {
+                    readSerial()
+                    Log.d("USBSerial", "La funzione readSerial() è stata avviata.")
+                }
+            }
+        }, 0, 3000)
+
+        // Imposta lo stato di avvio come true
+        isCheckSerialStatusStarted = true
     }
 
     /*
@@ -1477,6 +1590,7 @@ class MainActivity : AppCompatActivity() {
      Chiama la funzione JavaScript 'addOverlay'
      */
     fun removeOverlayDeviceDisconnected() {
+        isDeviceConnected = true
         runOnUiThread {
             webView.evaluateJavascript("removeOverlayDeviceDisconnected();") {
             }
