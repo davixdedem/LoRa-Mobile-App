@@ -21,6 +21,11 @@ Semtech manufactures LoRa devices. The Long Range wireless radio frequency techn
 - Features geolocation capabilities used to triangulate device positions via timestamps from gateways.
 - Enables long-range connectivity for Internet of Things (IoT) devices across various industries.
 
+
+
+
+
+
 ## Italiano
 
 **LoRa**
