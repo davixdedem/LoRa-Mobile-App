@@ -2,7 +2,7 @@
 
 ![Project Logo](logo.png)
 
-[English](https://pages.github.com/).
+The background color is `#ffffff` for light mode and `#000000` for dark mode.
 
 **LoRa**
 
