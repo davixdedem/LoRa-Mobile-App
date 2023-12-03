@@ -32,6 +32,7 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 **Descrizione**
 
 In questo progetto utilizziamo la Dev-Board **CubeCell – AB01 Dev-Board** in modalità AT-Command per comunicare con lo smartphone e avviare lo scambio di dati.
+
 ![Project Logo](hw1.png)
 
 **Caratteristiche Principali**
