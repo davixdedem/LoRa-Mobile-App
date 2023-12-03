@@ -27,18 +27,21 @@ Semtech manufactures LoRa devices. The Long Range wireless radio frequency techn
 
 **LoRa**
 
-LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espanso, derivata dalla tecnologia Chirp Spread Spectrum (CSS). Rappresenta la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale. Inizialmente sviluppata da Cycleo a Grenoble, in Francia, è stata acquisita da Semtech nel 2012 ed è diventata un membro fondatore della LoRa Alliance.
+LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espans derivata dalla tecnologia Chirp Spread Spectrum (CSS). Rappresenta la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale.
 
 **Descrizione**
 
-In questo progetto utilizziamo la Dev-Board **CubeCell – AB01 Dev-Board** in modalità AT Command Al fine di comunicare con lo Smartphone e avviare lo scambio di dati. La scheda deve necessariamente essere flashata con il sorgente scaricabile dal seguente link: LINK.
-L'applicazione permette di avviare una serie di chat testuali bidirezionali con tutti gli utenti, raggiungibili dalle limitazioni LoRa, che utilizzano lo stesso progetto.
+In questo progetto utilizziamo la Dev-Board **CubeCell – AB01 Dev-Board** in modalità AT Command al fine di comunicare con lo Smartphone e avviare lo scambio di dati. La scheda deve necessariamente essere flashata con il sorgente scaricabile dal seguente link: LINK.
+L'applicazione permette di avviare chat testuali bi-direzionali con tutti gli altri utilizzatori, disponibili nel campo LoRa.
+
+Nella versione attuale del progetto la Dev-Board viene collegata allo Smartphone tramite USB: FOTO.
 
 **Pro**
 Distanza di utilizzo
-Costo basso
+Basso costo
 
 **Contro**
+Lunghezza massima dei dati di trasferimento
 
 
 Riferimento al PDF dei comandi AT:
