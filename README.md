@@ -2,7 +2,7 @@
 
 ![Project Logo](logo.png)
 
-The background color is `#ffffff` for light mode and `#000000` for dark mode.
+ `#English` 
 
 **LoRa**
 
@@ -22,7 +22,7 @@ Semtech produces LoRa devices, and the Long Range wireless radio frequency techn
 - Enables long-range connectivity for Internet of Things (IoT) devices across various industries.
 
 
-[Italiano]
+ `#Italiano` 
 
 **LoRa**
 LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espanso, derivata dalla tecnologia Chirp Spread Spectrum (CSS). È la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale. Inizialmente sviluppata da Cycleo a Grenoble, in Francia, è stata acquisita da Semtech nel 2012 ed è diventata un membro fondatore della LoRa Alliance.
