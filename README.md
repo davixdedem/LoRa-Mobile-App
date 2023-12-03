@@ -23,9 +23,6 @@ Semtech manufactures LoRa devices. The Long Range wireless radio frequency techn
 
 
 
-
-
-
 ## Italiano
 
 **LoRa**
