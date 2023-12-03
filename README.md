@@ -31,10 +31,8 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 
 **Descrizione**
 
-In questo progetto sfruttiamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità AT Command, al fine di comunicare con lo Smartphone e avviare lo scambio di dati via radio. L'applicazione permette di comunicare testualmente con gli altri utenti disponibili nel raggio LoRa sulle frequenze disponibili nel paese di utilizzo. 
-Europa - 868 MHZ
-USA - 433 MHZ
-
+In questo progetto sfruttiamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command**, al fine di comunicare con lo Smartphone e avviare lo scambio di dati via radio. L'applicazione permette di avviare una chat testuale con gli altri utenti disponibili nel raggio LoRa(a tal proposito prestare attenzione alle frequenze disponibili nel paese di utilizzo e configurare di conseguenza il dispositivo tramite l'applicazione).
+Uno degli scopi principali dell'applicazione è quello di semplificare l'utilizzo del protocollo LoRa e renderlo alla portata di tutti permettendone una comunicazione bi-direzionale punto-punto.
 
 
 La scheda è disponibile per l'acquisto da: LINK.
