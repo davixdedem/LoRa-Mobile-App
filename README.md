@@ -3,7 +3,6 @@
 ![Project Logo](logo.png)
 
  `#English` 
-
 **LoRa**
 
 LoRa (Long Range) is a technology based on spread spectrum frequency modulation derived from Chirp Spread Spectrum (CSS) technology. It's the first low-cost implementation of chirp spread spectrum for commercial use. Initially developed by Cycleo in Grenoble, France, it was acquired by Semtech in 2012 and became a founding member of the LoRa Alliance.
@@ -23,7 +22,6 @@ Semtech produces LoRa devices, and the Long Range wireless radio frequency techn
 
 
  `#Italiano` 
-
 **LoRa**
 LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espanso, derivata dalla tecnologia Chirp Spread Spectrum (CSS). È la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale. Inizialmente sviluppata da Cycleo a Grenoble, in Francia, è stata acquisita da Semtech nel 2012 ed è diventata un membro fondatore della LoRa Alliance.
 
@@ -39,5 +37,3 @@ Semtech produce dispositivi LoRa e la tecnologia wireless a radiofrequenza Long 
 - I nuovi chipset LoRa presentano consumi energetici ridotti, maggiore potenza di trasmissione e dimensioni più compatte rispetto alle generazioni precedenti.
 - Dispone di funzionalità di geolocalizzazione per triangolare le posizioni dei dispositivi tramite timestamp dai gateway.
 - Consente la connettività a lungo raggio per dispositivi Internet of Things (IoT) in diversi settori.
-
-*[Fonte: Wikipedia]*
