@@ -1,4 +1,4 @@
-# LoRa Mobile App
+# LoRa Mobile Chat
 
 ![Project Logo](logo.png)
 
