@@ -2,7 +2,8 @@
 
 ![Project Logo](logo.png)
 
-[Inglese]
+[English](https://pages.github.com/).
+
 **LoRa**
 
 LoRa (Long Range) is a technology based on spread spectrum frequency modulation derived from Chirp Spread Spectrum (CSS) technology. It's the first low-cost implementation of chirp spread spectrum for commercial use. Initially developed by Cycleo in Grenoble, France, it was acquired by Semtech in 2012 and became a founding member of the LoRa Alliance.
