@@ -31,13 +31,13 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 
 **Descrizione**
 
-In questo progetto sfruttiamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command**, al fine di comunicare con lo Smartphone e avviare lo scambio di dati via radio. L'applicazione permette di avviare una chat testuale con gli altri utenti disponibili nel raggio LoRa(a tal proposito prestare attenzione alle frequenze disponibili nel paese di utilizzo e configurare di conseguenza il dispositivo tramite l'applicazione).
-Uno degli scopi principali dell'applicazione è quello di semplificare l'utilizzo del protocollo LoRa e renderlo alla portata di tutti permettendone una comunicazione bi-direzionale punto-punto.
-
+In questo progetto sfruttiamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command**, al fine di utilizzarla con lo Smartphone e avviare lo scambio di dati via radio. L'applicazione permette di avviare delle chat testuali per comunicare con gli altri utenti disponibili nel raggio LoRa(prestare attenzione alle frequenze disponibili nel paese di utilizzo e configurare di conseguenza il dispositivo tramite l'apposito pannello di configurazione).
+Uno degli scopi principali del progetto è quello di semplificare l'utilizzo di LoRa e renderlo alla portata di tutti permettendone una comunicazione bi-direzionale punto-punto. Per il corretto utilizzo, la scheda deve aver installato il seguente sorgente scaricabile dal LINK, a tal proposito è possibile utilizzare il software Arduino IDE o ESPTOOL.
+Fino all'ultima versione ufficiale, le chat non sono protette da nessuno strato di crittografia, anche se in futuro potrebbe essere previsto l'utilizzo di una crittografia a chiave simmetrica, rimanendo nei limiti della lunghezza massima dei pacchetti dati LoRa.
 
 La scheda è disponibile per l'acquisto da: LINK.
 
-Per il corretto funzionamento la scheda deve essere flashata con il sorgente scaricabile dal seguente link: LINK.
+
 
 
 Nella versione attuale la scheda viene collegata allo Smartphone tramite USB: FOTO.
