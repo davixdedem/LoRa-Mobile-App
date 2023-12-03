@@ -30,6 +30,8 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 **Descrizione**
 
 Semtech produce dispositivi LoRa. La tecnologia wireless a radiofrequenza Long Range (LoRa) è un chipset wireless a lungo raggio e basso consumo energetico utilizzato nell'implementazione di molte reti per l'Internet delle cose (IoT) in tutto il mondo. Compete con altre reti wireless a bassa potenza (LPWAN) come IoT a banda stretta (NB IoT), LTE Cat M1, SigFox e Ingenu.
+Questo progetto è compatibile con Heltec Cube Cell HTTCAB01:
+![Project Logo](hw1.png)
 
 **Caratteristiche Principali**
 
