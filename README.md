@@ -31,7 +31,16 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 
 **Descrizione**
 
-In questo progetto utilizziamo la Dev-Board **CubeCell – AB01 Dev-Board** in modalità AT-Command per comunicare con lo smartphone e avviare lo scambio di dati.
+In questo progetto utilizziamo la Dev-Board **CubeCell – AB01 Dev-Board** in modalità AT Command Al fine di comunicare con lo Smartphone e avviare lo scambio di dati. La scheda deve necessariamente essere flashata con il sorgente scaricabile dal seguente link: LINK.
+L'applicazione permette di avviare una serie di chat testuali bidirezionali con tutti gli utenti, raggiungibili dalle limitazioni LoRa, che utilizzano lo stesso progetto.
+
+**Pro**
+Distanza di utilizzo
+Costo basso
+
+**Contro**
+
+
 Riferimento al PDF dei comandi AT:
 https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf
 
