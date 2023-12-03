@@ -1,7 +1,8 @@
 # LoRa Mobile App
 
 **LoRa**
-![alt text](logo.png)
+
+![Logo del progetto](logo.png)
 
 LoRa (Long Range) è una tecnologia di modulazione di frequenza a spettro espanso derivata dalla tecnologia di Chirp Spread Spectrum (CSS) ed è la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale. È stato sviluppato da Cycleo di Grenoble, in Francia, e acquisito da Semtech nel 2012, membro fondatore di LoRa Alliance.
 I dispositivi LoRa di Semtech e la tecnologia wireless a radiofrequenza Long Range (tecnologia LoRa) sono un chipset wireless a lungo raggio e bassa potenza che viene utilizzato nell'implementazione di molte reti di dispositivi dell'internet delle cose (IoT) in tutto il mondo. LoRa è un protocollo di comunicazione che compete con altre reti wireless a bassa potenza (LPWAN) come IoT a banda stretta (NB IoT) o LTE Cat M1, SigFox e Ingenu.
