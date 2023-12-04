@@ -16,7 +16,7 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 - ## Requisiti di Sistema
 
 - **Android Versione**: 13 o successiva
-- **Spazio di archiviazione**: Minimo 100 MB
+- **Spazio di archiviazione**: Minimo 16.6 MB
 - **Memoria RAM**: Consigliato 2 GB o superiore
 
 - ## Preparazione del dispositivo<br>
