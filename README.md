@@ -1,59 +1,31 @@
 # LoRa Mobile Chat
 
-![Project Logo](logo.png)
-
-## English
-
-**LoRa**
-
-LoRa (Long Range) technology is based on spread spectrum frequency modulation derived from Chirp Spread Spectrum (CSS). It represents the first low-cost implementation of chirp spread spectrum for commercial use. Initially developed by Cycleo in Grenoble, France, it was acquired by Semtech in 2012 and became a founding member of the LoRa Alliance.
-
-**Description**
-
-Semtech manufactures LoRa devices. The Long Range wireless radio frequency technology (LoRa) is a low-power, long-range wireless chipset used in implementing numerous Internet of Things (IoT) networks worldwide. It competes with other low-power wireless networks (LPWAN) such as Narrowband IoT (NB IoT), LTE Cat M1, SigFox, and Ingenu.
-
-**Key Features**
-
-- LoRa operates on sub-gigahertz radio frequency bands like 433 MHz, 868 MHz (Europe), and 915 MHz (North America).
-- Enables long-range transmissions (over 10 km in rural areas, 3–5 km in heavily urbanized areas) with low energy consumption.
-- Comprises two parts: LoRa, the physical layer, and LoRaWAN (Long Range Wide Area Network), the upper layers.
-- New LoRa chipsets offer reduced energy consumption, increased transmission power, and smaller sizes compared to previous generations.
-- Features geolocation capabilities used to triangulate device positions via timestamps from gateways.
-- Enables long-range connectivity for Internet of Things (IoT) devices across various industries.
-
-
-
-## Italiano
-
 **LoRa**
 
 LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espans derivata dalla tecnologia Chirp Spread Spectrum (CSS). Rappresenta la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale.
 
 **Descrizione**
 
-In questo progetto sfruttiamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command**, al fine di utilizzarla con lo Smartphone e avviare lo scambio di dati via radio. L'applicazione permette di avviare delle chat testuali per comunicare con gli altri utenti disponibili nel raggio LoRa(prestare attenzione alle frequenze disponibili nel paese di utilizzo e configurare di conseguenza il dispositivo tramite l'apposito pannello di configurazione).
-Uno degli scopi principali del progetto è quello di semplificare l'utilizzo di LoRa e renderlo alla portata di tutti permettendone una comunicazione bi-direzionale punto-punto. Per il corretto utilizzo, la scheda deve aver installato il seguente sorgente scaricabile dal LINK, a tal proposito è possibile utilizzare il software Arduino IDE o ESPTOOL.
-Fino all'ultima versione ufficiale, le chat non sono protette da nessuno strato di crittografia, anche se in futuro potrebbe essere previsto l'utilizzo di una crittografia a chiave simmetrica, rimanendo nei limiti della lunghezza massima dei pacchetti dati LoRa.
+Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command** per consentire l'interazione con uno smartphone e avviare lo scambio di dati tramite radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa. È importante prestare attenzione alle frequenze disponibili nel paese d'uso e configurare di conseguenza il dispositivo tramite l'apposito pannello di configurazione.
 
-La scheda è disponibile per l'acquisto da: LINK.
+Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il seguente codice sorgente, scaricabile dal LINK fornito. Per questa operazione, è possibile utilizzare software come Arduino IDE o ESPTOOL.
 
+Fino all'ultima versione ufficiale, le chat non godono di alcun livello di crittografia. Tuttavia, in futuro, si potrebbe valutare l'implementazione di una crittografia a chiave simmetrica, sempre nel rispetto dei limiti relativi alla lunghezza massima dei pacchetti dati LoRa.
 
+La scheda è disponibile per l'acquisto da: [LINK].
 
-
-Nella versione attuale la scheda viene collegata allo Smartphone tramite USB: FOTO.
+Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOTO].
 
 **Pro**
-Distanza di utilizzo
-Basso costo
+- Distanza di utilizzo
+- Basso costo
 
 **Contro**
-Lunghezza massima dei dati di trasferimento
+- Lunghezza massima dei dati di trasferimento
 
+Riferimento al PDF dei comandi AT: [Manuale Utente Comandi AT](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
 
-Riferimento al PDF dei comandi AT:
-https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf
-
-![Project Logo](hw1.png)
+![Logo del Progetto](hw1.png)
 
 **Caratteristiche Principali**
 
