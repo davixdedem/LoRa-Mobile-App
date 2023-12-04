@@ -7,35 +7,32 @@
 LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espans derivata dalla tecnologia Chirp Spread Spectrum (CSS). Rappresenta la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale.
 
 ## **Descrizione**
-Questa è un'applicazione di **chat real-time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei.
+Questa è un'applicazione di **chat real-time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei tra loro o in un'unica chat room. <br>
 
 Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command** per consentire l'interazione con uno smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.<br>
 Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell. Per questa operazione, è possibile utilizzare software come Arduino IDE o ESPTOOL.
 La scheda è disponibile per l'acquisto da: [LINK].
 Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOTO].
 
-## **Funzionalità**
-**Messaggi in tempo reale**: La chat supporta la comunicazione istantanea tra gli utenti con l'utilizzo di Socket.io per la trasmissione dei messaggi in tempo reale.<br>
-**Connessione multipla**: Gli utenti possono connettersi contemporaneamente e scambiare messaggi tra loro in un'unica chat room.
-
-## PREPARAZIONE DEL DISPOSITIVO ⚙️<bt>
-**Tramite ARDUINO-IDE**<br>
-
-**1 - Preparazione dell'ambiente Arduino**<br>
-Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino, per supporto visitare: [Guida Ufficiale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager) <br>
-**2 - Impostare la modalità AT Command**<br>
-Il nostro intento è quello di installare il codice sorgente dedicato alla predisposizione dei comandi AT,disponibile negli esempi. 
-***Examples --> Lora --> AT_Command***
-
 ## PREPARAZIONE DEL DISPOSITIVO  ⚙️<br>
-**Tramite ESPTOOL**<br>
 
-**1 - Scaricare/Installare Esptool**<br>
-``pip install esptool``<br>
-**2 - Clonare il repository**<br>
+**1 - Clonare il repository**<br>
 ``git clone https://github.com/davixdedem/LoRa-Mobile-App``<br>
-**3 - Flashing del file *CubeCell_Board.cyacd***<br>
-``/home/magix/.arduino15/packages/CubeCell/tools/CubeCellflash/0.0.1/CubeCellflash -serial /dev/ttyUSB0 CubeCell_Board.cyacd``<br>
+**2 - Entrare nella directory *tools* del progetto**<br>
+``cd Lora-Mobile-App/tools``<br>
+**3 - Rendere eseguibile il tools *CubeCellflash***<br>
+``chmod +x CubeCellflash``<br>
+**4 - Flashing del file *at_command.hex***<br>
+``./CubeCellflash -serial /dev/ttyUSB0 at_command.hex``<br>
+
+## CONFIGURAZIONE DELL'APPLICAZIONE  📱<br>
+
+**1 - Scaricare l'applicazione dall'ultima release disponibile**<br>
+**2 - Collegare la Dev-Board allo Smartphone tramite cavo USB**<br>
+**3 - Configurare la frequenza disponibile nel proprio paese tramite il pannello di configurazione**<br>
+**3 - Inizia a chattare!**<br>
+
+
 
 ## **Pro & Contro**
 | **Pro**                                       | **Contro**                                              |
