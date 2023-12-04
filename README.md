@@ -20,6 +20,7 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 
 ## PREPARAZIONE DEL DISPOSITIVO ⚙️<bt>
 **Tramite ARDUINO-IDE**<br>
+
 **1 - Preparazione dell'ambiente Arduino**<br>
 Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino, per supporto visitare: [Guida Ufficiale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager) <br>
 **2 - Impostare la modalità AT Command**<br>
@@ -28,12 +29,14 @@ Il nostro intento è quello di installare il codice sorgente dedicato alla predi
 
 ## PREPARAZIONE DEL DISPOSITIVO  ⚙️<br>
 **Tramite ESPTOOL**<br>
-<span style="color: red;">Testo colorato in blu</span>
-**1 - Preparazione dell'ambiente Arduino**<br>
-Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino, per supporto visitare: [Guida Ufficiale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager) <br>
-**2 - Impostare la modalità AT Command**<br>
-Il nostro intento è quello di installare il codice sorgente dedicato alla predisposizione dei comandi AT,disponibile negli esempi. 
-***Examples --> Lora --> AT_Command***
+
+**1 - Scaricare/Installare Esptool**<br>
+``pip install esptool``<br>
+**2 - Clonare il repository**<br>
+``git clone https://github.com/davixdedem/LoRa-Mobile-App``<br>
+**3 - Flashing del file *CubeCell_Board.cyacd***<br>
+``/home/magix/.arduino15/packages/CubeCell/tools/CubeCellflash/0.0.1/CubeCellflash -serial /dev/ttyUSB0 CubeCell_Board.cyacd``<br>
+
 ## **Pro & Contro**
 | **Pro**                                       | **Contro**                                              |
 |-----------------------------------------------|----------------------------------------------------------|
