@@ -12,8 +12,6 @@ Questa è un'applicazione di chat real-time basata su LoRa che consente agli ute
 Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command** per consentire l'interazione con uno smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.
 Riferimento al PDF dei comandi AT: [Manuale Utente Comandi AT](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
 
-![Hardware](hw1.png)
-
 Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il seguente codice sorgente, scaricabile dal LINK fornito. Per questa operazione, è possibile utilizzare software come Arduino IDE o ESPTOOL.
 La scheda è disponibile per l'acquisto da: [LINK].
 Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOTO].
@@ -24,6 +22,14 @@ Interfaccia semplice:
 - Connessione multipla: Gli utenti possono connettersi contemporaneamente e scambiare messaggi tra loro in un'unica chat room.
 
 ## **Pro & Contro**
+| **Pro**                                       | **Contro**                                              |
+|-----------------------------------------------|----------------------------------------------------------|
+| Ampia copertura                               | Banda limitata                                           |
+| Basso consumo energetico                       | Velocità di trasmissione limitata                         |
+| Penetrazione di ostacoli                       | Interferenze                                             |
+| Costi ridotti                                  | Sicurezza                                                |
+| Versatilità delle applicazioni                 | Limitazioni dei pacchetti dati                            |
+
 **Pro**
 - Ampia copertura: LoRa offre una copertura estesa, con trasmissioni che possono raggiungere diverse decine di chilometri in aree rurali e diverse miglia in ambienti urbani densamente popolati.
 - Basso consumo energetico: I dispositivi LoRa sono progettati per consumare poca energia, il che li rende ideali per applicazioni a batteria o alimentate da energia solare.
@@ -38,7 +44,7 @@ Interfaccia semplice:
 - Sicurezza: Fino all'ultima versione ufficiale, LoRa non ha implementato di default livelli avanzati di crittografia, richiedendo ulteriori misure di sicurezza per proteggere i dati sensibili.
 - Limitazioni dei pacchetti dati: La lunghezza massima dei pacchetti dati LoRa può essere limitata, richiedendo la segmentazione dei dati o limitando il tipo di informazioni trasmesse.
 
-## **Curosiotà**
+## **Curiosità**
 - LoRa sfrutta bande di radiofrequenza sub-gigahertz come 433 MHz, 868 MHz (Europa) e 915 MHz (Nord America).
 - Garantisce trasmissioni a lungo raggio (oltre 10 km in zone rurali, 3–5 km in zone fortemente urbanizzate) con basso consumo energetico.
 - Si compone di due parti: LoRa, lo strato fisico, e LoRaWAN (Long Range Wide Area Network), gli strati superiori.
