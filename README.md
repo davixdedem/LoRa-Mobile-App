@@ -13,7 +13,13 @@ Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell �
 Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell. Per questa operazione, è possibile utilizzare software come Arduino IDE o il tool ufficiale rilasciato da Heltec Cubel Cell.
 Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOTO].
 
-## PREPARAZIONE DEL DISPOSITIVO  ⚙️<br>
+## Requisiti di Sistema
+
+- **Android Versione**: 13 o successiva
+- **Spazio di archiviazione**: Minimo 100 MB
+- **Memoria RAM**: Consigliato 2 GB o superiore
+
+## Preparazione del dispositivo<br>
 
 **1 - Clonare il repository**<br>
 ``git clone https://github.com/davixdedem/LoRa-Mobile-App``<br>
@@ -24,11 +30,11 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 **4 - Flashing del file *at_command.hex***<br>
 ``./CubeCellflash -serial /dev/ttyUSB0 at_command.hex``<br>
 
-## CONFIGURAZIONE DELL'APPLICAZIONE  📱<br>
+## Configurazione dell'applicazione<br>
 
-**1 - Scaricare l'applicazione dall'ultima release disponibile**<br>
-**2 - Collegare la Dev-Board allo Smartphone tramite cavo USB**<br>
-**3 - Configurare la frequenza disponibile nel proprio paese tramite il pannello di configurazione**<br>
+**1 - Scaricare l'applicazione dall'ultima release disponibile.**<br>
+**2 - Collegare la Dev-Board allo Smartphone tramite cavo USB.**<br>
+**3 - Configurare la frequenza disponibile nel proprio paese tramite il pannello di configurazione.**<br>
 **3 - Inizia a chattare!**<br>
 
 
@@ -50,3 +56,10 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 - Dispone di funzionalità di geolocalizzazione per triangolare le posizioni dei dispositivi tramite timestamp dai gateway.
 - Consente la connettività a lungo raggio per dispositivi Internet of Things (IoT) in diversi settori.
 - Riferimento al PDF dei comandi AT: [Manuale Utente Comandi AT](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
+
+- ## Supporto
+
+Per eventuali domande, segnalazioni di bug o richieste di nuove funzionalità, ti invitiamo ad aprire una nuova issue nel nostro repository su GitHub. Cercheremo di rispondere nel più breve tempo possibile.<br>
+Per domande più urgenti o altri problemi, puoi contattarci via email all'indirizzo davide.polli@dedem.it. Ti preghiamo di includere dettagli completi sul problema riscontrato per una risoluzione più rapida.<br>
+Siamo impegnati a migliorare continuamente l'applicazione e apprezziamo ogni contributo e feedback dalla nostra comunità.<br>
+
