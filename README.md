@@ -57,8 +57,7 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 - Consente la connettività a lungo raggio per dispositivi Internet of Things (IoT) in diversi settori.
 - Riferimento al PDF dei comandi AT: [Manuale Utente Comandi AT](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
 
-- ## Supporto
-
+- ## **Supporto**
 Per eventuali domande, segnalazioni di bug o richieste di nuove funzionalità, ti invitiamo ad aprire una nuova issue nel nostro repository su GitHub. Cercheremo di rispondere nel più breve tempo possibile.<br>
 Per domande più urgenti o altri problemi, puoi contattarci via email all'indirizzo davide.polli@dedem.it. Ti preghiamo di includere dettagli completi sul problema riscontrato per una risoluzione più rapida.<br>
 Siamo impegnati a migliorare continuamente l'applicazione e apprezziamo ogni contributo e feedback dalla nostra comunità.<br>
