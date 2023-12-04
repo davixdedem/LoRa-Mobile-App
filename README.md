@@ -20,18 +20,18 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 Interfaccia semplice:
 - Connessione multipla: Gli utenti possono connettersi contemporaneamente e scambiare messaggi tra loro in un'unica chat room.
 
-## **Preparazione del dispositivo **
+## **Preparazione del dispositivo**
 Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino.
 
-**Passo 1**: Avvia l'IDE di Arduino e apri il file del codice sorgente menzionato in questo repository.
+**Step 1**: Avvia l'IDE di Arduino e apri il file del codice sorgente menzionato in questo repository.
 
-**Passo 2**: Seleziona il Modello di Arduino: Vai su "Strumenti" > "Tipo di Scheda" e seleziona il modello di Arduino che stai utilizzando.
+**Step 2**: Seleziona il Modello di Arduino: Vai su "Strumenti" > "Tipo di Scheda" e seleziona il modello di Arduino che stai utilizzando.
 
-**Passo 3**: Seleziona la Porta: Vai su "Strumenti" > "Porta" e seleziona la porta a cui è collegata la tua scheda Arduino.
+**Step 3**: Seleziona la Porta: Vai su "Strumenti" > "Porta" e seleziona la porta a cui è collegata la tua scheda Arduino.
 
-**Passo 4**: Verifica il Codice: Utilizza il pulsante "Verifica" (simbolo della spunta) per compilare il codice. Assicurati che non ci siano errori nel codice prima di proseguire.
+**Step 4**: Verifica il Codice: Utilizza il pulsante "Verifica" (simbolo della spunta) per compilare il codice. Assicurati che non ci siano errori nel codice prima di proseguire.
 
-**Passo 5**: Caricamento del Codice.
+**Step 5**: Caricamento del Codice.
 
 ## **Pro & Contro**
 | **Pro**                                       | **Contro**                                              |
