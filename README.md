@@ -7,7 +7,7 @@
 LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espans derivata dalla tecnologia Chirp Spread Spectrum (CSS). Rappresenta la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale.
 
 ## **Descrizione**
-Questa è un'applicazione di chat real-time basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei.
+Questa è un'applicazione di **chat real-time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei.
 
 Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command** per consentire l'interazione con uno smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.
 
@@ -21,17 +21,7 @@ Interfaccia semplice:
 - Connessione multipla: Gli utenti possono connettersi contemporaneamente e scambiare messaggi tra loro in un'unica chat room.
 
 ## **Preparazione del dispositivo**
-Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino.
-
-**Step 1**: Avvia l'IDE di Arduino e apri il file del codice sorgente menzionato in questo repository.
-
-**Step 2**: Seleziona il Modello di Arduino: Vai su "Strumenti" > "Tipo di Scheda" e seleziona il modello di Arduino che stai utilizzando.
-
-**Step 3**: Seleziona la Porta: Vai su "Strumenti" > "Porta" e seleziona la porta a cui è collegata la tua scheda Arduino.
-
-**Step 4**: Verifica il Codice: Utilizza il pulsante "Verifica" (simbolo della spunta) per compilare il codice. Assicurati che non ci siano errori nel codice prima di proseguire.
-
-**Step 5**: Caricamento del Codice.
+Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino, per supporto visitare: [Guida Ufficiale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager)
 
 ## **Pro & Contro**
 | **Pro**                                       | **Contro**                                              |
