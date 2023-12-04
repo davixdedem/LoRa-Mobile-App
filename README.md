@@ -13,13 +13,13 @@ Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell �
 Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell. Per questa operazione, è possibile utilizzare software come Arduino IDE o il tool ufficiale rilasciato da Heltec Cubel Cell.
 Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOTO].
 
-## Requisiti di Sistema
+- ## Requisiti di Sistema
 
 - **Android Versione**: 13 o successiva
 - **Spazio di archiviazione**: Minimo 100 MB
 - **Memoria RAM**: Consigliato 2 GB o superiore
 
-## Preparazione del dispositivo<br>
+- ## Preparazione del dispositivo<br>
 
 **1 - Clonare il repository**<br>
 ``git clone https://github.com/davixdedem/LoRa-Mobile-App``<br>
@@ -30,7 +30,7 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 **4 - Flashing del file *at_command.hex***<br>
 ``./CubeCellflash -serial /dev/ttyUSB0 at_command.hex``<br>
 
-## Configurazione dell'applicazione<br>
+- ## Configurazione dell'applicazione<br>
 
 **1 - Scaricare l'applicazione dall'ultima release disponibile.**<br>
 **2 - Collegare la Dev-Board allo Smartphone tramite cavo USB.**<br>
@@ -48,7 +48,7 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 | Versatilità delle applicazioni                 | Limitazioni dei pacchetti dati                            |
 
 
-## **Curiosità**
+-## **Curiosità**
 - LoRa sfrutta bande di radiofrequenza sub-gigahertz come 433 MHz, 868 MHz (Europa) e 915 MHz (Nord America).
 - Garantisce trasmissioni a lungo raggio (oltre 10 km in zone rurali, 3–5 km in zone fortemente urbanizzate) con basso consumo energetico.
 - Si compone di due parti: LoRa, lo strato fisico, e LoRaWAN (Long Range Wide Area Network), gli strati superiori.
@@ -57,7 +57,7 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 - Consente la connettività a lungo raggio per dispositivi Internet of Things (IoT) in diversi settori.
 - Riferimento al PDF dei comandi AT: [Manuale Utente Comandi AT](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
 
-- ## **Supporto**
+-## **Supporto**
 Per eventuali domande, segnalazioni di bug o richieste di nuove funzionalità, ti invitiamo ad aprire una nuova issue nel nostro repository su GitHub. Cercheremo di rispondere nel più breve tempo possibile.<br>
 Per domande più urgenti o altri problemi, puoi contattarci via email all'indirizzo davide.polli@dedem.it. Ti preghiamo di includere dettagli completi sul problema riscontrato per una risoluzione più rapida.<br>
 Siamo impegnati a migliorare continuamente l'applicazione e apprezziamo ogni contributo e feedback dalla nostra comunità.<br>
