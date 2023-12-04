@@ -9,20 +9,31 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 ## **Descrizione**
 Questa è un'applicazione di **chat real-time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei.
 
-Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command** per consentire l'interazione con uno smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.
-
-Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il seguente codice sorgente, scaricabile dal LINK fornito. Per questa operazione, è possibile utilizzare software come Arduino IDE o ESPTOOL.
+Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command** per consentire l'interazione con uno smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.<br>
+Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell. Per questa operazione, è possibile utilizzare software come Arduino IDE o ESPTOOL.
 La scheda è disponibile per l'acquisto da: [LINK].
 Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOTO].
 
 ## **Funzionalità**
-- Messaggi in tempo reale: La chat supporta la comunicazione istantanea tra gli utenti con l'utilizzo di Socket.io per la trasmissione dei messaggi in tempo reale.
-Interfaccia semplice:
-- Connessione multipla: Gli utenti possono connettersi contemporaneamente e scambiare messaggi tra loro in un'unica chat room.
+**Messaggi in tempo reale**: La chat supporta la comunicazione istantanea tra gli utenti con l'utilizzo di Socket.io per la trasmissione dei messaggi in tempo reale.<br>
+**Connessione multipla**: Gli utenti possono connettersi contemporaneamente e scambiare messaggi tra loro in un'unica chat room.
 
-## **Preparazione del dispositivo**
-Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino, per supporto visitare: [Guida Ufficiale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager)
+## PREPARAZIONE DEL DISPOSITIVO ⚙️<bt>
+**Tramite ARDUINO-IDE**<br>
+**1 - Preparazione dell'ambiente Arduino**<br>
+Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino, per supporto visitare: [Guida Ufficiale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager) <br>
+**2 - Impostare la modalità AT Command**<br>
+Il nostro intento è quello di installare il codice sorgente dedicato alla predisposizione dei comandi AT,disponibile negli esempi. 
+***Examples --> Lora --> AT_Command***
 
+## PREPARAZIONE DEL DISPOSITIVO  ⚙️<br>
+**Tramite ESPTOOL**<br>
+<span style="color: red;">Testo colorato in blu</span>
+**1 - Preparazione dell'ambiente Arduino**<br>
+Il processo di flash del codice sulla scheda è abbastanza semplice e richiede pochi passaggi utilizzando l'IDE di Arduino, per supporto visitare: [Guida Ufficiale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager) <br>
+**2 - Impostare la modalità AT Command**<br>
+Il nostro intento è quello di installare il codice sorgente dedicato alla predisposizione dei comandi AT,disponibile negli esempi. 
+***Examples --> Lora --> AT_Command***
 ## **Pro & Contro**
 | **Pro**                                       | **Contro**                                              |
 |-----------------------------------------------|----------------------------------------------------------|
