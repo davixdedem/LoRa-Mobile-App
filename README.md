@@ -18,7 +18,7 @@ In the context of this project, we use the **CubeCell – AB01 Dev-Board develop
 5. [Curiosities](#curiosities)<br>
 6. [Support](#support)<br>
    
-- # 1. Prerequisites <div id="prerequisiti"></div>
+- # 1. Prerequisites <div id="prerequisites"></div>
 **Android Version**: 13 or later.<br>
 **Storage Space**: Minimum 16.6 MB.<br>
 **RAM**: Recommended 2 GB or higher.<br>
@@ -58,7 +58,6 @@ Ensure that the source matches this: [AT_Command.ino](https://github.com/HelTecA
 | Obstacle penetration                          | Interference                                             |
 | Reduced costs                                 | Security concerns                                        |
 | Application versatility                       | Data packet limitations                                  | 
-<br>
 
 - # **5. Curiosities** <div id="curiosities"></div>
 1. LoRa utilizes sub-gigahertz radio frequency bands such as 433 MHz, 868 MHz (Europe), and 915 MHz (North America).
