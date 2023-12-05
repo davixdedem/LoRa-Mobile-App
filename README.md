@@ -9,8 +9,9 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 ## **Descrizione**
 Questa è un'applicazione di **chat real-time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei tra loro o in un'unica chat room. <br>
 
-Nel contesto di questo progetto, utilizziamo la scheda di sviluppo **CubeCell – AB01 Dev-Board** in modalità **AT Command** per consentire l'interazione con uno smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.<br>
+Nel contesto di questo progetto, utilizziamo la scheda di sviluppo ***CubeCell – AB01 Dev-Board*** in modalità ***AT Command*** per consentire l'interazione con uno Smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.<br>
 Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell. Per questa operazione, è possibile utilizzare software come Arduino IDE o il tool ufficiale rilasciato da Heltec Cubel Cell.
+
 Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOTO].
 
 - ## Requisiti di Sistema
@@ -26,6 +27,8 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 [Amazon](https://www.amazon.it/LoRaWAN-sviluppo-ASR6501-energetico-Intelligent/dp/B07ZH7NL38/ref=sr_1_1?__mk_it_IT=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2E73JV8F1KPLV&keywords=heltec+cubecell&qid=1701754977&sprefix=heltec+cubecel%2Caps%2C148&sr=8-1)<br>
 
 [Aliexpress](https://it.aliexpress.com/item/1005005444339915.html?spm=a2g0o.productlist.main.3.1d7150b2TFr0YZ&algo_pvid=b9b676a0-1f19-4aaf-807d-e712d7758b64&algo_exp_id=b9b676a0-1f19-4aaf-807d-e712d7758b64-1&pdp_npi=4%40dis%21EUR%2116.48%2116.48%21%21%2117.45%21%21%402103209b17017550135711815e8815%2112000033106113757%21sea%21IT%210%21AB&curPageLogUid=SzqEk2lL0gTd)<br>
+
+- ## Dove acquistare *USB Type-C/Mini USB*
 
 - ## Preparazione del dispositivo<br>
 
