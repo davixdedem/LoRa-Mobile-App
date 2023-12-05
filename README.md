@@ -34,7 +34,7 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 ![TypeC/MicroUSB](cable.png) *USB Type-C/Micro USB*
 ![TypeC/MicroUSB](cable2.png) *USB Type-C/Micro USB*
 
-- ## 2.Preparazione del dispositivo<br><div id="preparazione"></div>
+- # 2.Preparazione del dispositivo<br><div id="preparazione"></div>
 [Istruzioni via Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#use-arduino-board-manager)<br>
 
 [Istruzioni via Git](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-git)<br>
