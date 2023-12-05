@@ -21,6 +21,7 @@ Nella versione attuale, la scheda è collegata allo smartphone tramite USB: [FOT
 **Memoria RAM**: Consigliato 2 GB o superiore<br>
 
 - ## Dove acquistare *CubeCell – AB01 Dev-Board*
+![HTTCAB01](httcab01.png)
 
 [Heltec](https://heltec.org/project/htcc-ab01-v2/)<br>
 
