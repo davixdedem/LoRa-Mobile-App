@@ -12,9 +12,9 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 **N.B. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell.<br> 
 
 - ## Step By Step
-1. [PRE-REQUISITI](#preparazione)<br>
-2. [PREPARAZIONE DEL DISPOSITIVO](#preparazione)<br>
-3. [CONFIGURAZIONE DELL'APPLICAZIONE](#preparazione)<br>
+1. [Pre-requisiti](#preparazione)<br>
+2. [Preparazione del dispositivo](#preparazione)<br>
+3. [Confgiurazione dell'appliczione](#preparazione)<br>
 
 - ## Requisiti di Sistema
 **Android Versione**: 13 o successiva<br>
