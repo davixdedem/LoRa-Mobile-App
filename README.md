@@ -6,27 +6,23 @@ LoRa (Long Range) is a technology based on frequency modulation with spread spec
 - ## **Description**
 **LoRa Mobile App** is a Real-Time Chat application based on LoRa, allowing users to send and receive instant messages either privately or in a single Chat Room.<br>
 
-![Screenshot ITA](screen_ita1.png)
-![Screenshot ITA](screen_ita2.png)
-
 In the context of this project, we use the **CubeCell – AB01 Dev-Board development board** in **AT Command** mode to enable interaction with a smartphone and initiate data exchange via radio frequencies. The application allows initiating simple text conversations to communicate with other users within the LoRa range. One of the main objectives of this project is to simplify the use of LoRa technology, making it accessible to everyone and facilitating bidirectional point-to-point communication.
 **Note: To ensure proper functionality, it is essential that the board contains the source code available from the official examples provided by Heltec Cube Cell**.<br>
 
-
 - ## Step By Step
-1. [Prerequisiti](#prerequisiti)<br>
-2. [Preparazione del dispositivo](#preparazione)<br>
-3. [Configurazione dell'appliczione](#configurazione)<br>
-4. [Pro & Contro](#proecontro)<br>
-5. [Curiosità](#curiosità)<br>
-6. [Supporto](#supporto)<br>
+1. [Prerequisites](#prerequisites)<br>
+2. [Device Preparation](#device-preparation)<br>
+3. [Application Configuration](#application-configuration)<br>
+4. [Pros & Cons](#pros-and-cons)<br>
+5. [Curiosities](#curiosities)<br>
+6. [Support](#support)<br>
    
-- # 1.Prerequisiti<div id="prerequisiti"></div>
-**Versione Android**: 13 o successiva.<br>
-**Spazio di archiviazione**: Minimo 16.6 MB.<br>
-**Memoria RAM**: Consigliato 2 GB o superiore.<br>
-**CubeCell – AB01 Dev-Board**: Scheda di sviluppo Heltec.<br>
-**Cavo USB**: Cavo USB per collegare la scheda allo Smartphone.
+- # 1. Prerequisites <div id="prerequisiti"></div>
+**Android Version**: 13 or later.<br>
+**Storage Space**: Minimum 16.6 MB.<br>
+**RAM**: Recommended 2 GB or higher.<br>
+**CubeCell – AB01 Dev-Board**: Heltec development board.<br>
+**USB Cable**: USB cable to connect the board to the Smartphone.
 
 ## Dove acquistare CubeCell – AB01 Dev-Board?
 ![HTTCAB01](httcab01.png)<br>
