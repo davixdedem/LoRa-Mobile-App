@@ -1,4 +1,4 @@
-# LoRa Mobile Chat
+# LoRa Mobile App
 
 **LoRa**
 
