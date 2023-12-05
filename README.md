@@ -32,6 +32,9 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
   
 [Amazon](https://www.amazon.it/micro-usb-to-type-c/s?k=micro+usb+to+type+c)
 
+- ## Dove acquistare *USB Type-C/Micro USB*
+![TypeC/MicroUSB](cable2.png)
+
 - ## Preparazione del dispositivo<br>
 
 **1 - Clonare il repository**<br>
