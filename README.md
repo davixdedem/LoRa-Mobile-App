@@ -7,6 +7,8 @@ LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spet
 - ## **Descrizione**
 **LoRa Mobile App** è un'applicazione di **Chat Real Time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei tra loro o in un'unica Chat Room. <br>
 
+![Screenshot ITA](screen_ita.png)
+
 Nel contesto di questo progetto, utilizziamo la scheda di sviluppo ***CubeCell – AB01 Dev-Board*** in modalità ***AT Command*** per consentire l'interazione con uno Smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.<br>
 Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto.
 **N.B. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell.<br> 
