@@ -1,4 +1,4 @@
-**LoRa**
+**LoRa Mobile App**
 
 ![Logo](logo.png) 
 
