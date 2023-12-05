@@ -12,7 +12,6 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 **N.B. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell.<br> Segui le [ISTRUZIONI](#preparazione)
 
 - ## Step By Step
-- 
 [PRE-REQUISITI](#preparazione)<br>
 [PREPARAZIONE DEL DISPOSITIVO](#preparazione)<br>
 [CONFIGURAZIONE DELL'APPLICAZIONE](#preparazione)<br>
