@@ -1,37 +1,17 @@
 **LoRa**
 
 ![Logo](logo.png) <br>
-**Italiano**<br>
-LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espans derivata dalla tecnologia Chirp Spread Spectrum (CSS). Rappresenta la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale.<br>
-
-**English**<br>
 LoRa (Long Range) is a technology based on frequency modulation with spread spectrum derived from Chirp Spread Spectrum (CSS) technology. It represents the first low-cost implementation of the chirp spread spectrum for commercial use."<br>
 
-**Español**<br>
-LoRa (Long Range) es una tecnología basada en la modulación de frecuencia de espectro extendido derivada de la tecnología de Espectro Disperso por Secuencia de Chirp (CSS). Representa la primera implementación de bajo costo del espectro de dispersión de chirp para uso comercial.<br>
-
-**Français**<br>
-LoRa (Long Range) est une technologie basée sur la modulation de fréquence à spectre étalé dérivée de la technologie Chirp Spread Spectrum (CSS). Il représente la première implémentation à bas coût du spectre d'étalement des chirps à usage commercial.<br>
-
-- ## **Descrizione**
-**Italiano**<br>
-**LoRa Mobile App** è un'applicazione di **Chat Real Time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei tra loro o in un'unica Chat Room. <br>
-
-**English**<br>
+- ## **Description**
 **LoRa Mobile App** is a Real-Time Chat application based on LoRa, allowing users to send and receive instant messages either privately or in a single Chat Room.<br>
-
-**Français**<br>
-**LoRa Mobile App** est une application de chat en temps réel basée sur LoRa, permettant aux utilisateurs d'envoyer et de recevoir des messages instantanés en privé ou dans une seule salle de discussion.<br>
-
-**Español**<br>
-**LoRa Mobile App** es una aplicación de chat en tiempo real basada en LoRa, que permite a los usuarios enviar y recibir mensajes instantáneos ya sea en privado o en una única sala de chat.<br>
 
 ![Screenshot ITA](screen_ita1.png)
 ![Screenshot ITA](screen_ita2.png)
 
-Nel contesto di questo progetto, utilizziamo la scheda di sviluppo ***CubeCell – AB01 Dev-Board*** in modalità ***AT Command*** per consentire l'interazione con uno Smartphone e avviare lo scambio di dati tramite frequenze radio. L'applicazione permette di avviare semplici conversazioni testuali per comunicare con altri utenti nel raggio LoRa.<br>
-Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto.
-**N.B. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell.<br> 
+In the context of this project, we use the **CubeCell – AB01 Dev-Board development board** in **AT Command** mode to enable interaction with a smartphone and initiate data exchange via radio frequencies. The application allows initiating simple text conversations to communicate with other users within the LoRa range. One of the main objectives of this project is to simplify the use of LoRa technology, making it accessible to everyone and facilitating bidirectional point-to-point communication.
+**Note: To ensure proper functionality, it is essential that the board contains the source code available from the official examples provided by Heltec Cube Cell**.<br>
+
 
 - ## Step By Step
 1. [Prerequisiti](#prerequisiti)<br>
