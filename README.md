@@ -48,7 +48,7 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 **3 - Inizia a chattare!**<br>
 
 
-## **Pro & Contro**
+- ## **4.Pro & Contro**
 
 | **Pro**                                       | **Contro**                                              |
 |-----------------------------------------------|----------------------------------------------------------|
