@@ -1,6 +1,6 @@
 **LoRa**
 
-![Logo](logo.png) 
+![Logo](logo.png) <br>
 **Italiano**
 LoRa (Long Range) è una tecnologia basata sulla modulazione di frequenza a spettro espans derivata dalla tecnologia Chirp Spread Spectrum (CSS). Rappresenta la prima implementazione a basso costo dello spettro di diffusione chirp per uso commerciale.
 **Inglese**<br>
