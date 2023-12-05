@@ -60,7 +60,8 @@ In the context of this project, we use the **CubeCell – AB01 Dev-Board develop
 4. New LoRa chipsets feature reduced power consumption, increased transmission power, and smaller sizes compared to previous generations.
 5. It offers geolocation capabilities to triangulate device positions using timestamps from gateways.
 6. Provides long-range connectivity for Internet of Things (IoT) devices across various sectors.
-7. Reference to the AT Command PDF: [AT Command User Manual](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
+7. Reference to [AT Command User Manual](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
+8. Reference to [Understanding LoRa](https://development.libelium.com/lora_networking_guide/understanding-lora)
 
 - # **6. Support**
 For any questions, bug reports, or feature requests, please open a new issue in our GitHub repository. We will strive to respond as quickly as possible.
