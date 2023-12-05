@@ -20,7 +20,7 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 6. [Supporto](#supporto)<br>
    
 - # 1.Prerequisiti<div id="prerequisiti"></div>
-**Android Versione**: 13 o successiva.<br>
+** Versione Android**: 13 o successiva.<br>
 **Spazio di archiviazione**: Minimo 16.6 MB.<br>
 **Memoria RAM**: Consigliato 2 GB o superiore.<br>
 **CubeCell – AB01 Dev-Board**: Scheda di sviluppo Heltec.<br>
