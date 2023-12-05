@@ -41,14 +41,13 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 
 [Istruzioni via File Locale](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-local-file)<br>
 
-- ## 3.Configurazione dell'applicazione<br><div id="configurazione"></div>
+- # 3.Configurazione dell'applicazione<br><div id="configurazione"></div>
 **1 - Scaricare l'applicazione dall'ultima release disponibile.**<br>
 **2 - Collegare la Dev-Board allo Smartphone tramite cavo USB.**<br>
 **3 - Configurare la frequenza disponibile nel proprio paese tramite il pannello di configurazione.**<br>
 **3 - Inizia a chattare!**<br>
 
-
-- ## **4.Pro & Contro**
+- # **4.Pro & Contro**
 
 | **Pro**                                       | **Contro**                                              |
 |-----------------------------------------------|----------------------------------------------------------|
@@ -59,7 +58,7 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 | Versatilità delle applicazioni                 | Limitazioni dei pacchetti dati                            |
 
 
-## **Curiosità**
+# **5.Curiosità**
 
 - LoRa sfrutta bande di radiofrequenza sub-gigahertz come 433 MHz, 868 MHz (Europa) e 915 MHz (Nord America).
 - Garantisce trasmissioni a lungo raggio (oltre 10 km in zone rurali, 3–5 km in zone fortemente urbanizzate) con basso consumo energetico.
@@ -69,7 +68,7 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 - Consente la connettività a lungo raggio per dispositivi Internet of Things (IoT) in diversi settori.
 - Riferimento al PDF dei comandi AT: [Manuale Utente Comandi AT](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
 
-## **Supporto**
+# **6.Supporto**
 
 Per eventuali domande, segnalazioni di bug o richieste di nuove funzionalità, ti invitiamo ad aprire una nuova issue nel nostro repository su GitHub. Cercheremo di rispondere nel più breve tempo possibile.<br>
 Per domande più urgenti o altri problemi, puoi contattarci via email all'indirizzo davide.polli@dedem.it. Ti preghiamo di includere dettagli completi sul problema riscontrato per una risoluzione più rapida.<br>
