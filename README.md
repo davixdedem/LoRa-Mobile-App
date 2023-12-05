@@ -40,10 +40,10 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 [Istruzioni via File Locale](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-local-file)<br>
 
 - # 3.Configurazione dell'applicazione<br><div id="configurazione"></div>
-**1.Scaricare l'applicazione dall'ultima release disponibile.**: <br>
-**2 - Collegare la Dev-Board allo Smartphone tramite cavo USB.**<br>
-**3 - Configurare la frequenza disponibile nel proprio paese tramite il pannello di configurazione.**<br>
-**3 - Inizia a chattare!**<br>
+**1 - Scaricare l'applicazione dall'ultima release disponibile.** <br>
+**2 - Collegare la Dev-Board allo Smartphone tramite cavo USB.** <br>
+**3 - Configurare la frequenza disponibile nel proprio paese tramite il pannello di configurazione.** <br>
+**3 - Inizia a chattare!** <br>
 
 - # **4.Pro & Contro**
 | **Pro**                                       | **Contro**                                              |
