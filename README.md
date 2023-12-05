@@ -28,10 +28,6 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 
 [Aliexpress](https://it.aliexpress.com/item/1005005444339915.html?spm=a2g0o.productlist.main.3.1d7150b2TFr0YZ&algo_pvid=b9b676a0-1f19-4aaf-807d-e712d7758b64&algo_exp_id=b9b676a0-1f19-4aaf-807d-e712d7758b64-1&pdp_npi=4%40dis%21EUR%2116.48%2116.48%21%21%2117.45%21%21%402103209b17017550135711815e8815%2112000033106113757%21sea%21IT%210%21AB&curPageLogUid=SzqEk2lL0gTd)<br>
 
-- ## Cavi USB compatibili(in base al vostro Smartphone)
-![TypeC/MicroUSB](cable.png) *USB Type-C/Micro USB*
-![TypeC/MicroUSB](cable2.png) *USB Type-C/Micro USB*
-
 - ## Preparazione del dispositivo<br><div id="preparazione"></div>
 
 [Istruzioni via Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#use-arduino-board-manager)<br>
@@ -39,6 +35,12 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 [Istruzioni via Git](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-git)<br>
 
 [Istruzioni via File Locale](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-local-file)<br>
+
+- ## Cavi USB compatibili(in base al vostro Smartphone)
+![TypeC/MicroUSB](cable.png) *USB Type-C/Micro USB*
+![TypeC/MicroUSB](cable2.png) *USB Type-C/Micro USB*
+
+
 
 
 ## Configurazione dell'applicazione<br>
