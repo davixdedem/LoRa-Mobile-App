@@ -18,7 +18,13 @@ LoRa (Long Range) est une technologie basée sur la modulation de fréquence à 
 **LoRa Mobile App** è un'applicazione di **Chat Real Time** basata su LoRa che consente agli utenti di inviare e ricevere messaggi istantanei tra loro o in un'unica Chat Room. <br>
 
 **English**<br>
-**LoRa Mobile App** is a Real-Time Chat application based on LoRa, allowing users to send and receive instant messages either privately or in a single Chat Room.
+**LoRa Mobile App** is a Real-Time Chat application based on LoRa, allowing users to send and receive instant messages either privately or in a single Chat Room.<br>
+
+**Français**<br>
+**LoRa Mobile App** est une application de chat en temps réel basée sur LoRa, permettant aux utilisateurs d'envoyer et de recevoir des messages instantanés en privé ou dans une seule salle de discussion.<br>
+
+**Español**<br>
+**LoRa Mobile App** es una aplicación de chat en tiempo real basada en LoRa, que permite a los usuarios enviar y recibir mensajes instantáneos ya sea en privado o en una única sala de chat.<br>
 
 ![Screenshot ITA](screen_ita1.png)
 ![Screenshot ITA](screen_ita2.png)
