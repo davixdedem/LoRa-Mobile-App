@@ -31,14 +31,14 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 ![TypeC/MicroUSB](cable.png) *USB Type-C/Micro USB*
 ![TypeC/MicroUSB](cable2.png) *USB Type-C/Micro USB*
 
-- ## Preparazione del dispositivo<br><div id="preparazione"></div>
+- ## 2.Preparazione del dispositivo<br><div id="preparazione"></div>
 [Istruzioni via Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#use-arduino-board-manager)<br>
 
 [Istruzioni via Git](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-git)<br>
 
 [Istruzioni via File Locale](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-local-file)<br>
 
-## Configurazione dell'applicazione<br><div id="configurazione"></div>
+- ## 3.Configurazione dell'applicazione<br><div id="configurazione"></div>
 **1 - Scaricare l'applicazione dall'ultima release disponibile.**<br>
 **2 - Collegare la Dev-Board allo Smartphone tramite cavo USB.**<br>
 **3 - Configurare la frequenza disponibile nel proprio paese tramite il pannello di configurazione.**<br>
