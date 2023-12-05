@@ -15,7 +15,10 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 1. [Prerequisiti](#prerequisiti)<br>
 2. [Preparazione del dispositivo](#preparazione)<br>
 3. [Configurazione dell'appliczione](#configurazione)<br>
-
+4. [Pro & Contro](#proecontro)<br>
+5. [Curiosità](#curiosità)<br>
+6. [Supporto](#supporto)<br>
+   
 - ## 1.Prerequisiti<div id="prerequisiti"></div>
 **Android Versione**: 13 o successiva.<br>
 **Spazio di archiviazione**: Minimo 16.6 MB.<br>
