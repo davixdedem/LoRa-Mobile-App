@@ -32,25 +32,10 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 ![TypeC/MicroUSB](cable2.png) *USB Type-C/Micro USB*
 
 - ## Preparazione del dispositivo<br>
-# Linux/Ubuntu
-**1 - Clonare il repository**<br>
-``git clone https://github.com/davixdedem/LoRa-Mobile-App``<br>
-**2 - Entrare nella directory *tools* del progetto**<br>
-``cd Lora-Mobile-App/tools``<br>
-**3 - Rendere eseguibile il tools *CubeCellflash***<br>
-``chmod +x CubeCellflash``<br>
-**4 - Flashing del file *at_command.hex***<br>
-``./CubeCellflash -serial /dev/ttyUSB0 at_command.hex``<br>
+[Istruzioni con Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#use-arduino-board-manager)<br>
+[Istruzioni con Git](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#via-git)<br>
+[Istruzioni via File Locale](https://docs.heltec.org/en/node/asr650x/htcc_am02/quick_start.html#via-local-file)<br>
 
-# Windows
-**1 - Clonare il repository**<br>
-``git clone https://github.com/davixdedem/LoRa-Mobile-App``<br>
-**2 - Entrare nella directory *tools* del progetto**<br>
-``cd Lora-Mobile-App/tools``<br>
-**3 - Rendere eseguibile il tools *CubeCellflash***<br>
-``chmod +x CubeCellflash``<br>
-**4 - Flashing del file *at_command.hex***<br>
-``./CubeCellflash -serial /dev/ttyUSB0 at_command.hex``<br>
 
 ## Configurazione dell'applicazione<br>
 **1 - Scaricare l'applicazione dall'ultima release disponibile.**<br>
