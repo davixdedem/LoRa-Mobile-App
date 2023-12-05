@@ -11,8 +11,12 @@ Nel contesto di questo progetto, utilizziamo la scheda di sviluppo ***CubeCell �
 Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo della tecnologia LoRa, rendendola accessibile a tutti e agevolando una comunicazione bidirezionale punto-punto.
 **N.B. Per garantire un corretto funzionamento, è essenziale che la scheda contenga il codice sorgente disponibile dagli esempi ufficiali forniti da Heltec Cube Cell.<br> Segui le [ISTRUZIONI](#preparazione)
 
-- ## Requisiti di Sistema
+- ## Step By Step
+[PRE-REQUISITI](#preparazione)<br>
+[PREPARAZIONE DEL DISPOSITIVO](#preparazione)<br>
+[CONFIGURAZIONE DELL'APPLICAZIONE](#preparazione)<br>
 
+- ## Requisiti di Sistema
 **Android Versione**: 13 o successiva<br>
 **Spazio di archiviazione**: Minimo 16.6 MB<br>
 **Memoria RAM**: Consigliato 2 GB o superiore<br>
