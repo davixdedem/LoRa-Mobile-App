@@ -14,7 +14,7 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 - ## Step By Step
 1. [Pre-requisiti](#preparazione)<br>
 2. [Preparazione del dispositivo](#preparazione)<br>
-3. [Confgiurazione dell'appliczione](#preparazione)<br>
+3. [Configurazione dell'appliczione](#preparazione)<br>
 
 - ## Requisiti di Sistema
 **Android Versione**: 13 o successiva<br>
