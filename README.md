@@ -36,7 +36,7 @@ In the context of this project, we use the **CubeCell – AB01 Dev-Board develop
 
 - # 2. Device Preparation <div id="preparazione"></div>
 **1 - Preparazione dell'ambiente**<br>
-[Instructions via Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#use-arduino-board-manager)**<--Raccommended**<br>
+[Instructions via Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#use-arduino-board-manager) **<--Raccommended**<br>
 [Instructions via Git](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-git)<br>
 [Instructions via Local File](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-local-file)<br>
 
