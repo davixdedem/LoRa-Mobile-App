@@ -57,7 +57,8 @@ Ensure that the source matches this: [AT_Command.ino](https://github.com/HelTecA
 | Low power consumption                         | Limited transmission speed                               |
 | Obstacle penetration                          | Interference                                             |
 | Reduced costs                                 | Security concerns                                        |
-| Application versatility                       | Data packet limitations                                  |
+| Application versatility                       | Data packet limitations                                  | 
+<br>
 
 - # **5. Curiosities** <div id="curiosities"></div>
 1. LoRa utilizes sub-gigahertz radio frequency bands such as 433 MHz, 868 MHz (Europe), and 915 MHz (North America).
