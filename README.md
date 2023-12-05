@@ -17,10 +17,10 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 3. [Configurazione dell'appliczione](#configurazione)<br>
 
 - ## 1.Prerequisiti
-**Android Versione**: 13 o successiva<br>
-**Spazio di archiviazione**: Minimo 16.6 MB<br>
-**Memoria RAM**: Consigliato 2 GB o superiore<br>
-**CubeCell – AB01 Dev-Board**: Scheda di sviluppo Heltec<br>
+**Android Versione**: 13 o successiva.<br>
+**Spazio di archiviazione**: Minimo 16.6 MB.<br>
+**Memoria RAM**: Consigliato 2 GB o superiore.<br>
+**CubeCell – AB01 Dev-Board**: Scheda di sviluppo Heltec.<br>
 **Cavo USB**: Cavo USB per collegare la scheda allo Smartphone.
 
 ## Dove acquistare *CubeCell – AB01 Dev-Board?*<div id="prerequisiti"></div>
