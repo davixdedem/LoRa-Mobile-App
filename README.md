@@ -12,8 +12,8 @@ In the context of this project, we use the **CubeCell – AB01 Dev-Board develop
 
 - ## Step By Step
 1. [Prerequisites](#prerequisites)<br>
-2. [Device Preparation](#device-preparation)<br>
-3. [Application Configuration](#application-configuration)<br>
+2. [Device Preparation](#preparazione)<br>
+3. [Application Configuration](#configurazione)<br>
 4. [Pros & Cons](#pros-and-cons)<br>
 5. [Curiosities](#curiosities)<br>
 6. [Support](#support)<br>
@@ -50,7 +50,7 @@ Ensure that the source matches this: [AT_Command.ino](https://github.com/HelTecA
 **3 - Configure the available frequency in your country using the configuration panel.** <br>
 **4 - Start chatting!** <br>
 
-- # **4. Pros & Cons**
+- # **4. Pros & Cons** <div id="pros-and-cons"></div>
 | **Pros**                                      | **Cons**                                                |
 |-----------------------------------------------|----------------------------------------------------------|
 | Wide coverage                                 | Limited bandwidth                                        |
@@ -59,7 +59,7 @@ Ensure that the source matches this: [AT_Command.ino](https://github.com/HelTecA
 | Reduced costs                                 | Security concerns                                        |
 | Application versatility                       | Data packet limitations                                  |
 
-- # **5. Curiosities**
+- # **5. Curiosities** <div id="curiosities"></div>
 1. LoRa utilizes sub-gigahertz radio frequency bands such as 433 MHz, 868 MHz (Europe), and 915 MHz (North America).
 2. It ensures long-range transmissions (over 10 km in rural areas, 3–5 km in highly urbanized zones) with low power consumption.
 3. It consists of two parts: LoRa, the physical layer, and LoRaWAN (Long Range Wide Area Network), the upper layers.
@@ -69,7 +69,7 @@ Ensure that the source matches this: [AT_Command.ino](https://github.com/HelTecA
 7. Reference to [AT Command User Manual](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
 8. Reference to [Understanding LoRa](https://development.libelium.com/lora_networking_guide/understanding-lora)
 
-- # **6. Support**
+- # **6. Support** <div id="support"></div>
 For any questions, bug reports, or feature requests, please open a new issue in our GitHub repository. We will strive to respond as quickly as possible.
 For more urgent inquiries or other issues, you can contact us via email at davide.polli@dedem.it. Please include complete details about the encountered problem for a faster resolution.
 We are committed to continually improving the application and value every contribution and feedback from our community.
