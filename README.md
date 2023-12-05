@@ -35,9 +35,13 @@ In the context of this project, we use the **CubeCell – AB01 Dev-Board develop
 ![TypeC/MicroUSB](cable2.png)<br>*USB Type-C/Micro USB*<br>
 
 - # 2. Device Preparation <div id="preparazione"></div>
-[Instructions via Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#use-arduino-board-manager)<br>
+**1 - Preparazione dell'ambiente**<br>
+[Instructions via Arduino Board Manager](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#use-arduino-board-manager)**<--Raccommended**<br>
 [Instructions via Git](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-git)<br>
 [Instructions via Local File](https://docs.heltec.org/en/node/asr650x/htcc_ab01/quick_start.html#via-local-file)<br>
+
+**2 - Flashing del dispositivo in AT Command**
+[AT_Command.ino]https://github.com/HelTecAutomation/CubeCell-Arduino/blob/master/libraries/LoRa/examples/AT_Command/AT_Command.ino
 
 - # 3. Application Configuration <div id="configurazione"></div>
 **1 - Download the application from the latest available release.** <br>
@@ -52,7 +56,7 @@ In the context of this project, we use the **CubeCell – AB01 Dev-Board develop
 | Low power consumption                         | Limited transmission speed                               |
 | Obstacle penetration                          | Interference                                             |
 | Reduced costs                                 | Security concerns                                        |
-| Application versatility                        | Data packet limitations                                  |
+| Application versatility                       | Data packet limitations                                  |
 
 - # **5. Curiosities**
 1. LoRa utilizes sub-gigahertz radio frequency bands such as 433 MHz, 868 MHz (Europe), and 915 MHz (North America).
