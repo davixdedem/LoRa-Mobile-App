@@ -48,7 +48,6 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 **3 - Inizia a chattare!**<br>
 
 - # **4.Pro & Contro**
-
 | **Pro**                                       | **Contro**                                              |
 |-----------------------------------------------|----------------------------------------------------------|
 | Ampia copertura                               | Banda limitata                                           |
@@ -58,7 +57,6 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 | Versatilità delle applicazioni                 | Limitazioni dei pacchetti dati                            |
 
 - # **5.Curiosità**
-
 - LoRa sfrutta bande di radiofrequenza sub-gigahertz come 433 MHz, 868 MHz (Europa) e 915 MHz (Nord America).
 - Garantisce trasmissioni a lungo raggio (oltre 10 km in zone rurali, 3–5 km in zone fortemente urbanizzate) con basso consumo energetico.
 - Si compone di due parti: LoRa, lo strato fisico, e LoRaWAN (Long Range Wide Area Network), gli strati superiori.
@@ -68,7 +66,6 @@ Uno degli obiettivi principali di questo progetto è semplificare l'utilizzo del
 - Riferimento al PDF dei comandi AT: [Manuale Utente Comandi AT](https://resource.heltec.cn/download/CubeCell/AT_Command_list/CubeCell_Series_AT_Command_User_Manual_V0.4.pdf)
 
 - # **6.Supporto**
-
 Per eventuali domande, segnalazioni di bug o richieste di nuove funzionalità, ti invitiamo ad aprire una nuova issue nel nostro repository su GitHub. Cercheremo di rispondere nel più breve tempo possibile.<br>
 Per domande più urgenti o altri problemi, puoi contattarci via email all'indirizzo davide.polli@dedem.it. Ti preghiamo di includere dettagli completi sul problema riscontrato per una risoluzione più rapida.<br>
 Siamo impegnati a migliorare continuamente l'applicazione e apprezziamo ogni contributo e feedback dalla nostra community.<br>
