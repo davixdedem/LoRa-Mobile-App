@@ -53,8 +53,6 @@ import java.util.Timer
 import java.util.TimerTask
 import kotlin.concurrent.timerTask
 
-
-
 class MainActivity : AppCompatActivity() {
     /***************************** DEVICE CONFIG *****************************************/
     private lateinit var loraFreq: String
@@ -228,7 +226,7 @@ class MainActivity : AppCompatActivity() {
          */
         userUUID = getDeviceUUID(this)
         myUUID = userUUID
-        inserisciConfigurazione(db,"userUUID",userUUID,"UUID dell'utente")
+        inserisciConfigurazione(db,"userUUID",userUUID,"User UUID")
 
         /*
          Assegnazione dei valori delle stringhe
@@ -459,88 +457,6 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onStart() {
         super.onStart()
-
-        /*
-         USBManager
-         */
-/*
-        if (!isDeviceConfigured) {
-            val usbManager = getSystemService(Context.USB_SERVICE) as UsbManager
-            val deviceList: HashMap<String, UsbDevice> = usbManager.deviceList
-            for (entry in deviceList.entries) {
-                val device: UsbDevice = entry.value
-                val permissionIntent = PendingIntent.getBroadcast(
-                    this,
-                    0,
-                    Intent(actionUsbPermission),
-                    PendingIntent.FLAG_IMMUTABLE
-                )
-                usbManager.requestPermission(device, permissionIntent)
-            }
-
-            */
-/*
-             Find all available drivers from attached devices.
-             *//*
-
-            val manager = getSystemService(USB_SERVICE) as UsbManager
-            val availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager)
-            Log.d("Driver", "$availableDrivers")
-            if (availableDrivers.isEmpty()) {
-                Log.d("Driver", "$availableDrivers")
-            }
-
-            try {
-                */
-/*
-                 Open a connection to the first available driver.
-                 *//*
-
-                driver = availableDrivers[0]
-                connection = manager.openDevice(driver.device)
-                    ?: // add UsbManager.requestPermission(driver.getDevice(), ..) handling here
-                    return
-                // Rest of your code to handle the USB connection
-                port = driver.ports[0]
-                port.open(connection)
-                port.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE)
-            } catch (e: Exception) {
-                // Handle exceptions here
-                e.printStackTrace() // Or perform other error handling tasks
-            }
-
-            */
-/*
-             Configurazione del dispositivo
-             *//*
-
-            isDeviceConfigured = setDeviceConfig(port)
-            if (isDeviceConfigured) {
-                Log.d("USBManager", "Device configurato correttamente,popolo i dati sul db.")
-                val mName = port.device.manufacturerName
-                val mVendorId = port.device.vendorId
-                val mDeviceId = port.device.deviceId
-                val mProductId = port.device.productId
-                val mProductName = port.device.productName
-                val mSerialNumber = port.device.serialNumber
-                val mVersion = port.device.version
-                if (mName != null) {
-                    inserisciConfigurazione(db, "mName", mName, "Device Manufacture Name")
-                }
-                inserisciConfigurazione(db, "mVendorId", mVendorId.toString(), "Device Vendor ID")
-                inserisciConfigurazione(db, "mDeviceId", mDeviceId.toString(), "Device ID")
-                inserisciConfigurazione(db, "mProductId", mProductId.toString(), "Device Product ID")
-                if (mProductName != null) {
-                    inserisciConfigurazione(db, "mProductName", mProductName, "Device Manufacture Name")
-                }
-                if (mSerialNumber != null) {
-                    inserisciConfigurazione(db, "mSerialNumber", mSerialNumber, "Device Serial Number")
-                }
-                inserisciConfigurazione(db, "mVersion", mVersion, "Device Version name")
-            }
-        }
-*/
-
     }
 
     private fun configureDevice(){
@@ -599,18 +515,18 @@ class MainActivity : AppCompatActivity() {
                 val mSerialNumber = port.device.serialNumber
                 val mVersion = port.device.version
                 if (mName != null) {
-                    inserisciConfigurazione(db, "mName", mName, "Device Manufacture Name")
+                    inserisciConfigurazione(db, "mName", mName, "Manufacture Name")
                 }
-                inserisciConfigurazione(db, "mVendorId", mVendorId.toString(), "Device Vendor ID")
-                inserisciConfigurazione(db, "mDeviceId", mDeviceId.toString(), "Device ID")
-                inserisciConfigurazione(db, "mProductId", mProductId.toString(), "Device Product ID")
+                inserisciConfigurazione(db, "mVendorId", mVendorId.toString(), "Manufacture Vendor ID")
+                inserisciConfigurazione(db, "mDeviceId", mDeviceId.toString(), "Manufacture Device ID")
+                inserisciConfigurazione(db, "mProductId", mProductId.toString(), "Manufacture Product ID")
                 if (mProductName != null) {
-                    inserisciConfigurazione(db, "mProductName", mProductName, "Device Manufacture Name")
+                    inserisciConfigurazione(db, "mProductName", mProductName, "Manufacture Product Name")
                 }
                 if (mSerialNumber != null) {
-                    inserisciConfigurazione(db, "mSerialNumber", mSerialNumber, "Device Serial Number")
+                    inserisciConfigurazione(db, "mSerialNumber", mSerialNumber, "Manufacture Serial Number")
                 }
-                inserisciConfigurazione(db, "mVersion", mVersion, "Device Version name")
+                inserisciConfigurazione(db, "mVersion", mVersion, "Manufacture Version")
             }
         }
 
@@ -914,19 +830,33 @@ class MainActivity : AppCompatActivity() {
     Funzione per inserire dati nella tabella 'groups' con parametri
      */
     private fun insertIntoGroupsTable(db: SQLiteDatabase, friendlyName: String, expectedUUID: String) {
-        val values = ContentValues().apply {
-            put("friendlyName", friendlyName)
-            put("expectedUUID", expectedUUID)
-        }
+        val selection = "friendlyName = ? AND expectedUUID = ?"
+        val selectionArgs = arrayOf(friendlyName, expectedUUID)
 
-        val rowId = db.insert("groups", null, values)
+        val query = "SELECT id FROM groups WHERE $selection"
+        val cursor = db.rawQuery(query, selectionArgs)
 
-        if (rowId != -1L) {
-            println("Dati inseriti correttamente nella tabella 'groups'")
+        if (cursor != null && cursor.moveToFirst()) {
+            // Valori già presenti, non fare nulla o gestisci l'esistenza
+            println("Valori già presenti nella tabella 'groups'")
+            cursor.close()
         } else {
-            println("Errore nell'inserimento dei dati nella tabella 'groups'")
+            // Valori non presenti, esegui l'inserimento
+            val values = ContentValues().apply {
+                put("friendlyName", friendlyName)
+                put("expectedUUID", expectedUUID)
+            }
+
+            val rowId = db.insert("groups", null, values)
+
+            if (rowId != -1L) {
+                println("Dati inseriti correttamente nella tabella 'groups'")
+            } else {
+                println("Errore nell'inserimento dei dati nella tabella 'groups'")
+            }
         }
     }
+
 
     /*
       Funzione per ottenere l'ultimo messaggio per ogni gruppo
@@ -966,6 +896,10 @@ class MainActivity : AppCompatActivity() {
             val groupName = groupsCursor.getString(groupsCursor.getColumnIndex("friendlyName"))
             val expectedUUID = groupsCursor.getString(groupsCursor.getColumnIndex("expectedUUID"))
 
+            Log.d("GROUPS","groupId: $groupId.")
+            Log.d("GROUPS","groupName: $groupName.")
+            Log.d("GROUPS","expectedUUID: $expectedUUID.")
+
             // Conta i messaggi non visti per ciascun gruppo
             val unseenCountQuery = "SELECT COUNT(*) AS unseenCount FROM messages WHERE hasGroup = 1 AND idGroup = $groupId AND seen = 0"
             val unseenCountCursor = db.rawQuery(unseenCountQuery, null)
@@ -973,6 +907,7 @@ class MainActivity : AppCompatActivity() {
 
             if (unseenCountCursor.moveToFirst()) {
                 unseenCount = unseenCountCursor.getInt(unseenCountCursor.getColumnIndex("unseenCount"))
+                Log.d("GROUPS","unseenCount: $unseenCount.")
             }
 
             unseenCountCursor.close()
@@ -987,6 +922,11 @@ class MainActivity : AppCompatActivity() {
                 val content = messagesCursor.getString(messagesCursor.getColumnIndex("content"))
                 val timestamp = messagesCursor.getString(messagesCursor.getColumnIndex("timestamp"))
                 val seen = messagesCursor.getInt(messagesCursor.getColumnIndex("seen"))
+
+                Log.d("GROUPS","messageId: $messageId.")
+                Log.d("GROUPS","senderUUID: $senderUUID.")
+                Log.d("GROUPS","content: $content.")
+                Log.d("GROUPS","timestamp: $timestamp.")
 
                 // Costruisci l'oggetto JSON per ogni messaggio
                 val messageObject = JSONObject().apply {
@@ -1136,6 +1076,29 @@ class MainActivity : AppCompatActivity() {
     """.trimIndent()
         db.execSQL(query)
     }
+
+     fun getAllConfigurations(db: SQLiteDatabase): String {
+        val configurationsArray = JSONArray()
+
+        val query = "SELECT * FROM configurations"
+        val cursor = db.rawQuery(query, null)
+
+        cursor.use { cursor ->
+            while (cursor.moveToNext()) {
+                val configObject = JSONObject()
+                configObject.put("id", cursor.getInt(cursor.getColumnIndex("id")))
+                configObject.put("configName", cursor.getString(cursor.getColumnIndex("configName")))
+                configObject.put("configValue", cursor.getString(cursor.getColumnIndex("configValue")))
+                configObject.put("configDescription", cursor.getString(cursor.getColumnIndex("configDescription")))
+                configObject.put("timestamp", cursor.getString(cursor.getColumnIndex("timestamp")))
+
+                configurationsArray.put(configObject)
+            }
+        }
+
+        return configurationsArray.toString()
+    }
+
 
     /*
      Controlla se uno userUUID esiste
@@ -1465,7 +1428,8 @@ class MainActivity : AppCompatActivity() {
 
         val query = (
                 "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite FROM messages " +
-                        "WHERE senderUUID = '$userUUID' OR receiverUUID = '$userUUID' " +
+                        "WHERE (senderUUID = '$userUUID' OR receiverUUID = '$userUUID') " +
+                        "AND hasGroup != 1 " +  // Aggiunta della condizione per escludere hasGroup = 1
                         "ORDER BY timestamp DESC LIMIT 50"
                 )
 
@@ -1638,6 +1602,16 @@ class MainActivity : AppCompatActivity() {
     fun sendJsonToJSUsersList(jsonString: String) {
         runOnUiThread {
             webView.evaluateJavascript("receiveContactsListJson('$jsonString');") {
+            }
+        }
+    }
+
+    /*
+    Chiama la funzione JavaScript 'receiveContactsListJson'
+    */
+    fun sendJsonToJSConfigList(jsonString: String) {
+        runOnUiThread {
+            webView.evaluateJavascript("receiveConfigurationsListJson('$jsonString');") {
             }
         }
     }
@@ -1835,6 +1809,8 @@ class WebAppInterface(private val mainActivity: MainActivity) {
     fun getBothLastMessagesJS() {
         val messages = mainActivity.getLastMessages(db)
         val messagesGroup = mainActivity.getLastGroupMessages(db)
+        Log.d("DBHandler","messages: $messages")
+        Log.d("DBHandler","messagesGroup: $messagesGroup")
         val jsonArray = JSONArray(messages)
         val jsonArrayGroup = JSONArray(messagesGroup)
         val jsonString = jsonArray.toString()
@@ -1915,6 +1891,15 @@ class WebAppInterface(private val mainActivity: MainActivity) {
         val jsonArray = JSONArray(messages)
         val jsonString = jsonArray.toString()
         mainActivity.sendJsonToJSUsersList(jsonString)
+    }
+
+    @JavascriptInterface
+    fun getConfigurations() {
+        val messages = mainActivity.getAllConfigurations(db)
+        Log.d("KotlinScript", messages)
+        val jsonArray = JSONArray(messages)
+        val jsonString = jsonArray.toString()
+        mainActivity.sendJsonToJSConfigList(jsonString)
     }
 
 }

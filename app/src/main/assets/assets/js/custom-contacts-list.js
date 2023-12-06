@@ -7,6 +7,7 @@ function receiveBothJsonList(jsonString, jsonStringGroup, myUUID) {
     global_myuuid = myUUID;
     var jsonData = JSON.parse(jsonString);
     var jsonDataGroup = JSON.parse(jsonStringGroup);
+    console.log(jsonString);
     for (var i = 0; i < jsonData.length; i++) {
         myUUID = jsonData[i].myUUID;
         var remoteUUID = jsonData[i].remoteUUID;
@@ -17,8 +18,9 @@ function receiveBothJsonList(jsonString, jsonStringGroup, myUUID) {
         createChatItem(myUUID, remoteUUID, remoteUUID, content, timestamp, seen, unseenCount);
     }
     if (jsonDataGroup.length === 0) {
-        createGroupChatItem("LoRa Group", myUUID, "LORAWAN0", "LORAWAN0", "Manda un messaggio a tutti quanti..", "", 0, 0, true);
+        createGroupChatItem("LoRa Chat-Room", myUUID, "LORAWAN0", "LORAWAN0", "Send a message to everyone..", "", 0, 0, true);
     } else {
+        console.log("CONDITION!")
         for (var i = 0; i < jsonDataGroup.length; i++) {
             myUUID = jsonDataGroup[i].myUUID;
             var groupName = jsonDataGroup[i].groupName;
@@ -41,6 +43,75 @@ function receiveContactsListJson(jsonString) {
     // Chiama la funzione per creare la lista dei contatti
     createContactList(jsonData);
 }
+
+// Funzione chiamata da Kotlin
+function receiveConfigurationsListJson(jsonString) {
+    // Chiama la funzione per creare la lista dei contatti
+    populeConfigurationsList(jsonString);
+}
+
+function populeConfigurationsList(jsonData) {
+    const data = JSON.parse(jsonData);
+
+    const manufactureName = data.find(config => config.configName === "mName");
+    const manufactureVendorID = data.find(config => config.configName === "mVendorId");
+    const manufactureDeviceID = data.find(config => config.configName === "mDeviceId");
+    const manufactureProductID = data.find(config => config.configName === "mProductId");
+    const manufactureProductName = data.find(config => config.configName === "mProductName");
+    const manufactureSerialNumber = data.find(config => config.configName === "mSerialNumber");
+    const manufactureVersion = data.find(config => config.configName === "mVersion");
+
+    if (manufactureName) {
+        const mNameElement = document.getElementById("mName");
+        if (mNameElement) {
+            mNameElement.textContent = manufactureName.configValue;
+        }
+    }
+
+    if (manufactureVendorID) {
+        const manufactureVendorIDElement = document.getElementById("mVendorId");
+        if (manufactureVendorIDElement) {
+            manufactureVendorIDElement.textContent = manufactureVendorID.configValue;
+        }
+    }
+
+    if (manufactureDeviceID) {
+        const manufactureDeviceIDElement = document.getElementById("mDeviceId");
+        if (manufactureDeviceIDElement) {
+            manufactureDeviceIDElement.textContent = manufactureDeviceID.configValue;
+        }
+    }
+
+    if (manufactureProductID) {
+        const manufactureProductIDElement = document.getElementById("mProductId");
+        if (manufactureProductIDElement) {
+            manufactureProductIDElement.textContent = manufactureProductID.configValue;
+        }
+    }
+
+    if (manufactureProductName) {
+        const manufactureProductNameElement = document.getElementById("mProductName");
+        if (manufactureProductNameElement) {
+            manufactureProductNameElement.textContent = manufactureProductName.configValue;
+        }
+    }
+
+    if (manufactureSerialNumber) {
+        const manufactureSerialNumberElement = document.getElementById("mSerialNumber");
+        if (manufactureSerialNumberElement) {
+            manufactureSerialNumberElement.textContent = manufactureSerialNumber.configValue;
+        }
+    }
+
+    if (manufactureVersion) {
+        const manufactureVersionElement = document.getElementById("mVersion");
+        if (manufactureVersionElement) {
+            manufactureVersionElement.textContent = manufactureVersion.configValue;
+        }
+    }
+
+}
+
 
 // Crea la lista dei contatti
 function createContactList(jsonData) {
@@ -394,6 +465,7 @@ window.onload = function() {
     hideContacts();
     bindingContactListButton();
 
+    Android.getConfigurations();
     Android.getBothLastMessagesJS();
     Android.getContactsListJS();
 }
