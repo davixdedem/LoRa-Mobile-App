@@ -37,6 +37,7 @@ import java.util.concurrent.Executors
 import android.Manifest
 import android.app.Activity
 import android.app.Application
+import android.content.res.Resources
 import android.database.SQLException
 import android.hardware.usb.UsbDeviceConnection
 import android.location.Location
@@ -258,6 +259,17 @@ class MainActivity : AppCompatActivity() {
                 "LoraSet=$loraFreq,$loraPower,$loraSF,$loraBW,$loraCodeRate," +
                 "$loraPreambleLength,$loraCRC,$loraIQInvert,$loraSaveToFlash").toByteArray()
         atCmdSetLoraReceiveTimeout = (atPrefix + "RX=" + loraReceiveTimeout).toByteArray()
+
+        inserisciConfigurazione(db,"loraFreq",loraFreq,"Lora Frequency")
+        inserisciConfigurazione(db,"loraPower",loraPower,"Lora Power")
+        inserisciConfigurazione(db,"loraSF",loraSF,"Lora Spread Factory")
+        inserisciConfigurazione(db,"loraBW",loraBW,"Lora BandWidth")
+        inserisciConfigurazione(db,"loraCodeRate",loraCodeRate,"Lora Code Rate")
+        inserisciConfigurazione(db,"loraPreambleLength",loraPreambleLength,"Lora Preamble Length")
+        inserisciConfigurazione(db,"loraCRC",loraCRC,"Lora CRC")
+        inserisciConfigurazione(db,"loraSaveToFlash",loraSaveToFlash,"Lora SaveToFlash")
+        inserisciConfigurazione(db,"loraReceiveTimeout",loraReceiveTimeout,"Lora ReceiveTimeout")
+        inserisciConfigurazione(db,"atPrefix",atPrefix,"Lora AT Prefix Mark")
 
         /*
          Query the current received data output mode:
@@ -1077,7 +1089,11 @@ class MainActivity : AppCompatActivity() {
         db.execSQL(query)
     }
 
-     fun getAllConfigurations(db: SQLiteDatabase): String {
+    /*
+    Torna un Json con le configurazioni attuali
+     */
+    @SuppressLint("Range")
+    fun getAllConfigurations(db: SQLiteDatabase): String {
         val configurationsArray = JSONArray()
 
         val query = "SELECT * FROM configurations"

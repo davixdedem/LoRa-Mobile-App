@@ -1236,11 +1236,11 @@
                                             <!-- Card Details Start -->
                                             <div class="d-flex flex-column align-items-center">
                                                 <div class="avatar avatar-lg mb-3">
-                                                    <img class="avatar-img" src="./../assets/media/avatar/3.png" alt="">
+                                                    <img class="avatar-img" src="./../assets/media/avatar/user.png" alt="">
                                                 </div>
                 
                                                 <div class="d-flex flex-column align-items-center">
-                                                    <h5>Catherine Richardson</h5>
+                                                    <h5 id="myUUID"></h5>
                                                 </div>
 
                                                 <div class="d-flex">
@@ -1270,23 +1270,23 @@
                                             <!-- Card Details End -->
 
                                             <!-- Card Options Start -->
-                                            <div class="card-options">
+<!--                                            <div class="card-options">
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <!-- Default :: Inline SVG -->
+                                                        &lt;!&ndash; Default :: Inline SVG &ndash;&gt;
                                                         <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
                                                         </svg>
                                                             
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+                                                        &lt;!&ndash; Alternate :: External File link &ndash;&gt;
+                                                        &lt;!&ndash; <img class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> &ndash;&gt;
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="#">Change Profile Picture</a>
                                                         <a class="dropdown-item" href="#">Change Number</a>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <!-- Card Options End -->
 
                                         </div>
@@ -1306,7 +1306,6 @@
                                                 .icon-container p {
                                                     color: white; /* Imposta il colore del testo a bianco */
                                                 }
-
                                             </style>
 
                                             <div class="icon-container">
@@ -1436,6 +1435,131 @@
                                                 </li>
                                                 <!-- List Group Item End -->
 
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Frequency</p>
+                                                            <p class="mb-0" id="loraFreq"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Power</p>
+                                                            <p class="mb-0" id="loraPower"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Spread Factory</p>
+                                                            <p class="mb-0" id="loraSF"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Band Width</p>
+                                                            <p class="mb-0" id="loraBW"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Code Rate</p>
+                                                            <p class="mb-0" id="loraCodeRate"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Code Rate</p>
+                                                            <p class="mb-0" id="loraPreambleLength"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa CRC</p>
+                                                            <p class="mb-0" id="loraCRC"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Save To Flash</p>
+                                                            <p class="mb-0" id="loraSaveToFlash"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
+
+                                                <!-- List Group Item Start -->
+                                                <li class="list-group-item pt-2">
+                                                    <div class="media align-items-center">
+                                                        <div class="media-body">
+                                                            <p class="small text-muted mb-0">LoRa Receive Timeout</p>
+                                                            <p class="mb-0" id="loraReceiveTimeout"></p>
+                                                        </div>
+
+                                                        <!-- Alternate :: External File link -->
+                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                    </div>
+                                                </li>
+                                                <!-- List Group Item End -->
 
 
                                             </ul>

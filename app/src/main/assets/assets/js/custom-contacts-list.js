@@ -5,6 +5,7 @@ let global_myuuid = "";
 function receiveBothJsonList(jsonString, jsonStringGroup, myUUID) {
     flushChatList();
     global_myuuid = myUUID;
+    document.getElementById("myUUID").textContent = global_myuuid;
     var jsonData = JSON.parse(jsonString);
     var jsonDataGroup = JSON.parse(jsonStringGroup);
     console.log(jsonString);
@@ -20,7 +21,6 @@ function receiveBothJsonList(jsonString, jsonStringGroup, myUUID) {
     if (jsonDataGroup.length === 0) {
         createGroupChatItem("LoRa Chat-Room", myUUID, "LORAWAN0", "LORAWAN0", "Send a message to everyone..", "", 0, 0, true);
     } else {
-        console.log("CONDITION!")
         for (var i = 0; i < jsonDataGroup.length; i++) {
             myUUID = jsonDataGroup[i].myUUID;
             var groupName = jsonDataGroup[i].groupName;
@@ -60,6 +60,16 @@ function populeConfigurationsList(jsonData) {
     const manufactureProductName = data.find(config => config.configName === "mProductName");
     const manufactureSerialNumber = data.find(config => config.configName === "mSerialNumber");
     const manufactureVersion = data.find(config => config.configName === "mVersion");
+
+    const loraFreq = data.find(config => config.configName === "loraFreq");
+    const loraPower = data.find(config => config.configName === "loraPower");
+    const loraSF = data.find(config => config.configName === "loraSF");
+    const loraBW = data.find(config => config.configName === "loraBW");
+    const loraCodeRate = data.find(config => config.configName === "loraCodeRate");
+    const loraPreambleLength = data.find(config => config.configName === "loraPreambleLength");
+    const loraCRC = data.find(config => config.configName === "loraCRC");
+    const loraSaveToFlash = data.find(config => config.configName === "loraSaveToFlash");
+    const loraReceiveTimeout = data.find(config => config.configName === "loraReceiveTimeout");
 
     if (manufactureName) {
         const mNameElement = document.getElementById("mName");
@@ -110,8 +120,70 @@ function populeConfigurationsList(jsonData) {
         }
     }
 
-}
+    if (loraFreq) {
+        const loraFreqElement = document.getElementById("loraFreq");
+        if (loraFreqElement) {
+            loraFreqElement.textContent = loraFreq.configValue;
+        }
+    }
 
+    if (loraPower) {
+        const loraPowerElement = document.getElementById("loraPower");
+        if (loraPowerElement) {
+            loraPowerElement.textContent = loraPower.configValue;
+        }
+    }
+
+    if (loraSF) {
+        const loraSFElement = document.getElementById("loraSF");
+        if (loraSFElement) {
+            loraSFElement.textContent = loraSF.configValue;
+        }
+    }
+
+    if (loraBW) {
+        const loraBWElement = document.getElementById("loraBW");
+        if (loraBWElement) {
+            loraBWElement.textContent = loraBW.configValue;
+        }
+    }
+
+    if (loraCodeRate) {
+        const loraCodeRateElement = document.getElementById("loraCodeRate");
+        if (loraCodeRateElement) {
+            loraCodeRateElement.textContent = loraCodeRate.configValue;
+        }
+    }
+
+    if (loraPreambleLength) {
+        const loraPreambleLengthElement = document.getElementById("loraPreambleLength");
+        if (loraPreambleLengthElement) {
+            loraPreambleLengthElement.textContent = loraPreambleLength.configValue;
+        }
+    }
+
+    if (loraCRC) {
+        const loraCRCElement = document.getElementById("loraCRC");
+        if (loraCRCElement) {
+            loraCRCElement.textContent = loraCRC.configValue;
+        }
+    }
+
+    if (loraSaveToFlash) {
+        const loraSaveToFlashElement = document.getElementById("loraSaveToFlash");
+        if (loraSaveToFlashElement) {
+            loraSaveToFlashElement.textContent = loraSaveToFlash.configValue;
+        }
+    }
+
+    if (loraReceiveTimeout) {
+        const loraReceiveTimeoutElement = document.getElementById("loraReceiveTimeout");
+        if (loraReceiveTimeoutElement) {
+            loraReceiveTimeoutElement.textContent = loraReceiveTimeout.configValue;
+        }
+    }
+
+}
 
 // Crea la lista dei contatti
 function createContactList(jsonData) {
