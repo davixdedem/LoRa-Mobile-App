@@ -1439,12 +1439,14 @@
                                                 <li class="list-group-item pt-2">
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
-                                                            <p class="small text-muted mb-0">LoRa Frequency</p>
-                                                            <p class="mb-0" id="loraFreq"></p>
+                                                            <p class="small text-muted mb-0">LoRa Frequency(HZ)</p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraFreq" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraFreqInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraFreq','loraFreqInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1453,12 +1455,14 @@
                                                 <li class="list-group-item pt-2">
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
-                                                            <p class="small text-muted mb-0">LoRa Power</p>
-                                                            <p class="mb-0" id="loraPower"></p>
+                                                            <p class="small text-muted mb-0">LoRa Power(dB)</p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraPower" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraPowerInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraPower','loraPowerInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1467,12 +1471,14 @@
                                                 <li class="list-group-item pt-2">
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
-                                                            <p class="small text-muted mb-0">LoRa Spread Factory</p>
-                                                            <p class="mb-0" id="loraSF"></p>
+                                                            <p class="small text-muted mb-0">LoRa SF</p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraSF" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraSFInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraSF','loraSFInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1481,12 +1487,14 @@
                                                 <li class="list-group-item pt-2">
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
-                                                            <p class="small text-muted mb-0">LoRa Band Width</p>
-                                                            <p class="mb-0" id="loraBW"></p>
+                                                            <p class="small text-muted mb-0">LoRa BW</p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraBW" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraBWInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraBW','loraBWInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1496,11 +1504,13 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">LoRa Code Rate</p>
-                                                            <p class="mb-0" id="loraCodeRate"></p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraCodeRate" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraCodeRateInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraCodeRate','loraCodeRateInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1509,12 +1519,14 @@
                                                 <li class="list-group-item pt-2">
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
-                                                            <p class="small text-muted mb-0">LoRa Code Rate</p>
-                                                            <p class="mb-0" id="loraPreambleLength"></p>
+                                                            <p class="small text-muted mb-0">LoRa Preamble Length</p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraPreambleLength" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraPreambleLengthInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraPreambleLength','loraPreambleLengthInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1524,11 +1536,13 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">LoRa CRC</p>
-                                                            <p class="mb-0" id="loraCRC"></p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraCRC" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraCRCInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraCRC','loraCRCInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1538,11 +1552,13 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">LoRa Save To Flash</p>
-                                                            <p class="mb-0" id="loraSaveToFlash"></p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraSaveToFlash" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraSaveToFlashInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraSaveToFlash','loraSaveToFlashInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
@@ -1552,15 +1568,16 @@
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
                                                             <p class="small text-muted mb-0">LoRa Receive Timeout</p>
-                                                            <p class="mb-0" id="loraReceiveTimeout"></p>
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Aggiunto un campo di input nascosto per la modifica -->
+                                                                <p class="mb-0 mr-2" id="loraReceiveTimeout" contenteditable="true">Valore attuale</p>
+                                                                <input type="text" class="d-none form-control" id="loraReceiveTimeoutInput">
+                                                                <img class="injectable text-muted hw-20 ml-1 edit-icon" src="./../assets/media/heroicons/outline/pencil.svg" alt="Edit" onclick="enableEdit('loraReceiveTimeout','loraReceiveTimeoutInput')">
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable text-muted hw-20 ml-1" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
                                                     </div>
                                                 </li>
                                                 <!-- List Group Item End -->
-
 
                                             </ul>
                                             <!-- List Group End -->

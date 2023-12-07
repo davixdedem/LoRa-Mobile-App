@@ -144,6 +144,13 @@ function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID
                             <!-- <img class="injectable hw-18 mr-2" src="./../assets/media/heroicons/outline/star.svg" alt="message favourite"> -->
                             <span>Favourite</span>
                         </a>
+                        <a class="dropdown-item d-flex align-items-center resend-button" href="#" data-id="${messageID}">
+                            <!-- Custom SVG for Forward Icon -->
+                            <svg class="hw-18 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4M20 12L12 4M20 12L12 20"></path>
+                            </svg>
+                            <span>Resend</span>
+                        </a>
                         <a class="dropdown-item d-flex align-items-center text-danger" href="#" data-id="${messageID}">
                             <!-- Default :: Inline SVG -->
                             <svg class="hw-18 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

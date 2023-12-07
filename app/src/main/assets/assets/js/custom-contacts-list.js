@@ -531,6 +531,38 @@ function bindingContactListButton(){
     });
 }
 
+function enableEdit(configName,input) {
+    const currentValue = document.getElementById(configName).textContent;
+    const inputField = document.getElementById(input);
+
+    // Imposta il valore del campo di input con il valore attuale
+    inputField.value = currentValue;
+
+    // Mostra il campo di input e nascondi il paragrafo
+    inputField.classList.remove('d-none');
+    document.getElementById(configName).classList.add('d-none');
+
+    // Quando viene completata la modifica, chiama la funzione saveEdit()
+    inputField.addEventListener('blur', saveEdit);
+    inputField.addEventListener('blur', function() {
+        saveEdit(configName,input); // Chiama saveEdit() passando il nuovo valore come argomento
+    });
+
+    inputField.focus();
+}
+
+function saveEdit(configName,input) {
+    const newValue = document.getElementById(input).value;
+    const paraElement = document.getElementById(configName);
+
+    // Imposta il nuovo valore nel paragrafo
+    paraElement.textContent = newValue;
+
+    // Nascondi il campo di input e mostra di nuovo il paragrafo
+    paraElement.classList.remove('d-none');
+    document.getElementById(input).classList.add('d-none');
+}
+
 // Avviene quando la pagina è stata caricata
 window.onload = function() {
     flushChatList();
