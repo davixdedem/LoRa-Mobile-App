@@ -1391,19 +1391,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-     Accorcia l'hash
-     */
+    Accorcia l'hash a 8 caratteri
+    */
     private fun shortHash(input: String): String {
         val digest = MessageDigest.getInstance("SHA-256")
         val hashBytes = digest.digest(input.toByteArray())
         val hexString = StringBuffer()
 
-        for (i in 0 until 8) {
+        // Converte i primi 4 byte dell'hash in una stringa esadecimale
+        for (i in 0 until 4) {
             val hex = Integer.toHexString(0xff and hashBytes[i].toInt())
             if (hex.length == 1) hexString.append('0')
-            hexString.append(hex[0])
+            hexString.append(hex)
         }
-        return hexString.toString()
+
+        // Restituisce i primi 8 caratteri della stringa esadecimale
+        return hexString.toString().substring(0, 8)
     }
 
     /*
