@@ -37,7 +37,6 @@ import java.util.concurrent.Executors
 import android.Manifest
 import android.app.Activity
 import android.app.Application
-import android.content.res.Resources
 import android.database.SQLException
 import android.hardware.usb.UsbDeviceConnection
 import android.location.Location
@@ -139,6 +138,7 @@ class MainActivity : AppCompatActivity() {
     private var timeoutTimer: Timer? = null
     private var isAppInForeground = false
     private var isReadSerialActive = false
+    private var timer: Timer? = null
 
     /***************************** DATABASE *****************************************/
     private lateinit var db: SQLiteDatabase
@@ -204,6 +204,11 @@ class MainActivity : AppCompatActivity() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 currentPage = url?.let { checkCurrentPage(it) }.toString()
                 Log.d("Webview","L'utente si trova in $currentPage")
+                if (currentPage == "Chat"){
+                    if (!isDeviceConnected) {
+                        disableTextareaAndLoadingIndicator()
+                    }
+                }
             }
         }
 
@@ -227,10 +232,10 @@ class MainActivity : AppCompatActivity() {
          */
         userUUID = getDeviceUUID(this)
         myUUID = userUUID
-        inserisciConfigurazione(db,"userUUID",userUUID,"User UUID")
+        inserisciConfigurazione(db,"userUUID",userUUID,"User UUID",true)
 
         /*
-         Assegnazione dei valori delle stringhe
+         Assegnazione dei valori di default delle stringhe
          */
         loraFreq = getString(R.string.lora_freq)
         loraPower = getString(R.string.lora_power)
@@ -260,6 +265,9 @@ class MainActivity : AppCompatActivity() {
                 "$loraPreambleLength,$loraCRC,$loraIQInvert,$loraSaveToFlash").toByteArray()
         atCmdSetLoraReceiveTimeout = (atPrefix + "RX=" + loraReceiveTimeout).toByteArray()
 
+        /*
+        Inserisco i valori sul DB se non sono già esistenti
+         */
         inserisciConfigurazione(db,"loraFreq",loraFreq,"Lora Frequency")
         inserisciConfigurazione(db,"loraPower",loraPower,"Lora Power")
         inserisciConfigurazione(db,"loraSF",loraSF,"Lora Spread Factory")
@@ -471,6 +479,12 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
     }
 
+    override fun onStop() {
+        super.onStop()
+        Log.d("USBSerial","Stopping..")
+        stopCheckReadSerialStatus()
+    }
+
     private fun configureDevice(){
         if (!isDeviceConfigured) {
             val usbManager = getSystemService(Context.USB_SERVICE) as UsbManager
@@ -508,40 +522,40 @@ class MainActivity : AppCompatActivity() {
                 port = driver.ports[0]
                 port.open(connection)
                 port.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE)
+
+                /*
+                 Configurazione del dispositivo
+                 */
+                isDeviceConfigured = setDeviceConfig(port)
+                if (isDeviceConfigured) {
+                    Log.d("USBManager", "Device configurato correttamente,popolo i dati sul db.")
+                    val mName = port.device.manufacturerName
+                    val mVendorId = port.device.vendorId
+                    val mDeviceId = port.device.deviceId
+                    val mProductId = port.device.productId
+                    val mProductName = port.device.productName
+                    val mSerialNumber = port.device.serialNumber
+                    val mVersion = port.device.version
+                    if (mName != null) {
+                        inserisciConfigurazione(db, "mName", mName, "Manufacture Name",true)
+                    }
+                    inserisciConfigurazione(db, "mVendorId", mVendorId.toString(), "Manufacture Vendor ID",true)
+                    inserisciConfigurazione(db, "mDeviceId", mDeviceId.toString(), "Manufacture Device ID",true)
+                    inserisciConfigurazione(db, "mProductId", mProductId.toString(), "Manufacture Product ID",true)
+                    if (mProductName != null) {
+                        inserisciConfigurazione(db, "mProductName", mProductName, "Manufacture Product Name",true)
+                    }
+                    if (mSerialNumber != null) {
+                        inserisciConfigurazione(db, "mSerialNumber", mSerialNumber, "Manufacture Serial Number",true)
+                    }
+                    inserisciConfigurazione(db, "mVersion", mVersion, "Manufacture Version",true)
+                }
+
             } catch (e: Exception) {
                 // Handle exceptions here
                 e.printStackTrace() // Or perform other error handling tasks
             }
-
-            /*
-             Configurazione del dispositivo
-             */
-            isDeviceConfigured = setDeviceConfig(port)
-            if (isDeviceConfigured) {
-                Log.d("USBManager", "Device configurato correttamente,popolo i dati sul db.")
-                val mName = port.device.manufacturerName
-                val mVendorId = port.device.vendorId
-                val mDeviceId = port.device.deviceId
-                val mProductId = port.device.productId
-                val mProductName = port.device.productName
-                val mSerialNumber = port.device.serialNumber
-                val mVersion = port.device.version
-                if (mName != null) {
-                    inserisciConfigurazione(db, "mName", mName, "Manufacture Name")
-                }
-                inserisciConfigurazione(db, "mVendorId", mVendorId.toString(), "Manufacture Vendor ID")
-                inserisciConfigurazione(db, "mDeviceId", mDeviceId.toString(), "Manufacture Device ID")
-                inserisciConfigurazione(db, "mProductId", mProductId.toString(), "Manufacture Product ID")
-                if (mProductName != null) {
-                    inserisciConfigurazione(db, "mProductName", mProductName, "Manufacture Product Name")
-                }
-                if (mSerialNumber != null) {
-                    inserisciConfigurazione(db, "mSerialNumber", mSerialNumber, "Manufacture Serial Number")
-                }
-                inserisciConfigurazione(db, "mVersion", mVersion, "Manufacture Version")
-            }
         }
-
     }
 
     /*
@@ -583,16 +597,17 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     isReadSerialActive = false
-                    Log.d("Buffering", "Thread fermato in questo momento...")
+                    Log.d("USBSerial", "Thread fermato in questo momento...")
                 }
             }
+            Log.d("USBSerial","Thrad interrotto!")
         }
 
         if (!isThreadReadingRunning) {
-            Log.d("Buffering", "Avvio il Thread di lettura.")
+            Log.d("USBSerial", "Avvio il Thread di lettura.")
             readThread.start()
         } else {
-            Log.d("Buffering", "Thread di lettura già avviato.")
+            Log.d("USBSerial", "Thread di lettura già avviato.")
         }
     }
 
@@ -606,8 +621,8 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val timer = Timer()
-        timer.scheduleAtFixedRate(timerTask {
+        timer = Timer()
+        timer!!.scheduleAtFixedRate(timerTask {
             if (isReadSerialActive) {
                 Log.d("USBSerial", "La funzione readSerial() è attiva.")
                 removeOverlayDeviceDisconnected()
@@ -626,6 +641,15 @@ class MainActivity : AppCompatActivity() {
 
         // Imposta lo stato di avvio come true
         isCheckSerialStatusStarted = true
+    }
+
+    /*
+    Fermo il thread di controllo seriale
+     */
+    fun stopCheckReadSerialStatus() {
+        timer?.cancel()
+        timer = null
+        isCheckSerialStatusStarted = false
     }
 
     /*
@@ -1001,6 +1025,19 @@ class MainActivity : AppCompatActivity() {
         context.startActivity(notificationIntent)
     }
 
+    fun updateConfiguration(configName: String, configValue: String, db: SQLiteDatabase): Boolean {
+        val values = ContentValues()
+        values.put("configValue", configValue)
+
+        val rowsAffected = db.update(
+            "configurations",
+            values,
+            "configName = ?",
+            arrayOf(configName)
+        )
+
+        return rowsAffected > 0
+    }
 
 
     /*
@@ -1210,13 +1247,13 @@ class MainActivity : AppCompatActivity() {
         configName: String,
         configValue: String,
         configDescription: String,
+        modifyIfExists: Boolean = false
     ): Long {
         val contentValues = ContentValues().apply {
             put("configName", configName)
             put("configValue", configValue)
             put("configDescription", configDescription)
         }
-        Log.d("DbHandler", "Ho inserito la configurazione: $configName,$configValue,$configDescription")
 
         val existingConfigCursor = db.query(
             "configurations",
@@ -1229,12 +1266,18 @@ class MainActivity : AppCompatActivity() {
         )
         val exists = existingConfigCursor.count > 0
         existingConfigCursor.close()
+
         return if (exists) {
-            db.update("configurations", contentValues, "configName = ?", arrayOf(configName)).toLong()
+            if (modifyIfExists) {
+                db.update("configurations", contentValues, "configName = ?", arrayOf(configName)).toLong()
+            } else {
+                -1 // Se non si modifica e esiste già, restituisci -1
+            }
         } else {
             db.insert("configurations", null, contentValues)
         }
     }
+
 
     /*
      Inserire un messaggio
@@ -1557,11 +1600,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
+     Chiama la funzione JavaScript 'disableTextareaAndLoadingIndicator'
+     */
+    fun disableTextareaAndLoadingIndicator() {
+        runOnUiThread {
+            webView.evaluateJavascript("disableTextareaAndLoadingIndicator();") {
+            }
+        }
+    }
+
+    /*
      Chiama la funzione JavaScript 'addOverlay'
      */
     fun addOverlayDeviceDisconnected() {
+        isDeviceConnected = false
         runOnUiThread {
-            webView.evaluateJavascript("addOverlayDeviceDisconnected();") {
+            webView.evaluateJavascript("deviceDisconnected();") {
             }
         }
     }
@@ -1572,7 +1626,7 @@ class MainActivity : AppCompatActivity() {
     fun removeOverlayDeviceDisconnected() {
         isDeviceConnected = true
         runOnUiThread {
-            webView.evaluateJavascript("removeOverlayDeviceDisconnected();") {
+            webView.evaluateJavascript("deviceConnected();") {
             }
         }
     }
@@ -1916,6 +1970,12 @@ class WebAppInterface(private val mainActivity: MainActivity) {
         val jsonArray = JSONArray(messages)
         val jsonString = jsonArray.toString()
         mainActivity.sendJsonToJSConfigList(jsonString)
+    }
+
+    @JavascriptInterface
+    fun editConfigurations(configName: String,configValue: String) {
+        val messages = mainActivity.updateConfiguration(configName,configValue,db)
+        Log.d("DBHadnler", "messages è: $messages")
     }
 
 }

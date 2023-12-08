@@ -499,6 +499,67 @@ function hideContacts() {
     });
 }
 
+// Disabilito la TextArea in caso di device disconnesso
+function disableTextareaAndLoadingIndicator() {
+  var textareaElement = document.getElementById('messageInput');
+  var loadingIndicator = document.getElementById('loadingIndicator');
+  var sendButton = document.querySelector('.btn.btn-primary.btn-icon.send-icon.rounded-circle.text-light.mb-1');
+  var locationLink = document.getElementById('buttonLocation');
+  var dropdownMenu = document.querySelector('.dropdown-menu');
+  var attachmentElement = document.querySelector('.attachment');
+
+  if (textareaElement && loadingIndicator && sendButton && locationLink && dropdownMenu && attachmentElement) {
+    textareaElement.disabled = true; // Disabilita l'area di testo
+    textareaElement.style.opacity = '0.8'; // Opacità al 50% per oscurare l'area di testo
+    textareaElement.style.color = 'black'; // Rende il testo della textarea nero
+
+    loadingIndicator.style.display = 'block'; // Mostra l'indicatore di caricamento
+
+    sendButton.style.pointerEvents = 'none'; // Disabilita gli eventi di puntatore sul pulsante
+    sendButton.style.opacity = '0'; // Opacità al 50% per oscurare il pulsante
+
+    locationLink.style.display = 'none'; // Rende invisibile l'elemento con ID "buttonLocation"
+
+    dropdownMenu.style.display = 'none'; // Rende invisibile l'elemento con classe "dropdown-menu"
+
+    attachmentElement.style.display = 'none'; // Rende invisibile l'elemento con classe "attachment"
+
+    textareaElement.value = 'In order to chat, connect the dev board.'; // Inserisce il testo nella textarea
+  } else {
+    console.log('Elementi non trovati');
+  }
+}
+
+//Funzione che ri-abilita la TextArea per un device connesso
+function enableTextareaAndLoadingIndicator() {
+  var textareaElement = document.getElementById('messageInput');
+  var loadingIndicator = document.getElementById('loadingIndicator');
+  var sendButton = document.querySelector('.btn.btn-primary.btn-icon.send-icon.rounded-circle.text-light.mb-1');
+  var locationLink = document.getElementById('buttonLocation');
+  var dropdownMenu = document.querySelector('.dropdown-menu');
+  var attachmentElement = document.querySelector('.attachment');
+
+  if (textareaElement && loadingIndicator && sendButton && locationLink && dropdownMenu && attachmentElement) {
+    textareaElement.disabled = false; // Riabilita l'area di testo
+    textareaElement.style.opacity = '1'; // Ripristina l'opacità
+    textareaElement.style.color = ''; // Ripristina il colore del testo della textarea
+
+    loadingIndicator.style.display = 'none'; // Nasconde l'indicatore di caricamento
+
+    sendButton.style.pointerEvents = ''; // Riattiva gli eventi di puntatore sul pulsante
+    sendButton.style.opacity = '1'; // Ripristina l'opacità del pulsante
+
+    locationLink.style.display = ''; // Riattiva l'elemento con ID "buttonLocation"
+
+    dropdownMenu.style.display = ''; // Riattiva l'elemento con classe "dropdown-menu"
+
+    attachmentElement.style.display = ''; // Riattiva l'elemento con classe "attachment"
+
+    textareaElement.value = ''; // Cancella il testo nella textarea
+  } else {
+    console.log('Elementi non trovati');
+  }
+}
 
 // Avviene quando la pagina è stata caricata
 window.onload = function() {

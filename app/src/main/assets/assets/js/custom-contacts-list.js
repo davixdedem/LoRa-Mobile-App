@@ -531,27 +531,28 @@ function bindingContactListButton(){
     });
 }
 
-function enableEdit(configName,input) {
-    const currentValue = document.getElementById(configName).textContent;
+function enableEdit(configName, input) {
+    const paraElement = document.getElementById(configName);
     const inputField = document.getElementById(input);
 
-    // Imposta il valore del campo di input con il valore attuale
+    // Salva il valore attuale e lo imposta come valore del campo di input
+    const currentValue = paraElement.textContent;
     inputField.value = currentValue;
 
     // Mostra il campo di input e nascondi il paragrafo
     inputField.classList.remove('d-none');
-    document.getElementById(configName).classList.add('d-none');
+    paraElement.classList.add('d-none');
 
-    // Quando viene completata la modifica, chiama la funzione saveEdit()
-    inputField.addEventListener('blur', saveEdit);
+    // Aggiungi un listener per salvare automaticamente quando si perde il focus sull'input
     inputField.addEventListener('blur', function() {
-        saveEdit(configName,input); // Chiama saveEdit() passando il nuovo valore come argomento
+        saveEdit(configName, input);
     });
 
+    // Imposta il focus sull'input
     inputField.focus();
 }
 
-function saveEdit(configName,input) {
+function saveEdit(configName, input) {
     const newValue = document.getElementById(input).value;
     const paraElement = document.getElementById(configName);
 
@@ -561,7 +562,51 @@ function saveEdit(configName,input) {
     // Nascondi il campo di input e mostra di nuovo il paragrafo
     paraElement.classList.remove('d-none');
     document.getElementById(input).classList.add('d-none');
+
+    Android.editConfigurations(configName,newValue);
 }
+
+function deviceDisconnected(){
+  var elementoDaNascondere = document.querySelector('.list-group.list-group-flush');
+  var statusElement = document.getElementById('hwStatus');
+
+  if (elementoDaNascondere) {
+    elementoDaNascondere.style.display = 'none';
+  } else {
+    console.log('Elemento non trovato');
+  }
+
+  if (statusElement) {
+    statusElement.textContent = 'NOT CONNECTED';
+  } else {
+    console.log('Elemento di status non trovato');
+  }
+}
+
+function deviceConnected() {
+  var elementoDaMostrare = document.querySelector('.list-group.list-group-flush');
+  var statusElement = document.getElementById('hwStatus');
+  var imageElement = document.getElementById('hwImage');
+
+  if (elementoDaMostrare) {
+    elementoDaMostrare.style.display = 'block'; // Mostra nuovamente l'elemento nascosto
+  } else {
+    console.log('Elemento non trovato');
+  }
+
+  if (statusElement) {
+    statusElement.textContent = 'CONNECTED'; // Ripristina il testo a "CONNECTED"
+  } else {
+    console.log('Elemento di status non trovato');
+  }
+
+  if (imageElement) {
+    imageElement.style.filter = 'none'; // Rimuove lo stile di bianco e nero
+  } else {
+    console.log('Elemento immagine non trovato');
+  }
+}
+
 
 // Avviene quando la pagina è stata caricata
 window.onload = function() {
