@@ -49,6 +49,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.hoho.android.usbserial.driver.UsbSerialDriver
+import java.net.URLEncoder
 import java.util.Timer
 import java.util.TimerTask
 import kotlin.concurrent.timerTask
@@ -197,7 +198,6 @@ class MainActivity : AppCompatActivity() {
             val webAppInterface = WebAppInterface(this)
             webView.addJavascriptInterface(webAppInterface, "Android")
             webView.loadUrl("file:///android_asset/dark-skin/index.html")
-
         }
 
         webView.webViewClient = object : WebViewClient() {
@@ -207,6 +207,11 @@ class MainActivity : AppCompatActivity() {
                 if (currentPage == "Chat"){
                     if (!isDeviceConnected) {
                         disableTextareaAndLoadingIndicator()
+                    }
+                }
+                if (currentPage == "Homepage"){
+                    if (!isDeviceConnected) {
+                        addOverlayDeviceDisconnected()
                     }
                 }
             }
@@ -221,6 +226,7 @@ class MainActivity : AppCompatActivity() {
         createTableUsers(db)
         createTableMessage(db)
         createTableGroups(db)
+        createTableCoordinates(db)
 
         /*
          Creo il gruppo Multicast se non esiste
@@ -612,6 +618,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
+    Carica Google Maps
+     */
+    fun loadMap(){
+        val latitude = 40.7128
+        val longitude = -74.0060
+        val zoomLevel = 15
+
+        val markerUrl = "https://www.openstreetmap.org/?mlat=$latitude&mlon=$longitude#map=$zoomLevel/$latitude/$longitude"
+        val encodedUrl = URLEncoder.encode(markerUrl, "UTF-8")
+
+        val mapUrl = "https://www.openstreetmap.org/export/embed.html"
+        webView.loadUrl(mapUrl)
+    }
+
+    /*
     Funzione che controlla ogni 3 secondi lo stato della funzione readSerial()
      */
     private fun checkReadSerialStatus() {
@@ -830,6 +851,24 @@ class MainActivity : AppCompatActivity() {
                 FOREIGN KEY (senderUUID) REFERENCES users(userUUID)
             );
         """.trimIndent()
+        db.execSQL(query)
+    }
+
+    /*
+     Creo la tabella 'coordinates'
+     */
+    private fun createTableCoordinates(db: SQLiteDatabase) {
+        val query = """
+        CREATE TABLE IF NOT EXISTS coordinates (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            receiverUUID TEXT,
+            latitude INTEGER DEFAULT NULL,
+            longitude INTEGER DEFAULT NULL,
+            rssi INTEGER DEFAULT NULL,
+            snr INTEGER DEFAULT NULL,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """.trimIndent()
         db.execSQL(query)
     }
 
@@ -1486,7 +1525,7 @@ class MainActivity : AppCompatActivity() {
         val jsonArray = JSONArray()
 
         val query = (
-                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite FROM messages " +
+                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite, rssi FROM messages " +
                         "WHERE (senderUUID = '$userUUID' OR receiverUUID = '$userUUID') " +
                         "AND hasGroup != 1 " +  // Aggiunta della condizione per escludere hasGroup = 1
                         "ORDER BY timestamp DESC LIMIT 50"
@@ -1503,6 +1542,7 @@ class MainActivity : AppCompatActivity() {
             val content = cursor.getString(3)
             val timestamp = cursor.getString(4)
             val favourite = cursor.getInt(5)
+            val rssi = cursor.getInt(6)
 
             val jsonObject = JSONObject()
             jsonObject.put("id", messageId)
@@ -1512,6 +1552,7 @@ class MainActivity : AppCompatActivity() {
             jsonObject.put("timestamp", timestamp)
             jsonObject.put("favourite", favourite)
             jsonObject.put("myUUID", myUUID)
+            jsonObject.put("rssi", rssi)
             jsonArray.put(jsonObject)
             cursor.moveToPrevious()
         }
@@ -1550,7 +1591,7 @@ class MainActivity : AppCompatActivity() {
         val jsonArray = JSONArray()
 
         val query = (
-                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite FROM messages " +
+                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite, rssi FROM messages " +
                         "WHERE hasGroup = 1 AND IDGroup = $groupID " +
                         "ORDER BY timestamp DESC LIMIT 50"
                 )
@@ -1565,6 +1606,7 @@ class MainActivity : AppCompatActivity() {
                 val content = cursor.getString(3)
                 val timestamp = cursor.getString(4)
                 val favourite = cursor.getInt(5)
+                val rssi = cursor.getInt(6)
 
                 val jsonObject = JSONObject()
                 jsonObject.put("id", messageId)
@@ -1574,6 +1616,8 @@ class MainActivity : AppCompatActivity() {
                 jsonObject.put("timestamp", timestamp)
                 jsonObject.put("favourite", favourite)
                 jsonObject.put("myUUID", myUUID)
+                jsonObject.put("rssi", rssi)
+
                 jsonArray.put(jsonObject)
             } while (cursor.moveToPrevious())
         }

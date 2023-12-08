@@ -25,4 +25,5 @@
     <string name="lora_retry_number">3</string>
     <string name="lora_question">\u003F</string>
     <string name="lora_prefix">AT+</string>
+    <string name="google_maps_key">AIzaSyAaLoeuhYn-pCwhKyQ1AUPsu9rcsSxOodc</string>
 </resources>

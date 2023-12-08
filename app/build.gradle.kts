@@ -13,8 +13,8 @@ android {
         applicationId = "com.magix.atcommand"
         minSdk = 30
         targetSdk = 33
-        versionCode = 5
-        versionName = "0.0.4"
+        versionCode = 6
+        versionName = "0.0.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,6 +47,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.github.mik3y:usb-serial-for-android:3.7.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("androidx.webkit:webkit:1.9.0")
 }
 
 

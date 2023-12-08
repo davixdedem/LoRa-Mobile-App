@@ -27,7 +27,8 @@ function receiveJsonUserChat(jsonString, newMessage="false") {
             message.timestamp,
             message.favourite,
             `./../assets/media/avatar/${message.senderUUID}.png`,
-            index === 0 ? needDivider : false
+            index === 0 ? needDivider : false,
+            message.rssi
         );
     });
     if(newMessage != "false"){
@@ -56,6 +57,7 @@ function receiveGroupJsonUserChat(jsonString,newMessage = "false"){
             message.favourite,
             `./../assets/media/avatar/${message.senderUUID}.png`,
             index === 0 ? needDivider : false,
+            message.rssi,
             true
         );
     });
@@ -92,7 +94,8 @@ function addMessageDivider() {
 }
 
 // Genera il contenuto della chat
-function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID, messageText, messageDate, favourite, avatarSrc, needDivider, isGroup=false) {
+function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID, messageText, messageDate, favourite, avatarSrc, needDivider, rssi, isGroup=false) {
+    console.log(rssi);
     const isSelf = myUUID === senderUUID;
     const messageClass = isSelf ? 'message self' : 'message';
     let messageContent = '';
@@ -110,6 +113,11 @@ function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID
                 <div class="message-content">
                     ${isGroup && senderUUID !== myUUID ? `<h6 class="text-dark">${senderUUID}</h6>` : ''}
                     <span>${messageText}</span>
+                    ${!isSelf ? `
+                        <div class="contacts-info">
+                            <span class="rssi" style="opacity: 0.3;">rssi: ${rssi}dB</span>
+                        </div>
+                    ` : ''}
                 </div>
             </div>
             <div class="message-options">
