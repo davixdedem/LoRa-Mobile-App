@@ -43,6 +43,8 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.webkit.WebViewClient
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -52,6 +54,9 @@ import com.hoho.android.usbserial.driver.UsbSerialDriver
 import java.net.URLEncoder
 import java.util.Timer
 import java.util.TimerTask
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.ThreadLocalRandom
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.timerTask
 
 class MainActivity : AppCompatActivity() {
@@ -140,6 +145,11 @@ class MainActivity : AppCompatActivity() {
     private var isAppInForeground = false
     private var isReadSerialActive = false
     private var timer: Timer? = null
+    private var gpsTimer: Timer? = null
+    private val handler = Handler(Looper.getMainLooper())
+    private var scheduler: ScheduledExecutorService? = null
+
+
 
     /***************************** DATABASE *****************************************/
     private lateinit var db: SQLiteDatabase
@@ -198,6 +208,7 @@ class MainActivity : AppCompatActivity() {
             val webAppInterface = WebAppInterface(this)
             webView.addJavascriptInterface(webAppInterface, "Android")
             webView.loadUrl("file:///android_asset/dark-skin/index.html")
+            //webView.loadUrl("file:///android_asset/index2.html")
         }
 
         webView.webViewClient = object : WebViewClient() {
@@ -337,6 +348,18 @@ class MainActivity : AppCompatActivity() {
             checkReadSerialStatus()
         }
 
+        /*
+        Avvio il servizio dell'update GPS
+         */
+        val intent = Intent(this, GPSService::class.java)
+        this.startService(intent)
+
+        /*
+        Invio coordinate GPS onTime
+         */
+        //startPeriodicGPSSend()
+
+
     }
 
     /*
@@ -421,6 +444,44 @@ class MainActivity : AppCompatActivity() {
      */
      fun sendMessage(message: String){
         sendATCommand(port,atCmdSendString,2,message)
+    }
+
+
+    // Funzione per inviare coordinata GPS ogni 5 minuti
+    private fun startPeriodicGPSSend() {
+        if (scheduler != null && !scheduler!!.isShutdown) {
+            // Se il controllo è già stato avviato, non fare nulla
+            return
+        }
+
+        // Avvia il controllo dopo un ritardo compreso tra 10 secondi e 5 minuti
+        scheduler = Executors.newScheduledThreadPool(1)
+        val randomDelayMinutes = ThreadLocalRandom.current().nextInt(1, 6) // Intervallo casuale tra 1 e 5 minuti
+        val randomDelaySeconds = ThreadLocalRandom.current().nextInt(0, 60) // Intervallo casuale tra 0 e 59 secondi
+        val randomDelayMilliseconds = ThreadLocalRandom.current().nextInt(0, 1000) // Intervallo casuale tra 0 e 999 millisecondi
+
+        val totalDelay = TimeUnit.MINUTES.toMillis(randomDelayMinutes.toLong()) +
+                TimeUnit.SECONDS.toMillis(randomDelaySeconds.toLong()) +
+                randomDelayMilliseconds.toLong()
+
+        scheduler!!.scheduleWithFixedDelay({
+            val coordinateGPS = readConfiguration("gpsCoordinates", db)
+            if (coordinateGPS != null) {
+                val message = "$myUUID-$coordinateGPS-LORAGPS0"
+                Log.d("GPSService", "Chiama la funzione per inviare il messaggio GPS: $message")
+                CoroutineScope(Dispatchers.IO).launch {
+                    sendMessage(message)
+                }
+            }
+            else{
+                Log.d("GPSService", "Non posso chiamare la funzione di invio coordinate perchè sono nulle")
+            }
+        }, totalDelay, totalDelay, TimeUnit.MILLISECONDS)
+    }
+
+    // Funzione per fermare l'invio delle coordinate onTime
+    private fun stopPeriodicCheck() {
+        scheduler?.shutdown()
     }
 
     /*
@@ -600,6 +661,7 @@ class MainActivity : AppCompatActivity() {
                         e.printStackTrace()
                         Thread.currentThread().interrupt() // Interrompe il thread in caso di eccezione
                         addOverlayDeviceDisconnected()
+                        disableTextareaAndLoadingIndicator()
                     }
                 } else {
                     isReadSerialActive = false
@@ -739,6 +801,25 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    else if (messageMap != null && senderUUID != "false" && (expectedReceiverUUID == "LORAGPS0")) {
+                        if (messageMap.isNotEmpty()) {
+                            val rssi = messageMap["RSSI"] as? Int
+                            val snr = messageMap["SNR"] as? Int
+                            val size = messageMap["SIZE"] as? Int
+                            if (rssi != null) {
+                                if (snr != null) {
+                                    if (size != null) {
+                                        Log.d("GPS", "Ricevuto messaggio multicast GPS: $senderUUID,$contentMessage,$rssi,$snr,$size")
+                                        val coordinates = extractCoordinates(contentMessage)
+                                        Log.d("GPS","Coordinates: $coordinates")
+                                        if (coordinates != null) {
+                                            insertCoordinatesData(db,senderUUID,coordinates.latitude.toString(),coordinates.longitude.toString(),rssi,snr,size)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 } else {
                     completeData.trim()
                 }
@@ -754,6 +835,26 @@ class MainActivity : AppCompatActivity() {
                 accumulatedData = ""
                 setRxMode(port)
             }
+        }
+    }
+
+    /*
+    Torna latitudine e longitudine di una stringa
+     */
+    data class Coordinates(val latitude: Double, val longitude: Double)
+    private fun extractCoordinates(coordinatesString: String): Coordinates? {
+        Log.d("GPS","Sto estraendo $coordinatesString")
+        val parts = coordinatesString.split(',')
+        return if (parts.size >= 2) {
+            try {
+                val latitude = parts[0].toDouble()
+                val longitude = parts[1].toDouble()
+                Coordinates(latitude, longitude)
+            } catch (e: NumberFormatException) {
+                null
+            }
+        } else {
+            null
         }
     }
 
@@ -861,16 +962,42 @@ class MainActivity : AppCompatActivity() {
         val query = """
         CREATE TABLE IF NOT EXISTS coordinates (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            receiverUUID TEXT,
-            latitude INTEGER DEFAULT NULL,
-            longitude INTEGER DEFAULT NULL,
+            senderUUID TEXT,
+            latitude TEXT DEFAULT NULL,
+            longitude TEXT DEFAULT NULL,
             rssi INTEGER DEFAULT NULL,
             snr INTEGER DEFAULT NULL,
+            size INTEGER DEFAULT NULL,
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """.trimIndent()
         db.execSQL(query)
     }
+
+    /*
+    Inserisce le coordinate GPS ricevute
+     */
+    private fun insertCoordinatesData(
+        db: SQLiteDatabase,
+        senderUUID: String,
+        latitude: String?,
+        longitude: String?,
+        rssi: Int?,
+        snr: Int?,
+        size: Int?
+    ) {
+        val contentValues = ContentValues().apply {
+            put("receiverUUID", senderUUID)
+            put("latitude", latitude)
+            put("longitude", longitude)
+            put("rssi", rssi)
+            put("snr", snr)
+            put("size", size)
+        }
+        Log.d("GPS","Sto inserendo le coords: $latitude,$longitude")
+        db.insert("coordinates", null, contentValues)
+    }
+
 
     fun deleteMessageById(db: SQLiteDatabase, messageId: Int) {
         val whereClause = "id = ?"
@@ -1165,6 +1292,35 @@ class MainActivity : AppCompatActivity() {
         db.execSQL(query)
     }
 
+    // Funzione per leggere una specifica configurazione
+    @SuppressLint("Range")
+    private fun readConfiguration(configName: String, db: SQLiteDatabase): String? {
+        var result: String? = null
+        val selection = "configName = ?"
+        val selectionArgs = arrayOf(configName)
+
+        val cursor: Cursor = db.query(
+            "configurations", // Nome della tabella
+            arrayOf("configValue"), // Colonne da selezionare
+            selection, // Clausole di selezione
+            selectionArgs, // Argomenti di selezione
+            null, // Group By
+            null, // Having
+            null // Order By
+        )
+
+        // Se esiste un risultato, ottieni il valore della configurazione
+        if (cursor.moveToFirst()) {
+            result = cursor.getString(cursor.getColumnIndex("configValue"))
+        }
+
+        // Chiudi il cursore (non è necessario chiudere il database passato come argomento)
+        cursor.close()
+
+        return result
+    }
+
+
     /*
     Torna un Json con le configurazioni attuali
      */
@@ -1348,7 +1504,7 @@ class MainActivity : AppCompatActivity() {
             hasGroup?.let{put("hasGroup", it)}
             idGroup?.let{put("idGroup",it)}
         }
-        Log.d("DBHandler", "Sto inserendo il messaggio: $content sul db con rssi: $rssi, chatID: $chatID, senderUUID: $senderUUID, receiverUUID: $receiverUUID")
+        Log.d("DBHandler", "Sto inserendo il messaggio: $content sul db con rssi: $rssi, chatID: $chatID, senderUUID: $senderUUID, receiverUUID: $receiverUUID,snr: $snr")
         return db.insert("messages", null, contentValues)
     }
 
@@ -1528,7 +1684,7 @@ class MainActivity : AppCompatActivity() {
         val jsonArray = JSONArray()
 
         val query = (
-                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite, rssi FROM messages " +
+                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite, rssi, snr FROM messages " +
                         "WHERE (senderUUID = '$userUUID' OR receiverUUID = '$userUUID') " +
                         "AND hasGroup != 1 " +  // Aggiunta della condizione per escludere hasGroup = 1
                         "ORDER BY timestamp DESC LIMIT 50"
@@ -1546,6 +1702,7 @@ class MainActivity : AppCompatActivity() {
             val timestamp = cursor.getString(4)
             val favourite = cursor.getInt(5)
             val rssi = cursor.getInt(6)
+            val snr = cursor.getInt(7)
 
             val jsonObject = JSONObject()
             jsonObject.put("id", messageId)
@@ -1556,6 +1713,7 @@ class MainActivity : AppCompatActivity() {
             jsonObject.put("favourite", favourite)
             jsonObject.put("myUUID", myUUID)
             jsonObject.put("rssi", rssi)
+            jsonObject.put("snr", snr)
             jsonArray.put(jsonObject)
             cursor.moveToPrevious()
         }
@@ -1594,7 +1752,7 @@ class MainActivity : AppCompatActivity() {
         val jsonArray = JSONArray()
 
         val query = (
-                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite, rssi FROM messages " +
+                "SELECT id, senderUUID, receiverUUID, content, timestamp, favourite, rssi, snr FROM messages " +
                         "WHERE hasGroup = 1 AND IDGroup = $groupID " +
                         "ORDER BY timestamp DESC LIMIT 50"
                 )
@@ -1610,6 +1768,7 @@ class MainActivity : AppCompatActivity() {
                 val timestamp = cursor.getString(4)
                 val favourite = cursor.getInt(5)
                 val rssi = cursor.getInt(6)
+                val snr = cursor.getInt(7)
 
                 val jsonObject = JSONObject()
                 jsonObject.put("id", messageId)
@@ -1620,6 +1779,7 @@ class MainActivity : AppCompatActivity() {
                 jsonObject.put("favourite", favourite)
                 jsonObject.put("myUUID", myUUID)
                 jsonObject.put("rssi", rssi)
+                jsonObject.put("snr", snr)
 
                 jsonArray.put(jsonObject)
             } while (cursor.moveToPrevious())
@@ -1650,6 +1810,7 @@ class MainActivity : AppCompatActivity() {
      Chiama la funzione JavaScript 'disableTextareaAndLoadingIndicator'
      */
     fun disableTextareaAndLoadingIndicator() {
+        isDeviceConnected = false
         runOnUiThread {
             webView.evaluateJavascript("disableTextareaAndLoadingIndicator();") {
             }
@@ -1795,6 +1956,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
+    Avvia l'update GPS
+     */
+    private fun startGPSUpdatesEveryNMinutes(n: Long = 5) {
+        gpsTimer?.cancel()
+        gpsTimer = Timer()
+        gpsTimer?.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                handler.post {
+                    startGPS(writeToDB = true)
+                }
+            }
+        }, 0, n * 60 * 1000)
+    }
+
+
+    // Funzione per fermare il timer GPS
+    fun stopGPSUpdates() {
+        gpsTimer?.cancel()
+        gpsTimer = null
+    }
+
+    /*
      Binding del back button
      */
     override fun onBackPressed() {
@@ -1808,7 +1991,8 @@ class MainActivity : AppCompatActivity() {
     /*
     Inizializza il GPS
      */
-    fun startGPS(timeoutInSeconds: Long = 30) {
+    fun startGPS(timeoutInSeconds: Long = 30, writeToDB: Boolean = false) {
+        Log.d("GPS","Starting GPS..")
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -1817,7 +2001,10 @@ class MainActivity : AppCompatActivity() {
             Log.d("GPS","Necessari i permessi GPS...")
             // Permission not granted, handle accordingly
             runOnUiThread {
-                webView.evaluateJavascript("hideLoading();"){}
+                if (!writeToDB) {
+                    webView.evaluateJavascript("hideLoading();") {}
+                }
+                //webView.evaluateJavascript("hideLoading();") {}
             }
             return
         }
@@ -1830,10 +2017,20 @@ class MainActivity : AppCompatActivity() {
                 val longitude = String.format("%.4f", location.longitude)
                 Log.d("GPS","$latitude,$longitude")
                 val coordinates = "$latitude,$longitude"
-                runOnUiThread {
-                    webView.evaluateJavascript("hideLoading();"){}
-                    webView.evaluateJavascript("populeInputText('$coordinates');"){}
+                if (!writeToDB) {
+                    runOnUiThread {
+                        webView.evaluateJavascript("hideLoading();") {}
+                        webView.evaluateJavascript("populeInputText('$coordinates');") {}
+                    }
                 }
+                else{
+                    Log.d("GPS","Sto inserendo le coordinate $coordinates nel DB")
+                    inserisciConfigurazione(db,"gpsCoordinates",coordinates,"Last GPS coordinates",true)
+                }
+/*                runOnUiThread {
+                    webView.evaluateJavascript("hideLoading();") {}
+                    webView.evaluateJavascript("populeInputText('$coordinates');") {}
+                }*/
                 resetTimeout()
             }
 
@@ -1873,7 +2070,7 @@ class MainActivity : AppCompatActivity() {
             10f, // Minimum distance between location updates in meters
             locationListener as LocationListener
         )
-        startTimeoutTimer(timeoutInSeconds)
+        //startTimeoutTimer(timeoutInSeconds)
     }
 
     /*
@@ -1901,6 +2098,10 @@ class MainActivity : AppCompatActivity() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancelAll() // Questo cancella tutte le notifiche emesse dall'app
         Log.d("Notifications","Sto cancellando le notifiche...")
+    }
+
+    private fun searchGPSandWriteToDb(db: SQLiteDatabase){
+
     }
 }
 

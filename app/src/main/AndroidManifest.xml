@@ -19,6 +19,8 @@
         android:roundIcon="@drawable/lora"
         android:supportsRtl="true"
         android:theme="@style/Theme.ATCommand">
+        <service android:name=".GPSService" />
+
 
         <activity
             android:name=".MainActivity"
@@ -26,6 +28,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

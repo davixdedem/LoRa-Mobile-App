@@ -28,7 +28,8 @@ function receiveJsonUserChat(jsonString, newMessage="false") {
             message.favourite,
             `./../assets/media/avatar/${message.senderUUID}.png`,
             index === 0 ? needDivider : false,
-            message.rssi
+            message.rssi,
+            message.snr
         );
     });
     if(newMessage != "false"){
@@ -58,6 +59,7 @@ function receiveGroupJsonUserChat(jsonString,newMessage = "false"){
             `./../assets/media/avatar/${message.senderUUID}.png`,
             index === 0 ? needDivider : false,
             message.rssi,
+            message.snr,
             true
         );
     });
@@ -94,7 +96,7 @@ function addMessageDivider() {
 }
 
 // Genera il contenuto della chat
-function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID, messageText, messageDate, favourite, avatarSrc, needDivider, rssi, isGroup=false) {
+function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID, messageText, messageDate, favourite, avatarSrc, needDivider, rssi, snr, isGroup=false) {
     console.log(rssi);
     const isSelf = myUUID === senderUUID;
     const messageClass = isSelf ? 'message self' : 'message';
@@ -115,7 +117,8 @@ function insertMessagesIntoContainer(messageID, myUUID, senderUUID, receiverUUID
                     <span>${messageText}</span>
                     ${!isSelf ? `
                         <div class="contacts-info">
-                            <span class="rssi" style="opacity: 0.3;">rssi: ${rssi}dB</span>
+                            <span class="rssi" style="opacity: 0.3;">rssi: ${rssi}dBm</span><br>
+                            <span class="snr" style="opacity: 0.3;">snr: ${snr}dB</span>
                         </div>
                     ` : ''}
                 </div>
@@ -401,18 +404,17 @@ function copyToClipboard(text) {
 }
 
 // Binding del pulsante per copiare il messaggio
-function bindMessagesCopyButtons(){
+function bindMessagesCopyButtons() {
     const copyIcons = document.querySelectorAll('.copy-button');
 
-    copyIcons.forEach(function(copyIcon) {
-        copyIcon.addEventListener('click', function(event) {
+    copyIcons.forEach(function (copyIcon) {
+        copyIcon.addEventListener('click', function (event) {
             const parentMessage = event.target.closest('.message');
             if (parentMessage) {
                 const messageContent = parentMessage.querySelector('.message-content');
                 if (messageContent) {
-                    let contentToCopy = messageContent.textContent;
-                    contentToCopy = contentToCopy.trim(); // Rimuovi gli spazi vuoti
-                    copyToClipboard(contentToCopy, parentMessage);
+                    const messageText = messageContent.querySelector('span').textContent;
+                    copyToClipboard(messageText.trim(), parentMessage);
                 }
             }
         });

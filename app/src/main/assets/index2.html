@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizzazione Punti GPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #000;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<canvas id="gpsCanvas"></canvas>
+
+<!-- Modal -->
+<div class="modal fade" id="coordinateModal" tabindex="-1" role="dialog" aria-labelledby="coordinateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="coordinateModalLabel">Dettagli Coordinate</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="coordinateDetails"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    const canvas = document.getElementById('gpsCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function calculateDistance(coord1, coord2) {
+        const dx = coord2.longitude - coord1.longitude;
+        const dy = coord2.latitude - coord1.latitude;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function drawGPSPoints(coordinates) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Imposta lo stile del testo
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'center';
+
+        // Calcola il centro della finestra
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        // Array per memorizzare le finestre di dettaglio aperte
+        const openWindows = [];
+
+        // Disegna i punti sulla mappa in base alle coordinate fornite
+        coordinates.forEach((coord, index) => {
+            const latitude = coord.latitude;
+            const longitude = coord.longitude;
+
+            // Converti le coordinate GPS in posizioni sulla mappa
+            let x, y;
+
+            if (index === 0) {
+                // Se è il punto 1, posizionalo al centro della finestra
+                x = centerX;
+                y = centerY;
+            } else {
+                // Altrimenti, calcola la posizione in base alle altre coordinate
+                x = ((longitude + 180) / 360) * canvas.width;
+                y = ((-1 * latitude) + 90) / 180 * canvas.height;
+            }
+
+            // Calcola lo spostamento in base alla distanza delle coordinate
+            let offsetX = 0;
+            let offsetY = 0;
+
+            for (let i = 0; i < coordinates.length; i++) {
+                if (i !== index) {
+                    const distance = calculateDistance(coord, coordinates[i]);
+                    offsetX += Math.sign(coordinates[i].longitude - coord.longitude) * Math.min(1000, distance * 1000);
+                    offsetY += Math.sign(coordinates[i].latitude - coord.latitude) * Math.min(1000, distance * 1000);
+                }
+            }
+
+            // Scegli un colore diverso per il primo punto (indice 0)
+            if (index === 0) {
+                ctx.fillStyle = 'blue'; // Colore blu per rappresentare la nostra posizione attuale
+            } else {
+                ctx.fillStyle = 'red';
+            }
+
+            // Disegna il punto sulla mappa con lo spostamento calcolato
+            ctx.beginPath();
+            ctx.arc(x + offsetX, y + offsetY, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+
+            // Scrivi "You" sopra il punto 1 e il nome identificativo sopra gli altri punti
+            if (index === 0) {
+                ctx.fillStyle = 'black';
+                ctx.fillText('You', x + offsetX, y - 10 + offsetY);
+            } else {
+                ctx.fillStyle = 'black';
+                ctx.fillText(`Punto ${index + 1}`, x + offsetX, y - 10 + offsetY);
+            }
+
+            // Salva le coordinate e la posizione del punto per gestire l'evento click
+            const clickArea = {
+                x: x + offsetX - 5, // Aggiungi un po' di spazio per il click
+                y: y + offsetY - 5,
+                width: 10,
+                height: 10,
+                coords: coord
+            };
+
+            // Aggiungi l'area di click all'array
+            openWindows.push(clickArea);
+        });
+
+        // Aggiungi un listener per gestire il click sul canvas
+        canvas.addEventListener('click', function(event) {
+            const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+            const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+
+            openWindows.forEach(area => {
+                if (mouseX >= area.x && mouseX <= area.x + area.width && mouseY >= area.y && mouseY <= area.y + area.height) {
+                    document.getElementById('coordinateDetails').innerText = `Latitudine: ${area.coords.latitude}\nLongitudine: ${area.coords.longitude}`;
+                    $('#coordinateModal').modal('show');
+                }
+            });
+        });
+    }
+
+    // Punti GPS
+    const gpsCoordinates = [
+        { latitude: 45.8668, longitude: 8.5127 },
+        { latitude: 45.8567, longitude: 8.5223 },
+        { latitude: 45.8765, longitude: 8.4956 },
+        // Aggiungi altri punti GPS come necessario...
+    ];
+
+    // Disegna i punti sulla mappa
+    drawGPSPoints(gpsCoordinates);
+
+    // Aggiorna i punti quando la finestra cambia dimensioni
+    window.addEventListener('resize', () => {
+        drawGPSPoints(gpsCoordinates);
+    });
+</script>
+</body>
+</html>
